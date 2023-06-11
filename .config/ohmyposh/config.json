@@ -1,0 +1,107 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "console_title_template": "{{if .Root}}🦸‍♂️ {{end}}{{.UserName}}@{{.PWD}} | {{.Shell}}",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground": "#0178d4",
+          "style": "plain",
+          "template": "\ue77d {{ .UserName }} ",
+          "type": "session"
+        },
+        {
+          "foreground": "#F7D060",
+          "properties": {
+            "folder_separator_icon": "/",
+            "style": "full"
+          },
+          "style": "plain",
+          "template": "\uf07b {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "type": "dotnet",
+          "style": "plain",
+          "foreground": "#512bd4",
+          "template": "\ue77f {{ .Full }} "
+        },
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "#026e00",
+          "template": "\ue718 {{ .Full }} "
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "#ffdf76",
+          "template": "\ue73c {{ .Full }} "
+        },
+        {
+          "foreground": "#f34c27",
+          "powerline_symbol": "\ue0b0",
+          "style": "plain",
+          "type": "git",
+          "template": "{{ .HEAD }}{{if .BranchStatus }}{{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}\uF044{{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }}|{{ end }}{{ if .Staging.Changed }}\uF046{{ .Staging.String }}{{ end }} "
+        },
+        {
+          "type": "sysinfo",
+          "style": "plain",
+          "foreground": "#EA8FEA",
+          "template": " {{ round (divf (mulf .PhysicalPercentUsed .PhysicalTotalMemory) 107374182400) 1 }}/{{ round (divf .PhysicalTotalMemory 1073741824) 1 }} "
+        },
+        {
+          "type": "exit",
+          "style": "diamond",
+          "foreground": "#16FF00",
+          "foreground_templates": ["{{ if gt .Code 0 }}#D21312{{ end }}"],
+          "template": "\uf21e",
+          "properties": {
+            "always_enabled": true
+          }
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "root",
+          "style": "diamond",
+          "trailing_diamond": "\ue0b0 ",
+          "foreground": "#e8dbb3",
+          "background": "#f0543b",
+          "template": " \uf21b admin "
+        },
+        {
+          "type": "text",
+          "foreground": "#FFB84C",
+          "template": "{{if not .Root}}\uf101 {{end}}"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "transient_prompt": {
+    "foreground": "#FFB84C",
+    "background": "transparent",
+    "template": "\uf101 "
+  },
+  "version": 2,
+  "tooltips": [
+    {
+      "type": "kubectl",
+      "tips": ["kubectl", "k"],
+      "style": "diamond",
+      "foreground": "#ffffff",
+      "background": "#316ce6",
+      "leading_diamond": "\ue0b6",
+      "trailing_diamond": "\ue0b4",
+      "template": "ﴱ {{.Context}}{{if .Namespace}}/{{.Namespace}}{{end}}"
+    }
+  ]
+}
