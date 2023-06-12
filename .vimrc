@@ -34,7 +34,7 @@ nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 
 nnoremap <leader>c :bp<CR>:bd #<CR>
-nnoremap <leader>/ :noh<CR>
+nnoremap // :noh<CR>
 
 let &t_SI = "\e[5 q"
 let &t_SR = "\e[3 q"
