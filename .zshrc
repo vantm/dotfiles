@@ -36,23 +36,37 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+# Make Ctrl-Left Ctrl-Right jump between words
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# Aliases
 alias k=kubectl
 alias ls="exa --icons"
 alias ll="ls -la"
 alias rm="rm -i"
 alias mv="mv -i"
 
+# User binaries
 export PATH="$PATH:$HOME/.local/bin"
 
+# .NET paths
+export DOTNET_ROOT="/usr/share/dotnet"
+export PATH="$PATH:$HOME/.local/bin/go/bin"
+
+# nvm paths
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export DOTNET_ROOT="/usr/share/dotnet"
-export PATH="$PATH:$HOME/.local/bin/go/bin"
-
+# plugins
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.json)"
 eval "$(zoxide init zsh)"
 source ~/.config/fzf-tab/fzf-tab.plugin.zsh
 source ~/.config/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# start tmux by default
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
