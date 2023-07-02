@@ -28,8 +28,6 @@ return require 'packer'.startup(function(use)
               '--files',
               '-g', '!**/.git/*',
               '-g', '!**/node_modules/*',
-              '-g', '!**/bin/*',
-              '-g', '!**/bin/*',
               '-g', '!**/.vs/*',
               '-g', '!**/.idea/*',
               '-g', '!**/dist/*',
