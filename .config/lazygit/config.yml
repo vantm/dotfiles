@@ -1,0 +1,6 @@
+gui:
+  border: 'rounded'
+
+git:
+  branchLogCmd: 'git log --graph --color=always --decorate --oneline {{branchName}} --'
+  allBranchesLogCmd: 'git log --graph --all --color=always --decorate --oneline'
