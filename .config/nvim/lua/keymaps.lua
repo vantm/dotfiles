@@ -33,15 +33,21 @@ keymap('n', '<S-h>', ':bprevious<cr>', opts)
 -- Clear highlights
 keymap('n', '//', '<cmd>nohlsearch<cr>', opts)
 
+-- Save buffer
+keymap('n', '<leader>w', ':w<cr>', opts)
+
 -- Close buffers
 keymap('n', '<S-q>', ':bd!<cr>', opts)
 
 -- Better paste
-keymap('v', 'p', 'P', opts)
-
--- Insert --
--- Press jk fast to enter
-keymap('i', 'jj', '<ESC>', opts)
+keymap('n', '<leader>p', '"*p', opts)
+keymap('v', '<leader>p', '"*p', opts)
+keymap('n', '<leader>P', '"*P', opts)
+keymap('v', '<leader>P', '"*P', opts)
+keymap('n', '<leader>y', '"*y', opts)
+keymap('v', '<leader>y', '"*y', opts)
+keymap('n', '<leader>Y', '"*Y', opts)
+keymap('v', '<leader>Y', '"*Y', opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -65,16 +71,15 @@ keymap('n', 'J', 'mzJ`z')
 keymap("v", "J", ":m '>+1<CR>gv=gv")
 keymap("v", "K", ":m '<-2<CR>gv=gv")
 
--- Plugins --
-
--- Open Netrw Tree
-keymap('n', '<leader>e', ':Ex<cr>', opts)
+-- Open Nvim-Tree
+keymap('n', '<leader>e', ':NvimTreeFocus<cr>', opts)
 
 -- Telescope
 keymap('n', '<leader>ff', ':Telescope find_files<cr>', opts)
 keymap('n', '<leader>fg', ':Telescope live_grep<cr>', opts)
 keymap('n', '<leader>fb', ':Telescope buffers<cr>', opts)
 keymap('n', '<leader>fh', ':Telescope help_tags<cr>', opts)
+
 -- Undotree
 keymap('n', '<leader>fu', ':UndotreeToggle<cr>', opts)
 
@@ -92,6 +97,10 @@ keymap('n', '<leader>dt', '<cmd>lua require"dap".terminate()<cr>', opts)
 -- Hop
 keymap('n', 's', '<cmd>lua require"hop".hint_char2()<cr>', opts)
 
+-- Packer
+keymap('n', '<leader>ss', ':PackerSync<cr>', opts)
+keymap('n', '<leader>sc', ':PackerCompile<cr>')
+
 -- Lsp
 vim.keymap.set('n', '<space>le', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -101,30 +110,29 @@ vim.keymap.set('n', '<space>lq', vim.diagnostic.setloclist, opts)
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local inner_opts = { buffer = ev.buf, silent = true }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, inner_opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, inner_opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, inner_opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, inner_opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, inner_opts)
-    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, inner_opts)
-    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, inner_opts)
-    vim.keymap.set('n', '<leader>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, inner_opts)
-    vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, inner_opts)
-    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, inner_opts)
-    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, inner_opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, inner_opts)
-    vim.keymap.set('n', '<leader>lf', function()
-      vim.lsp.buf.format { async = true }
-    end, inner_opts)
-  end,
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+        -- Enable completion triggered by <c-x><c-o>
+        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+        -- Buffer local mappings.
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local inner_opts = { buffer = ev.buf, silent = true }
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, inner_opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, inner_opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, inner_opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, inner_opts)
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, inner_opts)
+        vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, inner_opts)
+        vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, inner_opts)
+        vim.keymap.set('n', '<leader>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, inner_opts)
+        vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, inner_opts)
+        vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, inner_opts)
+        vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, inner_opts)
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, inner_opts)
+        vim.keymap.set('n', '<leader>lf', function()
+            vim.lsp.buf.format { async = true }
+        end, inner_opts)
+    end,
 })
