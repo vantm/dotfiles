@@ -10,23 +10,5 @@ require 'telescope'.setup {
                 ['<C-k>'] = actions.move_selection_previous
             }
         }
-    },
-    pickers = {
-        find_files = {
-            find_command = {
-                'rg',
-                '--files',
-                '-g', '!**/.git/*',
-                '-g', '!**/node_modules/*',
-                '-g', '!**/.vs/*',
-                '-g', '!**/.idea/*',
-                '-g', '!**/dist/*',
-                '-g', '!**/bin/*',
-                '-g', '!**/obj/*',
-                '-g', '!**/*.lock',
-                '-g', '!**/*.lock.json',
-                '-g', '!**/*.{dll,bin,min.js,min.css}'
-            }
-        },
-    },
+    }
 }

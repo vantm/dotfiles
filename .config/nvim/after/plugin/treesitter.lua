@@ -15,7 +15,9 @@ require 'nvim-treesitter.configs'.setup {
         'sql',
         'markdown',
         'json',
-        'yaml'
+        'yaml',
+        'xml',
+        'java'
     },
     highlight = {
         enable = true

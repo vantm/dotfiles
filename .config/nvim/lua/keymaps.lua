@@ -13,7 +13,6 @@ vim.g.mapleader = ' '
 --   term_mode = 't',
 --   command_mode = 'c',
 
--- Normal --
 -- Better window navigation
 keymap('n', '<C-h>', '<C-w>h', opts)
 keymap('n', '<C-j>', '<C-w>j', opts)
@@ -40,16 +39,15 @@ keymap('n', '<leader>w', ':w<cr>', opts)
 keymap('n', '<S-q>', ':bd!<cr>', opts)
 
 -- Better paste
-keymap('n', '<leader>p', '"*p', opts)
-keymap('v', '<leader>p', '"*p', opts)
-keymap('n', '<leader>P', '"*P', opts)
-keymap('v', '<leader>P', '"*P', opts)
-keymap('n', '<leader>y', '"*y', opts)
-keymap('v', '<leader>y', '"*y', opts)
-keymap('n', '<leader>Y', '"*Y', opts)
-keymap('v', '<leader>Y', '"*Y', opts)
+keymap('n', '<leader>p', '"+p', opts)
+keymap('v', '<leader>p', '"+p', opts)
+keymap('n', '<leader>P', '"+P', opts)
+keymap('v', '<leader>P', '"+P', opts)
+keymap('n', '<leader>y', '"+y', opts)
+keymap('v', '<leader>y', '"+y', opts)
+keymap('n', '<leader>Y', '"+Y', opts)
+keymap('v', '<leader>Y', '"+Y', opts)
 
--- Visual --
 -- Stay in indent mode
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
@@ -64,15 +62,20 @@ keymap('n', 'N', 'Nzzzv')
 keymap('n', '<C-d>', '<C-d>zz')
 keymap('n', '<C-u>', '<C-u>zz')
 
---
+-- Better join lines
 keymap('n', 'J', 'mzJ`z')
+keymap('v', 'J', 'mzJ`z')
 
---
-keymap("v", "J", ":m '>+1<CR>gv=gv")
-keymap("v", "K", ":m '<-2<CR>gv=gv")
+-- Move line
+keymap("n", "<A-k>", ":m-2<CR>==")
+keymap("n", "<A-j>", ":m+1<CR>==")
+keymap("v", "<A-k>", ":m'<-2<CR>gv=gv")
+keymap("v", "<A-j>", ":m'>+1<CR>gv=gv")
+keymap("i", "<A-k>", "<C-o>:m-2<CR><C-o>==")
+keymap("i", "<A-j>", "<C-o>:m+1<CR><C-o>==")
 
 -- Open Nvim-Tree
-keymap('n', '<leader>e', ':NvimTreeFocus<cr>', opts)
+keymap('n', '<leader>e', ':NvimTreeToggle<cr>', opts)
 
 -- Telescope
 keymap('n', '<leader>ff', ':Telescope find_files<cr>', opts)
