@@ -3,7 +3,6 @@ require 'mason'.setup {}
 require 'mason-lspconfig'.setup {
     ensure_installed = {
         'bashls',
-        'csharp_ls',
         'cssls',
         'gopls',
         'html',
@@ -13,6 +12,7 @@ require 'mason-lspconfig'.setup {
         'pyright',
         'rust_analyzer',
         'tsserver',
+        'omnisharp',
         'yamlls'
     },
     automatic_installation = true

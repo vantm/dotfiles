@@ -39,7 +39,7 @@ return require 'packer'.startup(function(use)
             { 'hrsh7th/cmp-path' },
             { 'hrsh7th/cmp-cmdline' },
             { 'hrsh7th/nvim-cmp' },
-            { 'Decodetalkers/csharpls-extended-lsp.nvim' },
+            { 'Hoffs/omnisharp-extended-lsp.nvim' },
         }
     }
 

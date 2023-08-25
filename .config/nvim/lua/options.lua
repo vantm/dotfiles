@@ -34,9 +34,6 @@ vim.opt.list = true
 vim.opt.listchars = { space = '·', tab = '>-' }
 vim.opt.termguicolors = true
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF:h12'
     vim.g.neovide_scroll_animation_length = 0.5
