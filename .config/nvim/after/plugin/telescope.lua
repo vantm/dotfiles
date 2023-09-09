@@ -9,7 +9,7 @@ require 'telescope'.setup {
             "build/",
             "bin/",
             "obj/"
-        }
+        },
         
         mappings = {
             i = {
