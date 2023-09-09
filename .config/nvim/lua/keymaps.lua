@@ -106,8 +106,8 @@ keymap('n', '<leader>sc', ':PackerCompile<cr>')
 
 -- Lsp
 vim.keymap.set('n', '<space>le', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+--vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+--vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>lq', vim.diagnostic.setloclist, opts)
 
 -- Use LspAttach autocommand to only map the following keys
