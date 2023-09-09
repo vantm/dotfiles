@@ -7,7 +7,7 @@ prompt adam1
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
+bindkey -v
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
@@ -39,6 +39,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Make Ctrl-Left Ctrl-Right jump between words
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey "^F" autosuggest-accept
 
 # Aliases
 alias k=kubectl
@@ -60,13 +61,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # plugins
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.json)"
 eval "$(zoxide init zsh)"
 source ~/.config/fzf-tab/fzf-tab.plugin.zsh
 source ~/.config/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-
-# start tmux by default
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
+source ~/.config/zsh-vi-mode/zsh-vi-mode.plugin.zsh
