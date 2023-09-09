@@ -1,3 +1,5 @@
+require 'lastbuf'
+
 return require 'packer'.startup(function(use)
     use 'wbthomason/packer.nvim'
 
@@ -6,7 +8,7 @@ return require 'packer'.startup(function(use)
         branch = '0.1.x',
         requires = {
             { 'nvim-lua/plenary.nvim', opt = false },
-            { 'BurntSushi/ripgrep', opt = false }
+            { 'BurntSushi/ripgrep',    opt = false }
         }
     }
 
@@ -40,6 +42,8 @@ return require 'packer'.startup(function(use)
             { 'hrsh7th/cmp-cmdline' },
             { 'hrsh7th/nvim-cmp' },
             { 'Hoffs/omnisharp-extended-lsp.nvim' },
+            { 'SirVer/ultisnips' },
+            { 'quangnguyen30192/cmp-nvim-ultisnips' }
         }
     }
 

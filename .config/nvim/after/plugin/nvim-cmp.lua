@@ -6,7 +6,11 @@ local check_backspace = function()
 end
 
 cmp.setup {
-    snippet = {},
+    snippet = {
+        expand = function(args)
+            vim.fn["UltiSnips#Anon"](args.body)
+        end
+    },
     mapping = cmp.mapping.preset.insert {
         ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<C-j>'] = cmp.mapping.select_next_item(),
@@ -120,7 +124,7 @@ lspconfig.omnisharp.setup {
     enable_ms_build_load_projects_on_demand = false,
 
     -- Enables support for roslyn analyzers, code fixes and rulesets.
-    enable_roslyn_analyzers = false,
+    enable_roslyn_analyzers = true,
 
     -- Specifies whether 'using' directives should be grouped and sorted during
     -- document formatting.
@@ -141,11 +145,14 @@ lspconfig.omnisharp.setup {
     -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
     -- true
     analyze_open_documents_only = true,
+
+    capabilities = capabilities
 }
 
 lspconfig.jdtls.setup {
     capabilities = capabilities
 }
+
 lspconfig.metals.setup {
     capabilities = capabilities
 }

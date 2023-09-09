@@ -33,11 +33,3 @@ vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars = { space = '·', tab = '>-' }
 vim.opt.termguicolors = true
-
-if vim.g.neovide then
-    vim.o.guifont = 'CaskaydiaCove NF:h12'
-    vim.g.neovide_scroll_animation_length = 0.5
-    vim.g.neovide_cursor_animation_length = 0.1
-    vim.g.neovide_cursor_trail_size = 0.2
-    vim.g.neovide_cursor_vfx_mode = "pixiedust"
-end
