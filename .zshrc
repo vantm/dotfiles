@@ -2,11 +2,11 @@
 
 autoload -Uz promptinit
 promptinit
-prompt adam1
+prompt redhat
 
 setopt histignorealldups sharehistory
 
-# Use emacs keybindings even if our EDITOR is set to vi
+# Use vim keybindings
 bindkey -v
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
@@ -48,12 +48,14 @@ alias ll="ls -la"
 alias rm="rm -i"
 alias mv="mv -i"
 
-# User binaries
-export PATH="$PATH:$HOME/.local/bin"
+# GO paths
+export GOPATH="$HOME/.local/share/go"
 
 # .NET paths
-export DOTNET_ROOT="/usr/share/dotnet"
-export PATH="$PATH:$HOME/.local/bin/go/bin"
+export DOTNET_ROOT="$HOME/.local/share/dotnet"
+
+# Revise PATH
+export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools"
 
 # nvm paths
 export NVM_DIR="$HOME/.nvm"
