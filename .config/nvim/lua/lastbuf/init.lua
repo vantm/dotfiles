@@ -21,6 +21,16 @@ local function push(nr)
     table.insert(bufs, nr)
 end
 
+local function buf_listed(nr)
+    local info = vim.fn.getbufinfo(nr)
+
+    if #info > 0 and info[1].listed == 1 then
+        return true
+    end
+
+    return false
+end
+
 local augroup = vim.api.nvim_create_augroup("augroup_lastbuf", {
     clear = true
 })
@@ -29,12 +39,13 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     pattern = { "*" },
     group = augroup,
     callback = function(e)
-        push(e.buf)
+        if buf_listed(e.buf) then
+            push(e.buf)
+        end
     end
 })
 
 M.open_last_buf = function()
-    pop()
     pop()
     local buf = pop()
 
