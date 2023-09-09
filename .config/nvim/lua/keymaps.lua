@@ -36,7 +36,7 @@ keymap('n', '//', '<cmd>nohlsearch<cr>', opts)
 keymap('n', '<leader>w', ':w<cr>', opts)
 
 -- Close buffers
-keymap('n', '<S-q>', ':bd!<cr>', opts)
+keymap('n', '<S-q>', ':bd!<cr>:lua require"lastbuf".open_last_buf()<cr>', opts)
 
 -- Better paste
 keymap('n', '<leader>p', '"+p', opts)
