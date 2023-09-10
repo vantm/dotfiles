@@ -3,12 +3,18 @@ local actions = require 'telescope.actions'
 require 'telescope'.setup {
     defaults = {
         file_ignore_patterns = {
-            ".git/",
-            "node_modules/",
-            "dist/",
-            "build/",
-            "bin/",
-            "obj/",
+            "**/.git/",
+            "**/node_modules/",
+            "**/dist/",
+            "**/build/",
+            "**/bin/",
+            "**/obj/",
+            "**\\.git\\",
+            "**\\node_modules\\",
+            "**\\dist\\",
+            "**\\build\\",
+            "**\\bin\\",
+            "**\\obj\\",
         },
 
         mappings = {
