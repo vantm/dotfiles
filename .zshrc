@@ -41,12 +41,22 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey "^F" autosuggest-accept
 
+# plugins
+eval "$(zoxide init zsh)"
+source ~/.config/fzf-tab/fzf-tab.plugin.zsh
+source ~/.config/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source ~/.config/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # Aliases
-alias k=kubectl
-alias ls="exa --icons"
 alias ll="ls -la"
 alias rm="rm -i"
 alias mv="mv -i"
+alias ls="exa --icons"
+alias k=kubectl
+alias v=nvim
+alias vi=nvim
+alias lg=lazygit
 
 # GO paths
 export GOPATH="$HOME/.local/share/go"
@@ -54,7 +64,7 @@ export GOPATH="$HOME/.local/share/go"
 # .NET paths
 export DOTNET_ROOT="$HOME/.local/share/dotnet"
 
-# Revise PATH
+# paths
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools"
 
 # nvm paths
@@ -62,9 +72,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# plugins
-eval "$(zoxide init zsh)"
-source ~/.config/fzf-tab/fzf-tab.plugin.zsh
-source ~/.config/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source ~/.config/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# bun completions
+[ -s "/home/vantm/.bun/_bun" ] && source "/home/vantm/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
