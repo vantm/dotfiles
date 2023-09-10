@@ -8,9 +8,9 @@ require 'telescope'.setup {
             "dist/",
             "build/",
             "bin/",
-            "obj/"
+            "obj/",
         },
-        
+
         mappings = {
             i = {
                 ['<Down>'] = actions.move_selection_next,

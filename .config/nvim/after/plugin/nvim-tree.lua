@@ -14,5 +14,15 @@ require("nvim-tree").setup {
                 col = 1,
             },
         }
+    },
+    filters = {
+        custom = {
+            "node_modules",
+            ".git",
+            "bin",
+            "obj",
+            "dist",
+            "build",
+        }
     }
 }
