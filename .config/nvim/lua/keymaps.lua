@@ -86,6 +86,15 @@ keymap('n', '<leader>fh', ':Telescope help_tags<cr>', opts)
 -- Undotree
 keymap('n', '<leader>fu', ':UndotreeToggle<cr>', opts)
 
+-- harpoon
+keymap('n', '<leader>ha', ':lua require"harpoon.mark".add_file()<cr>', opts)
+keymap('n', '<leader>he', ':lua require"harpoon.ui".toggle_quick_menu()<cr>', opts)
+keymap('n', '<leader>1', ':lua require"harpoon.ui".nav_file(1)<cr>', opts)
+keymap('n', '<leader>2', ':lua require"harpoon.ui".nav_file(2)<cr>', opts)
+keymap('n', '<leader>3', ':lua require"harpoon.ui".nav_file(3)<cr>', opts)
+keymap('n', '<C-l>', ':lua require"harpoon.ui".nav_next()<cr>', opts)
+keymap('n', '<C-h>', ':lua require"harpoon.ui".nav_prev()<cr>', opts)
+
 -- DAP
 keymap('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<cr>', opts)
 keymap('n', '<leader>dc', '<cmd>lua require"dap".continue()<cr>', opts)
