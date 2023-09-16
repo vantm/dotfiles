@@ -78,16 +78,16 @@ keymap("i", "<A-j>", "<C-o>:m+1<CR><C-o>==")
 keymap('n', '<leader>e', ':NvimTreeToggle<cr>', opts)
 
 -- Telescope
-keymap('n', '<leader>ff', ':Telescope find_files<cr>', opts)
-keymap('n', '<leader>fg', ':Telescope live_grep<cr>', opts)
-keymap('n', '<leader>fb', ':Telescope buffers<cr>', opts)
-keymap('n', '<leader>fh', ':Telescope help_tags<cr>', opts)
+keymap('n', '<leader>f', ':Telescope find_files<cr>', opts)
+keymap('n', '<leader>g', ':Telescope live_grep<cr>', opts)
+keymap('n', '<leader>b', ':Telescope buffers<cr>', opts)
+keymap('n', '<leader>h', ':Telescope help_tags<cr>', opts)
 
 -- Undotree
-keymap('n', '<leader>fu', ':UndotreeToggle<cr>', opts)
+keymap('n', '<leader>u', ':UndotreeToggle<cr>', opts)
 
 -- harpoon
-keymap('n', '<leader>ha', ':lua require"harpoon.mark".add_file()<cr>', opts)
+keymap('n', '<leader>m', ':lua require"harpoon.mark".add_file()<cr>', opts)
 keymap('n', '<leader>he', ':lua require"harpoon.ui".toggle_quick_menu()<cr>', opts)
 keymap('n', '<leader>1', ':lua require"harpoon.ui".nav_file(1)<cr>', opts)
 keymap('n', '<leader>2', ':lua require"harpoon.ui".nav_file(2)<cr>', opts)
