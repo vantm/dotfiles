@@ -9,12 +9,12 @@ require 'telescope'.setup {
             "**/build/",
             "**/bin/",
             "**/obj/",
-            "**\\.git\\",
-            "**\\node_modules\\",
-            "**\\dist\\",
-            "**\\build\\",
-            "**\\bin\\",
-            "**\\obj\\",
+            ".git/",
+            "node_modules/",
+            "dist/",
+            "build/",
+            "bin/",
+            "obj/",
         },
 
         mappings = {
@@ -22,7 +22,10 @@ require 'telescope'.setup {
                 ['<Down>'] = actions.move_selection_next,
                 ['<Up>'] = actions.move_selection_previous,
                 ['<C-j>'] = actions.move_selection_next,
-                ['<C-k>'] = actions.move_selection_previous
+                ['<C-k>'] = actions.move_selection_previous,
+                ['<C-[>'] = actions.close,
+                ['<C-c>'] = actions.close,
+                ['<Esc>'] = actions.close,
             }
         }
     }

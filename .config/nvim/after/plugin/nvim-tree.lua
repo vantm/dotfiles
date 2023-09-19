@@ -17,18 +17,18 @@ require("nvim-tree").setup {
     },
     filters = {
         custom = {
-            "/node_modules/",
-            "/.git/",
-            "/bin/",
-            "/obj/",
-            "/dist/",
-            "/build/",
-            "\\node_modules\\",
-            "\\.git\\",
-            "\\bin\\",
-            "\\obj\\",
-            "\\dist\\",
-            "\\build\\",
+            "/?node_modules/",
+            "/?\\.git/",
+            "/?bin/",
+            "/?obj/",
+            "/?dist/",
+            "/?build/",
+            "^node_modules$",
+            "^\\.git$",
+            "^bin$",
+            "^obj$",
+            "^dist$",
+            "^build$",
         }
     }
 }

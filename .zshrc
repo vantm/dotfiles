@@ -64,8 +64,11 @@ export GOPATH="$HOME/.local/share/go"
 # .NET paths
 export DOTNET_ROOT="$HOME/.local/share/dotnet"
 
+# OmniSharp path
+export OMNISHARP_ROOT="$HOME/.local/share/omnisharp"
+
 # paths
-export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools"
+export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$OMNISHARP_ROOT"
 
 # nvm paths
 export NVM_DIR="$HOME/.nvm"

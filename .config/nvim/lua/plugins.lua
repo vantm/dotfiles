@@ -61,6 +61,8 @@ return require 'packer'.startup(function(use)
 
     use 'ellisonleao/gruvbox.nvim'
 
+    use { 'rose-pine/neovim', as = 'rose-pine' }
+
     use 'nvim-tree/nvim-tree.lua'
 
     use 'RRethy/vim-illuminate'

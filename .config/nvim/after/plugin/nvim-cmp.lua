@@ -98,11 +98,7 @@ lspconfig.gopls.setup {
 }
 
 local pid = vim.fn.getpid()
-local omnisharp_bin = '/usr/share/OmniSharp'
-
-if string.find(vim.loop.os_uname().sysname, 'Windows') then
-    omnisharp_bin = os.getenv("USERPROFILE") .. "\\.omnisharp\\bin\\OmniSharp.exe"
-end
+local omnisharp_bin = os.getenv('OMNISHARP_ROOT') .. '/OmniSharp'
 
 lspconfig.omnisharp.setup {
     cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) },
@@ -124,7 +120,7 @@ lspconfig.omnisharp.setup {
     enable_ms_build_load_projects_on_demand = false,
 
     -- Enables support for roslyn analyzers, code fixes and rulesets.
-    enable_roslyn_analyzers = true,
+    enable_roslyn_analyzers = false,
 
     -- Specifies whether 'using' directives should be grouped and sorted during
     -- document formatting.
