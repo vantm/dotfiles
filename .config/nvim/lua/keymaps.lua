@@ -110,10 +110,6 @@ keymap('n', '<leader>dt', '<cmd>lua require"dap".terminate()<cr>', opts('Debug: 
 -- Hop
 keymap('n', 's', '<cmd>lua require"hop".hint_char2()<cr>', opts('Hop by 2 char'))
 
--- Packer
-keymap('n', '<leader>ps', ':PackerSync<cr>', opts('Packer: sync'))
-keymap('n', '<leader>pc', ':PackerCompile<cr>', opts('Packer: compile'))
-
 -- Splitting
 keymap('n', '<leader>s', '<c-w><c-s>', opts('Split horizontally'))
 keymap('n', '<leader>v', '<c-w><c-v>', opts('Split verically'))
