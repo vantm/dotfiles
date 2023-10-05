@@ -17,7 +17,7 @@ if [ "$1" = "" ]; then
 
         SESSION="~/$(realpath $(pwd) --relative-to=$HOME | sed 's/\./_/g')"
 
-        if [ "$(tmux ls -F '#{session_name}' | grep $SESSION)" = "" ]; then
+        if [ "$(tmux ls -F '#{session_name}' | grep "$SESSION$")" = "" ]; then
             tmux new-session -s $SESSION -c "$(pwd)" -d
         fi
 
@@ -39,7 +39,7 @@ else
 
     echo "Verify session $SESSION"
 
-    if [ "$(tmux ls -F '#{session_name}' | grep $SESSION)" = "" ]; then
+    if [ "$(tmux ls -F '#{session_name}' | grep "$SESSION$")" = "" ]; then
         echo "Create new session $SESSION"
         tmux new-session -s $SESSION -c $ZPATH -d
     fi
