@@ -30,7 +30,8 @@ if [ "$1" = "" ]; then
 else
     ZPATH="$(zoxide query $1)"
     if [ "$?" != "0" ]; then
-        exit 1
+        $0 $1
+        exit 0
     fi
 
     echo "zoxide: Found path $ZPATH"
