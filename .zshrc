@@ -50,6 +50,7 @@ source ~/.config/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Aliases
 alias ll="ls -la"
+alias la="ls -1a"
 alias rm="rm -i"
 alias mv="mv -i"
 alias ls="exa --icons"
