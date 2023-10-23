@@ -30,7 +30,12 @@ if [ "$1" = "" ]; then
 else
     ZPATH="$(zoxide query $1)"
     if [ "$?" != "0" ]; then
-        $0 $1
+        if [ -d "$1" ]; then
+            zoxide add $1
+            echo "Added $1 to zoxide db"
+            echo "Executing $0 $1..."
+            $0 $1
+        fi
         exit 0
     fi
 
