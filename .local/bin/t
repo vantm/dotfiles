@@ -1,59 +1,63 @@
 #!/bin/bash
 
-if [ "$1" = "" ]; then
-    SESSION="$(tmux list-session -F '#{session_name}' | tail -n 1 | sed 's/\./_/g')"
+create_session_id()
+{
+    echo "~/$(realpath $1 --relative-to=$HOME | sed 's/\./_/g')"
+}
 
-    if [ -n "$SESSION" ]; then
-        echo "Found session $SESSION"
-        if [ "$TMUX" != "" ]; then
-            echo "Switching session $SESSION"
-            tmux switch-client -t $SESSION
-        else
-            echo "Attaching session $SESSION"
-            tmux attach-session -t $SESSION
-        fi
+enter_session()
+{
+    if [ "$TMUX" != "" ]; then
+        tmux switch-client -t $1
     else
-        echo "Session $SESSION not found, try creating new session"
+        tmux attach-session -t $1
+    fi
+}
 
-        SESSION="~/$(realpath $(pwd) --relative-to=$HOME | sed 's/\./_/g')"
+# 0: success
+# 1: fail
+enter_last_session()
+{
+    ss="$(tmux list-session -F '#{session_name}' | tail -n 1 | sed 's/\./_/g')"
+    ret=1
 
-        if [ "$(tmux ls -F '#{session_name}' | grep "$SESSION$")" = "" ]; then
-            tmux new-session -s $SESSION -c "$(pwd)" -d
-        fi
+    if [ -n "$ss" ]; then
+        enter_session $ss
+        ret=0
+    fi
 
-        if [ "$TMUX" != "" ]; then
-            tmux switch-client -t $SESSION
-        else
-            tmux attach-session -t $SESSION
-        fi
+    return "$ret"
+}
+
+new_session()
+{
+    sid="$(create_session_id $1)"
+
+    if [ "$(tmux ls -F '#{session_name}' | grep "$sid$")" = "" ]; then
+        tmux new-session -s $sid -c $1 -d
+    fi
+
+    echo $sid
+}
+
+if [ "$1" = "" ]; then
+    enter_last_session
+    if [ "$?" != 0 ]; then
+        sid="$(new_session "$(pwd)")"
+        enter_session $sid
     fi
 else
-    ZPATH="$(zoxide query $1)"
+    fp="$(zoxide query $1)"
     if [ "$?" != "0" ]; then
         if [ -d "$1" ]; then
-            zoxide add $1
-            echo "Added $1 to zoxide db"
-            echo "Executing $0 $1..."
-            $0 $1
+            fp="$(realpath $1)"
+            zoxide add $fp
+        else
+            exit 0
         fi
-        exit 0
     fi
 
-    echo "zoxide: Found path $ZPATH"
-
-    SESSION="~/$(realpath $ZPATH --relative-to=$HOME | sed 's/\./_/g')"
-
-    echo "Verify session $SESSION"
-
-    if [ "$(tmux ls -F '#{session_name}' | grep "$SESSION$")" = "" ]; then
-        echo "Create new session $SESSION"
-        tmux new-session -s $SESSION -c $ZPATH -d
-    fi
-
-    if [ "$TMUX" != "" ]; then
-        tmux switch-client -t $SESSION
-    else
-        tmux attach-session -t $SESSION
-    fi
+    sid="$(new_session $fp)"
+    enter_session $sid
 fi
 
