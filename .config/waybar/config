@@ -1,0 +1,146 @@
+{
+"layer": "top",
+"position": "top",
+"height": 10,
+"margin-bottom":0,
+"margin-top":0,
+
+"modules-left": ["hyprland/workspaces", "hyprland/window"],
+"modules-center": ["clock"],
+"modules-right":  ["idle_inhibitor","cpu","memory","network","mpd","wireplumber","backlight","battery", "tray"],
+"battery": {
+    "bat": "BAT1",
+    "interval": 60,
+    "states": {
+        "warning": 30,
+        "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": ["", "", "", "", ""],
+    "max-length": 25
+},
+"hyprland/workspaces": {
+     "sort-by-name": true,
+     "on-click": "activate"
+},
+"hyprland/window": {
+    "max-length": 200,
+    "separate-outputs": true
+},
+"wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "<span color='#EE4E4E'> Muted</span>",
+    "on-click": "helvum",
+    "format-icons": ["", "", ""]
+},
+"tray": {
+    "icon-size": 24,
+    "spacing": 6
+},
+"clock": {
+    "format": "{:%H:%M}  ",
+    "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+        "mode"          : "year",
+        "mode-mon-col"  : 3,
+        "weeks-pos"     : "right",
+        "on-scroll"     : 1,
+        "format": {
+              "months":     "<span color='#ffead3'><b>{}</b></span>",
+              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
+    },
+    "actions":  {
+        "on-click-right": "mode",
+        "on-click-forward": "tz_up",
+        "on-click-backward": "tz_down",
+        "on-scroll-up": "shift_up",
+        "on-scroll-down": "shift_down"
+    }
+},
+"cpu": {
+    "interval": 10,
+    "format": " {}%",
+    "max-length": 10
+},
+"memory": {
+    "interval": 30,
+    "format": " {used:0.2f}GB",
+    "max-length": 10,
+    "tooltip": false,
+    "warning": 70,
+    "critical": 90
+},
+"network": {
+  "interval": 2,
+  "format-wifi": "  {signalStrength}%",
+  "format-ethernet": "",
+  "format-linked": " {ipaddr}",
+  "format-disconnected": " Disconnected",
+  "format-disabled": "",
+  "tooltip": false,
+  "max-length": 20,
+  "min-length": 6,
+  "format-alt": "{essid}",
+},
+"idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+        "activated": "",
+        "deactivated": ""
+    }
+},
+"backlight": {
+    // "device": "acpi_video1",
+    "format": "{icon}&#8239;{percent}%",
+    "format-icons": ["", ""],
+    "on-scroll-down": "brightnessctl -c backlight set 1%-",
+    "on-scroll-up": "brightnessctl -c backlight set +1%"
+},
+"mpd": {
+  "format": "{stateIcon} {artist} - {title}",
+  "format-disconnected": "🎶",
+  "format-stopped": "♪",
+  "interval": 10,
+  "consume-icons": {
+    "on": " " // Icon shows only when "consume" is on
+  },
+  "random-icons": {
+    "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+    "on": " "
+  },
+  "repeat-icons": {
+    "on": " "
+  },
+  "single-icons": {
+    "on": "1 "
+  },
+  "state-icons": {
+    "paused": "",
+    "playing": ""
+  },
+  "tooltip-format": "MPD (connected)",
+  "tooltip-format-disconnected": "MPD (disconnected)",
+  "max-length": 35
+},
+"custom/recorder": {
+    "format": " Rec",
+    "format-disabled": " Off-air", //An empty format will hide the module.
+    "return-type": "json",
+    "interval": 1,
+    "exec": "echo '{\"class\": \"recording\"}'",
+    "exec-if": "pgrep wf-recorder",
+},
+"custom/audiorec": {
+    "format": "♬ Rec",
+    "format-disabled": "♬ Off-air", //An empty format will hide the module.
+    "return-type": "json",
+    "interval": 1,
+    "exec": "echo '{\"class\": \"audio recording\"}'",
+    "exec-if": "pgrep ffmpeg",
+},
+}

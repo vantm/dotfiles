@@ -1,0 +1,51 @@
+* {
+    font-family: "Hack Nerd Font";
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(0,0,0,0.8)
+}
+
+#workspaces {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#workspaces button {
+    margin-right: 5px;
+    padding: 4px 10px;
+    font-weight: bold;
+    background-color: #31363F;
+}
+
+#workspaces button.active,
+#workspaces button.focused{
+    color: #000000;
+    background: #E8751A;
+}
+
+#tray,
+#mpd,
+#custom-weather,
+#cpu,
+#temperature,
+#memory,
+#backlight,
+#wireplumber,
+#disk,
+#custom-recorder,
+#custom-audiorec,
+#battery,
+#clock,
+#network {
+    padding: 4px 10px;
+}
+
+#idle_inhibitor {
+    margin-right: 20px;
+    padding: 4px 10px;
+}

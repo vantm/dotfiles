@@ -49,19 +49,11 @@ return require 'packer'.startup(function(use)
 
     use 'nvim-treesitter/nvim-treesitter'
 
-    use {
-        'akinsho/bufferline.nvim',
-        tag = 'v4.2.0',
-        requires = 'nvim-tree/nvim-web-devicons'
-    }
-
     use 'lukas-reineke/indent-blankline.nvim'
 
     use 'windwp/nvim-autopairs'
 
     use 'ellisonleao/gruvbox.nvim'
-
-    use { 'rose-pine/neovim', as = 'rose-pine' }
 
     use 'nvim-tree/nvim-tree.lua'
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 swaylock \
-    --screenshot \
+#    --screenshot \
     --effect-blur 7x5 \
     --ring-color 83A598 \
     --key-hl-color B75F17 \
