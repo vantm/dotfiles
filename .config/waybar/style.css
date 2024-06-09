@@ -1,25 +1,33 @@
 * {
     font-family: "Hack Nerd Font";
-    font-size: 14px;
+    font-size: 12px;
     min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(0,0,0,0.8)
+    background-color: rgba(0,0,0,0);
 }
 
-#workspaces {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    margin-right: 10px;
-    margin-left: 10px;
+.modules-left,
+.modules-center,
+.modules-right {
+    margin: 8px 8px 0px 8px;
+    padding: 2px 4px;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 8px;
+}
+
+#window {
+    min-width: 400px;
+    padding: 0px 10px;
 }
 
 #workspaces button {
-    margin-right: 5px;
-    padding: 4px 10px;
+    margin: 2px;
+    padding: 4px 4px;
     font-weight: bold;
     background-color: #31363F;
+    border-radius: 50%;
 }
 
 #workspaces button.active,
@@ -42,10 +50,27 @@ window#waybar {
 #battery,
 #clock,
 #network {
-    padding: 4px 10px;
+    margin: 4px;
+    padding: 2px 4px;
 }
 
 #idle_inhibitor {
-    margin-right: 20px;
-    padding: 4px 10px;
+    margin-right: 10px;
+    padding: 2px 8px;
+}
+
+#mpd,
+#custom-weather,
+#cpu,
+#temperature,
+#memory,
+#backlight,
+#wireplumber,
+#disk,
+#custom-recorder,
+#custom-audiorec,
+#battery,
+#network {
+    background-color: #31363F;
+    border-radius: 8px;
 }
