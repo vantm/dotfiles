@@ -1,10 +1,11 @@
-# Set up the prompt
+fpath+=($HOME/.config/pure)
 
-autoload -Uz promptinit
-promptinit
-prompt redhat
+autoload -Uz promptinit; promptinit
+prompt pure
 
 setopt histignorealldups sharehistory
+
+unsetopt BEEP
 
 # Use vim keybindings
 bindkey -v
@@ -53,11 +54,31 @@ alias ll="ls -la"
 alias la="ls -1a"
 alias rm="rm -i"
 alias mv="mv -i"
-alias ls="exa --icons"
 alias k=kubectl
 alias v=nvim
 alias vi=nvim
 alias lg=lazygit
+alias ss='yay -Ss '
+alias syu='yay -Syu '
+alias sy='yay -Sy '
+
+# Functions
+
+function vzz() {
+    local P=$(fzf)
+
+    if [[ -n $P ]] ; then
+        nvim $P
+    fi
+}
+
+function zz() {
+    local P=$(fd --type dir | fzf)
+
+    if [[ -n $P ]] ; then
+        z $P
+    fi
+}
 
 # GO paths
 export GOPATH="$HOME/.local/share/go"
@@ -72,9 +93,7 @@ export OMNISHARP_ROOT="$HOME/.local/share/omnisharp"
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$OMNISHARP_ROOT"
 
 # nvm paths
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source /usr/share/nvm/init-nvm.sh
 
 # bun completions
 [ -s "/home/vantm/.bun/_bun" ] && source "/home/vantm/.bun/_bun"
