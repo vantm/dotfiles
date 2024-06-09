@@ -11,10 +11,10 @@ window#waybar {
 .modules-left,
 .modules-center,
 .modules-right {
-    margin: 8px 8px 0px 8px;
+    margin: 12px 10px 0px 12px;
     padding: 2px 4px;
     background-color: rgba(0,0,0,0.6);
-    border-radius: 8px;
+    border-radius: 20px;
 }
 
 #window {
@@ -27,7 +27,7 @@ window#waybar {
     padding: 4px 4px;
     font-weight: bold;
     background-color: #31363F;
-    border-radius: 50%;
+    border-radius: 20px;
 }
 
 #workspaces button.active,
@@ -51,12 +51,12 @@ window#waybar {
 #clock,
 #network {
     margin: 4px;
-    padding: 2px 4px;
+    padding: 4px 8px;
 }
 
 #idle_inhibitor {
     margin-right: 10px;
-    padding: 2px 8px;
+    padding: 4px 8px;
 }
 
 #mpd,
@@ -72,5 +72,5 @@ window#waybar {
 #battery,
 #network {
     background-color: #31363F;
-    border-radius: 8px;
+    border-radius: 16px;
 }
