@@ -1,103 +1,78 @@
-fpath+=($HOME/.config/pure)
+let mapleader=" "
 
-autoload -Uz promptinit; promptinit
-prompt pure
+set autoident expandtab tabstop=4 shiftwidth=4
+set number relativenumber
+set nohlsearch
+set ideajoin
+set showmode ideastatusicon=enabled
 
-setopt histignorealldups sharehistory
+set visualbell noerrorbells
 
-unsetopt BEEP
+nmap g] <Action>(FindUsages)
+nmap <C-]> <Action>(GotoImplementation)
 
-# Use vim keybindings
-bindkey -v
+nmap <C-/> <Action>(CommentByLineComment)
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.zsh_history
+nmap <leader>lf <Action>(ReformatCode)
+nmap <leader>lr <Action>(RenameElement)
+nmap <leader>la <Action>(ShowIntentionActions)
 
-# Use modern completion system
-autoload -Uz compinit
-compinit
+nmap <leader>f <Action>(GotoFile)
 
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
+nmap H <Action>(PreviousTab)
+nmap L <Action>(NextTab)
 
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+map <C-k> <Action>(ParameterInfo)
 
-# Make Ctrl-Left Ctrl-Right jump between words
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-bindkey "^F" autosuggest-accept
+nmap <A-j> :m+1<cr>
+nmap <A-k> :m-2<cr>
+imap <A-j> <esc>V:m+1<cr>i
+imap <A-k> <esc>V:m-2<cr>i
+vmap <A-j> :m'>+1<cr>gv=gv
+vmap <A-k> :m'<-2<cr>gv=gv
 
-# plugins
-eval "$(zoxide init zsh)"
-source ~/.config/fzf-tab/fzf-tab.plugin.zsh
-source ~/.config/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source ~/.config/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+nmap S "_diwP
+nmap S "_diwP
 
-# Aliases
-alias ll="ls -la"
-alias la="ls -1a"
-alias rm="rm -i"
-alias mv="mv -i"
-alias k=kubectl
-alias v=nvim
-alias vi=nvim
-alias lg=lazygit
-alias ss='yay -Ss '
-alias syu='yay -Syu '
-alias sy='yay -Sy '
+nmap <leader>so :source ~/.ideavimrc<cr>
 
-# Functions
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>P "+P
 
-function vzz() {
-    local P=$(fzf)
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+vnoremap <leader>Y "+Y
 
-    if [[ -n $P ]] ; then
-        nvim $P
-    fi
-}
+nmap <leader>w :w<cr>
 
-function zz() {
-    local P=$(fd --type dir | fzf)
+nmap Q :q!<cr>
 
-    if [[ -n $P ]] ; then
-        z $P
-    fi
-}
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
-# GO paths
-export GOPATH="$HOME/.local/share/go"
+nnoremap J mzJ`z
 
-# .NET paths
-export DOTNET_ROOT="$HOME/.local/share/dotnet"
+set easymotion
+set NERDTree
+set surround
+set exchange
+set argtextobj
+set textobj-entire
+set vim-paragraph-motion
+set highlightedyank
 
-# OmniSharp path
-export OMNISHARP_ROOT="$HOME/.local/share/omnisharp"
+nmap s <Plug>(easymotion-s2)
 
-# paths
-export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$OMNISHARP_ROOT"
+nmap <leader>e :NERDTreeFocus<cr>
+nmap <leader>nx :NERDTreeClose<cr>
 
-# nvm paths
-source /usr/share/nvm/init-nvm.sh
+nmap ae <Plug>(textobj-entire-a)
+nmap ie <Plug>(textobj-entire-i)
 
-# bun completions
-[ -s "/home/vantm/.bun/_bun" ] && source "/home/vantm/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+nmap cx <Plug>(Exchange)
+xmap X <Plug>(Exchange)
+nmap cxc <Plug>(ExchangeClear)
+nmap cxx <Plug>(ExchangeLine)
