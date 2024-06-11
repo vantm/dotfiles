@@ -16,3 +16,6 @@ cp -r ~/.config/rofi .config
 cp -r ~/.config/swayidle .config
 cp -r ~/.config/swaylock .config
 cp -r ~/.config/waybar .config
+
+rm -rf .wallpapers
+cp -r ~/.wallpapers/ .wallpapers
