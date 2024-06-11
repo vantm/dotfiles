@@ -4,10 +4,26 @@
   "height": 25,
   "margin-bottom":0,
   "margin-top":0,
-
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock","mpd"],
-  "modules-right":  ["idle_inhibitor","tray","cpu","memory","disk#d1","network","bluetooth","backlight","wireplumber","battery"],
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock",
+    "mpd"
+  ],
+  "modules-right":  [
+    "tray",
+    "idle_inhibitor",
+    "cpu",
+    "memory",
+    "disk#d1",
+    "network",
+    "bluetooth",
+    "backlight",
+    "wireplumber",
+    "battery"
+  ],
   "battery": {
       "bat": "BAT1",
       "interval": 60,

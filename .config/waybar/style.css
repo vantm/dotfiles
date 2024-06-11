@@ -14,7 +14,7 @@ window#waybar {
     margin: 4px 4px 0px 4px;
     padding: 2px;
     background-color: rgba(0,0,0,0.6);
-    border-radius: 20px;
+    border-radius: 8px;
 }
 
 #window {
@@ -43,13 +43,13 @@ window#waybar {
     padding: 2px 12px;
     min-width: 16px;
     background-color: #31363F;
-    border-radius: 16px;
+    border-radius: 4px;
 }
 
 #idle_inhibitor,
 #clock {
     background-color: transparent;
-    margin: 4px;
+    margin: 2px;
     padding: 4px;
 }
 
