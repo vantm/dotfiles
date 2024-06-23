@@ -1,78 +1,103 @@
-let mapleader=" "
+fpath+=($HOME/.config/pure)
 
-set autoident expandtab tabstop=4 shiftwidth=4
-set number relativenumber
-set nohlsearch
-set ideajoin
-set showmode ideastatusicon=enabled
+autoload -Uz promptinit; promptinit
+prompt pure
 
-set visualbell noerrorbells
+setopt histignorealldups sharehistory
 
-nmap g] <Action>(FindUsages)
-nmap <C-]> <Action>(GotoImplementation)
+unsetopt BEEP
 
-nmap <C-/> <Action>(CommentByLineComment)
+# Use vim keybindings
+bindkey -v
 
-nmap <leader>lf <Action>(ReformatCode)
-nmap <leader>lr <Action>(RenameElement)
-nmap <leader>la <Action>(ShowIntentionActions)
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
 
-nmap <leader>f <Action>(GotoFile)
+# Use modern completion system
+autoload -Uz compinit
+compinit
 
-nmap H <Action>(PreviousTab)
-nmap L <Action>(NextTab)
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
 
-map <C-k> <Action>(ParameterInfo)
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-nmap <A-j> :m+1<cr>
-nmap <A-k> :m-2<cr>
-imap <A-j> <esc>V:m+1<cr>i
-imap <A-k> <esc>V:m-2<cr>i
-vmap <A-j> :m'>+1<cr>gv=gv
-vmap <A-k> :m'<-2<cr>gv=gv
+# Make Ctrl-Left Ctrl-Right jump between words
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey "^F" autosuggest-accept
 
-nmap S "_diwP
-nmap S "_diwP
+# plugins
+eval "$(zoxide init zsh)"
+source ~/.config/fzf-tab/fzf-tab.plugin.zsh
+source ~/.config/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source ~/.config/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-nmap <leader>so :source ~/.ideavimrc<cr>
+# Aliases
+alias ll="ls -la"
+alias la="ls -1a"
+alias rm="rm -i"
+alias mv="mv -i"
+alias k=kubectl
+alias v=nvim
+alias vi=nvim
+alias lg=lazygit
+alias ss='yay -Ss '
+alias syu='yay -Syu '
+alias sy='yay -Sy '
 
-nnoremap <leader>p "+p
-vnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>P "+P
+# Functions
 
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-nnoremap <leader>Y "+Y
-vnoremap <leader>Y "+Y
+function vzz() {
+    local P=$(fzf)
 
-nmap <leader>w :w<cr>
+    if [[ -n $P ]] ; then
+        nvim $P
+    fi
+}
 
-nmap Q :q!<cr>
+function zz() {
+    local P=$(fd --type dir | fzf)
 
-nnoremap n nzzzv
-nnoremap N Nzzzv
+    if [[ -n $P ]] ; then
+        z $P
+    fi
+}
 
-nnoremap J mzJ`z
+# GO paths
+export GOPATH="$HOME/.local/share/go"
 
-set easymotion
-set NERDTree
-set surround
-set exchange
-set argtextobj
-set textobj-entire
-set vim-paragraph-motion
-set highlightedyank
+# .NET paths
+export DOTNET_ROOT="$HOME/.local/share/dotnet"
 
-nmap s <Plug>(easymotion-s2)
+# OmniSharp path
+export OMNISHARP_ROOT="$HOME/.local/share/omnisharp"
 
-nmap <leader>e :NERDTreeFocus<cr>
-nmap <leader>nx :NERDTreeClose<cr>
+# paths
+export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$OMNISHARP_ROOT"
 
-nmap ae <Plug>(textobj-entire-a)
-nmap ie <Plug>(textobj-entire-i)
+# nvm paths
+source /usr/share/nvm/init-nvm.sh
 
-nmap cx <Plug>(Exchange)
-xmap X <Plug>(Exchange)
-nmap cxc <Plug>(ExchangeClear)
-nmap cxx <Plug>(ExchangeLine)
+# bun completions
+[ -s "/home/vantm/.bun/_bun" ] && source "/home/vantm/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

@@ -2,7 +2,7 @@
 
 cp ~/.zprofile .zprofile
 cp ~/.zshrc .zshrc
-cp ~/.ideavimrc .zshrc
+cp ~/.ideavimrc .ideavimrc
 cp ~/.tmux.conf .tmux.conf
 
 mkdir -p .config/mpd
