@@ -58,9 +58,9 @@ alias k=kubectl
 alias v=nvim
 alias vi=nvim
 alias lg=lazygit
-alias ss='yay -Ss '
-alias syu='yay -Syu '
-alias sy='yay -Sy '
+alias ysy='yay -Syu '
+alias yss='yay -Ss '
+alias zso='source ~/.zshrc'
 
 # Functions
 
@@ -96,8 +96,14 @@ export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:
 source /usr/share/nvm/init-nvm.sh
 
 # bun completions
-[ -s "/home/vantm/.bun/_bun" ] && source "/home/vantm/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# docker
+export PATH=$HOME/bin:$PATH
+export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+
+[ -f "/home/vantm/.ghcup/env" ] && . "/home/vantm/.ghcup/env" # ghcup-env
