@@ -58,9 +58,11 @@ alias k=kubectl
 alias v=nvim
 alias vi=nvim
 alias lg=lazygit
-alias ysy='yay -Syu '
-alias yss='yay -Ss '
+
 alias zso='source ~/.zshrc'
+
+alias syu='yay -Syu '
+alias ss='yay -Ss '
 
 # Functions
 
