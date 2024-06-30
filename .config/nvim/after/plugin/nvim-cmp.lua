@@ -98,10 +98,9 @@ lspconfig.gopls.setup {
 }
 
 local pid = vim.fn.getpid()
-local omnisharp_bin = os.getenv('OMNISHARP_ROOT') .. '/OmniSharp'
 
 lspconfig.omnisharp.setup {
-    cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) },
+    cmd = { 'OmniSharp', '--languageserver', '--hostPID', tostring(pid) },
 
     handlers = {
         ['textDocument/definition'] = require 'omnisharp_extended'.handler,
