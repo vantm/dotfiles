@@ -5,15 +5,15 @@
 }
 
 window#waybar {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0.8);
 }
 
 .modules-left,
 .modules-center,
 .modules-right {
-    margin: 4px 4px 0px 4px;
+    margin: 0px 4px;
     padding: 2px;
-    background-color: rgba(0,0,0,0.6);
+    /*background-color: rgba(0,0,0,0.6);*/
     border-radius: 8px;
 }
 

@@ -44,6 +44,7 @@ bindkey "^F" autosuggest-accept
 
 # plugins
 eval "$(zoxide init zsh)"
+eval "$(fzf --zsh)"
 source ~/.config/fzf-tab/fzf-tab.plugin.zsh
 source ~/.config/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
