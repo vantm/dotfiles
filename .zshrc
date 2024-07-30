@@ -65,24 +65,6 @@ alias zso='source ~/.zshrc'
 alias syu='yay -Syu '
 alias ss='yay -Ss '
 
-# Functions
-
-function vzz() {
-    local P=$(fzf)
-
-    if [[ -n $P ]] ; then
-        nvim $P
-    fi
-}
-
-function zz() {
-    local P=$(fd --type dir | fzf)
-
-    if [[ -n $P ]] ; then
-        z $P
-    fi
-}
-
 # GO paths
 export GOPATH="$HOME/.local/share/go"
 
