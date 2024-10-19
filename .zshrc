@@ -62,8 +62,12 @@ alias lg=lazygit
 
 alias zso='source ~/.zshrc'
 
-alias syu='yay -Syu '
+alias sy='yay -Sy '
 alias ss='yay -Ss '
+
+function tss() {
+    sesh connect $(sesh list | fzf)
+}
 
 # GO paths
 export GOPATH="$HOME/.local/share/go"
