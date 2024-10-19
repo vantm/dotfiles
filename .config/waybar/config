@@ -47,7 +47,7 @@
   "wireplumber": {
       "format": "{icon}  {volume}%",
       "format-muted": "<span color='#EE4E4E'> Muted</span>",
-      "on-click": "env GTK_THEME=Adwaita:dark helvum",
+      "on-click": "env GTK_THEME=Adwaita:dark pwvucontrol",
       "format-icons": ["", "", ""]
   },
   "tray": {
