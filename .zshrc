@@ -65,7 +65,7 @@ alias zso='source ~/.zshrc'
 alias sy='yay -Sy '
 alias ss='yay -Ss '
 
-function tss() {
+function fff() {
     sesh connect $(sesh list | fzf)
 }
 
