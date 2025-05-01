@@ -5,7 +5,7 @@
 }
 
 window#waybar {
-    /*background-color: rgba(0,0,0,1);*/
+    /* background-color: rgba(0,0,0,1); */
     background-color: #111;
 }
 
@@ -14,8 +14,8 @@ window#waybar {
 .modules-right {
     margin: 0px 4px;
     padding: 2px;
-    /*background-color: rgba(0,0,0,0.6);*/
-    border-radius: 8px;
+    /* background-color: rgba(0,0,0,0.6); */
+    /* border-radius: 4px; */
 }
 
 #window {
@@ -27,14 +27,18 @@ window#waybar {
     margin: 2px;
     padding: 4px;
     font-weight: bold;
-    background-color: #31363F;
-    border-radius: 40px;
+    /* background-color: #31363F; */
+    /* border-radius: 40px; */
+    /* border-radius: 4px; */
+    border-radius: 0;
 }
 
 #workspaces button.active,
 #workspaces button.focused{
-    color: #000000;
-    background: #E8751A;
+    /* color: #000000; */
+    /* background: #E8751A; */
+    /* background-color: #983602; */
+    background-color: #31363F;
 }
 
 .modules-right widget label,
@@ -44,7 +48,7 @@ window#waybar {
     padding: 2px 12px;
     min-width: 16px;
     background-color: #31363F;
-    border-radius: 4px;
+    /* border-radius: 4px; */
 }
 
 #idle_inhibitor,
