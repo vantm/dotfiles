@@ -17,7 +17,7 @@ nmap <leader>lf <Action>(ReformatCode)
 nmap <leader>lr <Action>(RenameElement)
 nmap <leader>la <Action>(ShowIntentionActions)
 
-nmap <leader>f <Action>(GotoFile)
+nmap <leader>ff <Action>(GotoFile)
 
 nmap H <Action>(PreviousTab)
 nmap L <Action>(NextTab)

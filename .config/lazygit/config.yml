@@ -1,6 +1,5 @@
 gui:
   border: 'rounded'
-
 git:
   branchLogCmd: 'git log --graph --color=always --decorate --oneline {{branchName}} --'
   allBranchesLogCmd: 'git log --graph --all --color=always --decorate --oneline'
@@ -9,14 +8,12 @@ git:
     # E.g: `ABC-123` or `feat/ABC-123` or `feature/ABC-123` or `my-prefix/ABC-123`
     #      Then the prepended prefix is 'ABC-123'
     my-repo:
-      pattern: "^(\\w+\\/)?(\\w+-\\w+).*"
-      replace: '$2 '
-
+      - pattern: "^(\\w+\\/)?(\\w+-\\w+).*"
+        replace: '$2 '
 notARepository: skip
-
 keybinding:
   universal:
     jumpToBlock: ['0', '1', '2', '3', '4']
-
 services:
-  #'gitlab.my-company.com': 'gitlab:gitlab.my-company.com'
+
+#'gitlab.my-company.com': 'gitlab:gitlab.my-company.com'

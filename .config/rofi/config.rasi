@@ -3,4 +3,5 @@
 //@theme "/usr/share/rofi/themes/dmenu.rasi"
 //@theme "/usr/share/rofi/themes/fancy.rasi"
 //@theme "/usr/share/rofi/themes/glue_pro_blue.rasi"
-@theme "~/.config/rofi/rounded-orange-dark.rasi"
+//@theme "~/.config/rofi/rounded-orange-dark.rasi"
+@theme "~/.config/rofi/simple-tokyo.rasi"

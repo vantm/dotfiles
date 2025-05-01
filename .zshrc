@@ -65,8 +65,12 @@ alias zso='source ~/.zshrc'
 alias sy='yay -Sy '
 alias ss='yay -Ss '
 
-function fff() {
+function sss() {
     sesh connect $(sesh list | fzf)
+}
+
+function ssf() {
+    sesh connect $(fd -t d -d=3 . ~ | fzf)
 }
 
 # GO paths
@@ -74,6 +78,8 @@ export GOPATH="$HOME/.local/share/go"
 
 # .NET paths
 export DOTNET_ROOT="$HOME/.local/share/dotnet"
+export DOTNET_HOST_PATH="$DOTNET_ROOT/dotnet"
+export PATH="$PATH:$HOME/.dotnet/tools"
 
 # OmniSharp path
 export OMNISHARP_ROOT="$HOME/.local/share/omnisharp"
@@ -96,3 +102,7 @@ export PATH=$HOME/bin:$PATH
 export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
 
 [ -f "/home/vantm/.ghcup/env" ] && . "/home/vantm/.ghcup/env" # ghcup-env
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

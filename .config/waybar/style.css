@@ -5,7 +5,8 @@
 }
 
 window#waybar {
-    background-color: rgba(0,0,0,0.8);
+    /*background-color: rgba(0,0,0,1);*/
+    background-color: #111;
 }
 
 .modules-left,

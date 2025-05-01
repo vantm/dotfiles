@@ -36,9 +36,7 @@
       "max-length": 25
   },
   "hyprland/workspaces": {
-       "sort-by-number": true,
-       "active-only": false,
-       "on-click": "activate"
+       "active-only": false
   },
   "hyprland/window": {
       "max-length": 200,
