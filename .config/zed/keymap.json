@@ -12,6 +12,17 @@
     }
   },
   {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "p": "project_panel::Paste"
+    }
+  },
+  {
     "context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
     "bindings": {
       "space f f": "file_finder::Toggle",
@@ -22,7 +33,7 @@
       "space l s": "language_selector::Toggle",
       "space w": "workspace::Save",
       "space a i": "assistant::InlineAssist",
-      "space a c": "assistant::NewChat"
+      "space a c": "assistant::ToggleFocus"
     }
   }
 ]
