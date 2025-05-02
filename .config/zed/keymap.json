@@ -1,0 +1,28 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
+    "bindings": {
+      "space f f": "file_finder::Toggle",
+      "space e": "project_panel::ToggleFocus",
+      "space g": "git_panel::ToggleFocus",
+      "space l f": "editor::Format",
+      "space l a": "editor::ToggleCodeActions",
+      "space l s": "language_selector::Toggle",
+      "space w": "workspace::Save",
+      "space a i": "assistant::InlineAssist",
+      "space a c": "assistant::NewChat"
+    }
+  }
+]
