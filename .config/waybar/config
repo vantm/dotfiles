@@ -16,9 +16,6 @@
     "idle_inhibitor",
     "cpu",
     "memory",
-    "disk#d1",
-    "network",
-    "bluetooth",
     "backlight",
     "wireplumber",
     "battery"
