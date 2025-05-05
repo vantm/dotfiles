@@ -13,16 +13,16 @@ window#waybar {
 .modules-center,
 .modules-right {
     /* margin: 0px 4px; */
-    margin: 4px 0px;
+    margin: 4px 1px;
     padding: 4px 0px;
     /* background-color: rgba(0,0,0,0.6); */
     /* border-radius: 4px; */
 }
 
-#window {
-    min-width: 400px;
-    padding: 0px 10px;
-}
+/* #window { */
+/*     min-width: 400px; */
+/*     padding: 0px 10px; */
+/* } */
 
 #workspaces button {
     /* margin: 2px; */
