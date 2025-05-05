@@ -1,0 +1,16 @@
+[general]
+live_config_reload = false
+
+[window]
+decorations = "None"
+
+[font]
+normal.family = "Mononoki Nerd Font"
+size = 14
+
+[colors]
+primary.background = "#000000"
+
+[mouse]
+hide_when_typing = true
+

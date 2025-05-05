@@ -6,7 +6,7 @@
 
 window#waybar {
     /* background-color: rgba(0,0,0,1); */
-    background-color: #111;
+    background-color: #000000;
 }
 
 .modules-left,
@@ -19,10 +19,10 @@ window#waybar {
     /* border-radius: 4px; */
 }
 
-/* #window { */
-/*     min-width: 400px; */
-/*     padding: 0px 10px; */
-/* } */
+#window {
+    min-width: 400px;
+    padding: 0px 10px;
+}
 
 #workspaces button {
     /* margin: 2px; */

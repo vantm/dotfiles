@@ -31,7 +31,7 @@
           "warning": 30,
           "critical": 15
       },
-      "format": "{icon}  {capacity}%",
+      "format": "{icon}  {capacity} %",
       "format-icons": ["", "", "", "", ""],
       "max-length": 25
   },
@@ -43,7 +43,7 @@
       "separate-outputs": true
   },
   "wireplumber": {
-      "format": "{icon} {volume}%",
+      "format": "{icon} {volume} %",
       "format-muted": "<span color='#EE4E4E'> Muted</span>",
       "on-click": "env GTK_THEME=Adwaita:dark pwvucontrol",
       "format-icons": ["", "", ""]
@@ -78,7 +78,7 @@
   },
   "cpu": {
       "interval": 5,
-      "format": "  {}%",
+      "format": "  {} %",
       "max-length": 10
   },
   "memory": {
@@ -91,7 +91,7 @@
   },
   "network": {
     "interval": 5,
-    "format-wifi": "  {signalStrength}%",
+    "format-wifi": "  {signalStrength} %",
     "format-ethernet": "",
     "format-linked": " {ipaddr}",
     "format-disconnected": " Disconnected",
@@ -110,8 +110,7 @@
       "icon-size": 32
   },
   "backlight": {
-      "device": "amdgpu_bl1",
-      "format": "{icon} {percent}%",
+      "format": "{icon} {percent} %",
       "format-icons": ["", ""],
       "on-scroll-down": "brightnessctl -c backlight set 1%-",
       "on-scroll-up": "brightnessctl -c backlight set +1%"
@@ -158,10 +157,15 @@
       "exec": "echo '{\"class\": \"audio recording\"}'",
       "exec-if": "pgrep ffmpeg",
   },
-  //"disk#d1": {
+  //"disk#home": {
   //    "interval": 30,
-  //    "format": "󰋊 {percentage_used}%",
+  //    "format": "󰋊 {percentage_used} %",
   //    "path": "/home"
+  //},
+  //"disk#root": {
+  //    "interval": 31,
+  //    "format": "󰋊 {percentage_used} %",
+  //    "path": "/"
   //},
   "bluetooth": {
     // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
