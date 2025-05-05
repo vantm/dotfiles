@@ -66,8 +66,27 @@ function sesh-sessions() {
   {
     exec </dev/tty
     exec <&1
+
+    local childdirs=$(fd \
+      -t d -H -d=2 \
+      --exclude .git \
+      --exclude .local \
+      --exclude .idea \
+      --exclude .vscode \
+      --exclude .svn \
+      --exclude .hg \
+      --exclude node_modules \
+      --exclude vendor \
+      --exclude __pycache__ \
+      --color=never \
+      --full-path "$HOME/work")
+
+    local sessions=$(sesh list)
+
+    local all="$childdirs\n$sessions"
+    
     local session
-    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    session=$(echo $all | fzf --height 41% --no-sort --reverse --border-label ' sesh ' --border --prompt '⚡  ')
     zle reset-prompt > /dev/null 2>&1 || true
     [[ -z "$session" ]] && return
     sesh connect $session
