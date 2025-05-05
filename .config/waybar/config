@@ -49,8 +49,8 @@
       "format-icons": ["", "", ""]
   },
   "tray": {
-      "icon-size": 24,
-      "spacing": 6
+      "icon-size": 20,
+      "spacing": 4
   },
   "clock": {
       "format": "{:%Y/%m/%d %H:%M}",
