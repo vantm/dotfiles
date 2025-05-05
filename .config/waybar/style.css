@@ -13,8 +13,8 @@ window#waybar {
 .modules-center,
 .modules-right {
     /* margin: 0px 4px; */
-    margin: 2px 0px;
-    padding: 2px 0px;
+    margin: 4px 0px;
+    padding: 4px 0px;
     /* background-color: rgba(0,0,0,0.6); */
     /* border-radius: 4px; */
 }
@@ -44,19 +44,31 @@ window#waybar {
 
 .modules-right widget label,
 .modules-center widget label {
-    font-size: 12px;
-    margin: 2px;
     padding: 2px 12px;
     min-width: 16px;
     background-color: #31363F;
     /* border-radius: 4px; */
 }
 
-#idle_inhibitor,
-#clock {
+.modules-right widget label {
+    margin-left: 8px;
+}
+
+#idle_inhibitor, 
+#clock,
+#privacy,
+#mpris {
     background-color: transparent;
-    margin: 2px;
     padding: 4px;
+}
+
+#privacy {
+    margin-left: 6px;
+}
+
+#idle_inhibitor {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 #window {

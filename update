@@ -5,9 +5,6 @@ cp ~/.zshrc .zshrc
 cp ~/.ideavimrc .ideavimrc
 cp ~/.tmux.conf .tmux.conf
 
-mkdir -p .config/mpd
-cp ~/.config/mpd/mpd.conf .config/mpd
-
 cp -r ~/.config/hypr .config
 cp -r ~/.config/kitty .config
 cp -r ~/.config/lazygit .config
