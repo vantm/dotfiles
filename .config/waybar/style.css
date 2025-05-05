@@ -59,6 +59,11 @@ window#waybar {
 #privacy,
 #mpris {
     background-color: transparent;
+}
+
+#idle_inhibitor, 
+#clock,
+#mpris {
     padding: 4px;
 }
 
@@ -67,8 +72,7 @@ window#waybar {
 }
 
 #idle_inhibitor {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin: 0;
 }
 
 #window {

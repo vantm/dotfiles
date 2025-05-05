@@ -176,13 +176,13 @@
     "format": "{player_icon} {title} - {artist}",
     "format-paused": "{status_icon} {title} - {artist}",
     "player-icons": {
-      "default": ""
+      "default": " "
     },
     "status-icons": {
       "paused": ""
     },
-    "title-len": 30,
-    "artist-len": 20
+    "title-len": 24,
+    "artist-len": 16
   },
   "privacy": {
     "icon-spacing": 4,

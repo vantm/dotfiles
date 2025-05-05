@@ -62,16 +62,21 @@ alias lg=lazygit
 
 alias zso='source ~/.zshrc'
 
-alias sy='yay -Sy '
-alias ss='yay -Ss '
-
-function sss() {
-    sesh connect $(sesh list | fzf)
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
 }
 
-function ssf() {
-    sesh connect $(fd -t d -d=3 . ~ | fzf)
-}
+zle     -N             sesh-sessions
+bindkey -M vicmd '\es' sesh-sessions
+bindkey -M viins '\es' sesh-sessions
 
 # GO paths
 export GOPATH="$HOME/.local/share/go"
