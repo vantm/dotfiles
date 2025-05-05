@@ -12,8 +12,11 @@
     "clock",
   ],
   "modules-right":  [
+    "mpris",
     "tray",
     "idle_inhibitor",
+    "custom/recorder",
+    "custom/audiorec",
     "cpu",
     "memory",
     "backlight",
@@ -111,32 +114,32 @@
       "on-scroll-down": "brightnessctl -c backlight set 1%-",
       "on-scroll-up": "brightnessctl -c backlight set +1%"
   },
-  "mpd": {
-    "format": "{stateIcon} {artist} - {title}",
-    "format-disconnected": "🎶",
-    "format-stopped": "♪",
-    "interval": 10,
-    "consume-icons": {
-      "on": " " // Icon shows only when "consume" is on
-    },
-    "random-icons": {
-      "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
-      "on": " "
-    },
-    "repeat-icons": {
-      "on": " "
-    },
-    "single-icons": {
-      "on": "1 "
-    },
-    "state-icons": {
-      "paused": "",
-      "playing": ""
-    },
-    "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)",
-    "max-length": 35
-  },
+  //"mpd": {
+  //  "format": "{stateIcon} {artist} - {title}",
+  //  "format-disconnected": "🎶",
+  //  "format-stopped": "♪",
+  //  "interval": 10,
+  //  "consume-icons": {
+  //    "on": " " // Icon shows only when "consume" is on
+  //  },
+  //  "random-icons": {
+  //    "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+  //    "on": " "
+  //  },
+  //  "repeat-icons": {
+  //    "on": " "
+  //  },
+  //  "single-icons": {
+  //    "on": "1 "
+  //  },
+  //  "state-icons": {
+  //    "paused": "",
+  //    "playing": ""
+  //  },
+  //  "tooltip-format": "MPD (connected)",
+  //  "tooltip-format-disconnected": "MPD (disconnected)",
+  //  "max-length": 35
+  //},
   "custom/recorder": {
       "format": " Rec",
       "format-disabled": " Off-air", //An empty format will hide the module.
@@ -153,11 +156,11 @@
       "exec": "echo '{\"class\": \"audio recording\"}'",
       "exec-if": "pgrep ffmpeg",
   },
-  "disk#d1": {
-      "interval": 30,
-      "format": "󰋊 {percentage_used}%",
-      "path": "/home"
-  },
+  //"disk#d1": {
+  //    "interval": 30,
+  //    "format": "󰋊 {percentage_used}%",
+  //    "path": "/home"
+  //},
   "bluetooth": {
     // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
     "format": " {status}",
@@ -166,5 +169,17 @@
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+  },
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} {title} - {artist}",
+    "player-icons": {
+      "default": ""
+    },
+    "status-icons": {
+      "paused": ""
+    },
+    "title-len": 30,
+    "artist-len": 20
   }
 }

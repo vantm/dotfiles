@@ -12,8 +12,6 @@ cp -r ~/.config/hypr .config
 cp -r ~/.config/kitty .config
 cp -r ~/.config/lazygit .config
 cp -r ~/.config/rofi .config
-cp -r ~/.config/swayidle .config
-cp -r ~/.config/swaylock .config
 cp -r ~/.config/waybar .config
 cp -r ~/.config/zed .config
 
