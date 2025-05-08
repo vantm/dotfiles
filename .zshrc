@@ -63,39 +63,34 @@ alias lg=lazygit
 alias zso='source ~/.zshrc'
 
 function sesh-sessions() {
-  {
-    exec </dev/tty
-    exec <&1
+  exec </dev/tty
+  exec <&1
+  local sesh_list=$(sesh list -t -c)
+  local dir_list=$(fd -t d -d=2 -H \
+    -E .git \
+    -E node_modules \
+    -E __pycache \
+    -p ~ ~ | \
+    sed "s|^$HOME|~|" | sed 's|\/$||' | awk '!seen[$0]++')
+  local session
+  session=$(echo "$sesh_list\n$dir_list" | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+  zle reset-prompt > /dev/null 2>&1 || true
+  [[ -z "$session" ]] && return
+  sesh connect $session
+}
 
-    local childdirs=$(fd \
-      -t d -H -d=2 \
-      --exclude .git \
-      --exclude .local \
-      --exclude .idea \
-      --exclude .vscode \
-      --exclude .svn \
-      --exclude .hg \
-      --exclude node_modules \
-      --exclude vendor \
-      --exclude __pycache__ \
-      --color=never \
-      --full-path "$HOME/work")
-
-    local sessions=$(sesh list)
-
-    local all="$childdirs\n$sessions"
-    
-    local session
-    session=$(echo $all | fzf --height 41% --no-sort --reverse --border-label ' sesh ' --border --prompt '⚡  ')
-    zle reset-prompt > /dev/null 2>&1 || true
-    [[ -z "$session" ]] && return
-    sesh connect $session
-  }
+function start-hyprland {
+  [[ "$XDG_SESSION_TYPE" != "tty" ]] && return
+  Hyprland
 }
 
 zle     -N             sesh-sessions
 bindkey -M vicmd '\es' sesh-sessions
 bindkey -M viins '\es' sesh-sessions
+
+zle     -N             start-hyprland
+bindkey -M vicmd '\eh' start-hyprland
+bindkey -M viins '\eh' start-hyprland
 
 # GO paths
 export GOPATH="$HOME/.local/share/go"
@@ -130,3 +125,6 @@ export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+
+[[ "$XDG_SESSION_TYPE" == "tty" ]] && /usr/bin/Hyprland
