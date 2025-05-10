@@ -1,80 +1,74 @@
-* {
-    font-family: "Hack Nerd Font";
-    font-size: 14px;
-    min-height: 0;
-}
-
-window#waybar {
-    /* background-color: rgba(0,0,0,1); */
-    background-color: #000000;
-}
-
-.modules-left,
-.modules-center,
-.modules-right {
-    /* margin: 0px 4px; */
-    margin: 4px 1px;
-    padding: 4px 0px;
-    /* background-color: rgba(0,0,0,0.6); */
-    /* border-radius: 4px; */
-}
-
-#window {
-    min-width: 400px;
-    padding: 0px 10px;
-}
-
-#workspaces button {
-    /* margin: 2px; */
-    padding: 4px;
-    font-weight: bold;
-    /* background-color: #31363F; */
-    /* border-radius: 40px; */
-    /* border-radius: 4px; */
+button {
+    font-family: Monaspace Krypton;
+    font-size: 16px;
     border-radius: 0;
-}
-
-#workspaces button.active,
-#workspaces button.focused{
-    /* color: #000000; */
-    /* background: #E8751A; */
-    /* background-color: #983602; */
-    background-color: #31363F;
-}
-
-.modules-right widget label,
-.modules-center widget label {
-    padding: 2px 12px;
-    min-width: 16px;
-    background-color: #31363F;
-    /* border-radius: 4px; */
-}
-
-.modules-right widget label {
-    margin-left: 8px;
-}
-
-#idle_inhibitor, 
-#clock,
-#privacy,
-#mpris {
-    background-color: transparent;
-}
-
-#idle_inhibitor, 
-#clock,
-#mpris {
-    padding: 4px;
-}
-
-#privacy {
-    margin-left: 6px;
-}
-
-#idle_inhibitor {
+    padding: 0 4px;
     margin: 0;
 }
 
+/* waybar */
+
+#waybar {
+    background-color: #000;
+}
+
+#waybar>box {
+    padding: 8px 0;
+}
+
+/* windows */
+
 #window {
+    font-family: Roboto Slab;
+    font-size: 16px;
+}
+
+/* workspaces */
+
+#workspaces {
+    margin-right: 8px;
+}
+
+#workspaces button {
+    color: #888;
+}
+
+#workspaces button.active {
+    color: #fff;
+    background-color: transparent;
     font-weight: bold;
+    background-color: #181818;
+    border-bottom: 1px solid #fff;
+}
+
+/* center modules */
+
+.modules-center #idle_inhibitor {
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+#clock {
+    font-family: Monaspace Neon;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* right modules */
+
+.modules-right label:not(#mpris) {
+    font-family: MonaspiceKr Nerd Font;
+    font-size: 14px;
+    background-color: #181818;
+    padding: 4px 8px;
+    border-bottom: 1px solid #fff;
+}
+
+.modules-right .module {
+    margin-left: 8px;
+}
+
+#mpris {
+    font-family: FiraCode Nerd Font;
+    font-size: 12px;
 }

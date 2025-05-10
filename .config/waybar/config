@@ -15,14 +15,14 @@
   ],
   "modules-right":  [
     "mpris",
-    "tray",
     "custom/recorder",
     "custom/audiorec",
     "cpu",
     "memory",
     "backlight",
     "wireplumber",
-    "battery"
+    "battery",
+    "tray"
   ],
   "battery": {
       "bat": "BAT1",
@@ -31,7 +31,7 @@
           "warning": 30,
           "critical": 15
       },
-      "format": "{icon}  {capacity}%",
+      "format": "{icon} {capacity}%",
       "format-icons": ["", "", "", "", ""]
   },
   "hyprland/workspaces": {
@@ -45,7 +45,8 @@
       "format": "{icon} {volume}%",
       "format-muted": "<span color='#EE4E4E'> </span>",
       "on-click": "env GTK_THEME=Adwaita:dark pwvucontrol",
-      "format-icons": ["", "", ""]
+      "format-icons": ["", "", ""],
+      "scroll-step": 0.2
   },
   "tray": {
       "icon-size": 20,
@@ -53,50 +54,50 @@
   },
   "clock": {
       "format": "{:%Y/%m/%d %H:%M}",
-      "tooltip-format": "<tt>{calendar}</tt>",
+      "tooltip-format": "\n<span size='12pt' font='Monaspace Neon' background='#000'>{calendar}</span>",
+      "timezone": "Asia/Ho_Chi_Minh",
       "calendar": {
           "mode"          : "year",
           "mode-mon-col"  : 3,
           "weeks-pos"     : "left",
           "on-scroll"     : 1,
           "format": {
-                "months":     "<span color='#ffead3'><b>{}</b></span>",
-                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+              "months":     "<span color='#0392cf'>{}</span>",
+              "days":       "<span>{}</span>",
+              "weeks":      "<span color='#fdf498'>W{}</span>",
+              "weekdays":   "<span color='#fffeb3'>{}</span>",
+              "today":      "<span color='#0392cf'><b><u>{}</u></b></span>"
           }
       },
       "actions":  {
           "on-click-right": "mode",
-          "on-click-forward": "tz_up",
-          "on-click-backward": "tz_down",
+          "on-click": "shift_reset",
           "on-scroll-up": "shift_up",
           "on-scroll-down": "shift_down"
       }
   },
   "cpu": {
       "interval": 5,
-      "format": "  {}%"
+      "format": " {}%"
   },
   "memory": {
       "interval": 10,
-      "format": "  {used:0.1f}GB",
+      "format": " {used:0.1f}GB",
       "tooltip": false,
       "warning": 70,
       "critical": 90
   },
-  "network": {
-    "interval": 5,
-    "format-wifi": "  {signalStrength}%",
-    "format-ethernet": "",
-    "format-linked": " {ipaddr}",
-    "format-disconnected": " Disconnected",
-    "format-disabled": "",
-    "tooltip": false,
-    "min-length": 6,
-    "format-alt": "{essid}",
-  },
+  //"network": {
+  //  "interval": 5,
+  //  "format-wifi": "  {signalStrength}%",
+  //  "format-ethernet": "",
+  //  "format-linked": " {ipaddr}",
+  //  "format-disconnected": " Disconnected",
+  //  "format-disabled": "",
+  //  "tooltip": false,
+  //  "min-length": 6,
+  //  "format-alt": "{essid}",
+  //},
   "idle_inhibitor": {
       "format": "{icon}",
       "format-icons": {
@@ -108,8 +109,9 @@
   "backlight": {
       "format": "{icon} {percent}%",
       "format-icons": ["", ""],
-      "on-scroll-down": "brightnessctl -c backlight set 1%-",
-      "on-scroll-up": "brightnessctl -c backlight set +1%"
+      "on-scroll-down": "brightnessctl --class backlight set 1%+ > /dev/null",
+      "on-scroll-up": "brightnessctl --class backlight set 1%- > /dev/null",
+      "scroll-step": 0.1
   },
   //"mpd": {
   //  "format": "{stateIcon} {artist} - {title}",
@@ -181,8 +183,8 @@
     "status-icons": {
       "paused": ""
     },
-    "title-len": 20,
-    "artist-len": 10
+    "title-len": 40,
+    "artist-len": 20
   },
   "privacy": {
     "icon-spacing": 4,

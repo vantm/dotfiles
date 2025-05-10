@@ -62,6 +62,8 @@ alias lg=lazygit
 
 alias zso='source ~/.zshrc'
 
+alias rebar='setopt NO_HUP && pkill waybar && waybar &'
+
 function sesh-sessions() {
   exec </dev/tty
   exec <&1
