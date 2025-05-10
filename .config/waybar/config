@@ -19,6 +19,8 @@
     "custom/audiorec",
     "cpu",
     "memory",
+    "network",
+    "bluetooth",
     "backlight",
     "wireplumber",
     "battery",
@@ -31,7 +33,7 @@
           "warning": 30,
           "critical": 15
       },
-      "format": "{icon} {capacity}%",
+      "format": "{icon}  {capacity}%",
       "format-icons": ["", "", "", "", ""]
   },
   "hyprland/workspaces": {
@@ -62,11 +64,11 @@
           "weeks-pos"     : "left",
           "on-scroll"     : 1,
           "format": {
-              "months":     "<span color='#0392cf'>{}</span>",
+              "months":     "<span color='#e05634'>{}</span>",
               "days":       "<span>{}</span>",
-              "weeks":      "<span color='#fdf498'>W{}</span>",
-              "weekdays":   "<span color='#fffeb3'>{}</span>",
-              "today":      "<span color='#0392cf'><b><u>{}</u></b></span>"
+              "weeks":      "<span color='#62c1cc'>W{}</span>",
+              "weekdays":   "<span color='#62c1cc'>{}</span>",
+              "today":      "<span color='#e05634'><b><u>{}</u></b></span>"
           }
       },
       "actions":  {
@@ -78,26 +80,23 @@
   },
   "cpu": {
       "interval": 5,
-      "format": " {}%"
+      "format": "  {}%"
   },
   "memory": {
       "interval": 10,
-      "format": " {used:0.1f}GB",
+      "format": "  {used:0.1f}GB",
       "tooltip": false,
       "warning": 70,
       "critical": 90
   },
-  //"network": {
-  //  "interval": 5,
-  //  "format-wifi": "  {signalStrength}%",
-  //  "format-ethernet": "",
-  //  "format-linked": " {ipaddr}",
-  //  "format-disconnected": " Disconnected",
-  //  "format-disabled": "",
-  //  "tooltip": false,
-  //  "min-length": 6,
-  //  "format-alt": "{essid}",
-  //},
+  "network": {
+    "interval": 5,
+    "format-wifi": "  {essid}",
+    "format-ethernet": " ",
+    "format-linked": "{ipaddr}",
+    "format-disconnected": " Disconnected",
+    "format-disabled": ""
+  },
   "idle_inhibitor": {
       "format": "{icon}",
       "format-icons": {
@@ -113,32 +112,6 @@
       "on-scroll-up": "brightnessctl --class backlight set 1%- > /dev/null",
       "scroll-step": 0.1
   },
-  //"mpd": {
-  //  "format": "{stateIcon} {artist} - {title}",
-  //  "format-disconnected": "🎶",
-  //  "format-stopped": "♪",
-  //  "interval": 10,
-  //  "consume-icons": {
-  //    "on": " " // Icon shows only when "consume" is on
-  //  },
-  //  "random-icons": {
-  //    "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
-  //    "on": " "
-  //  },
-  //  "repeat-icons": {
-  //    "on": " "
-  //  },
-  //  "single-icons": {
-  //    "on": "1 "
-  //  },
-  //  "state-icons": {
-  //    "paused": "",
-  //    "playing": ""
-  //  },
-  //  "tooltip-format": "MPD (connected)",
-  //  "tooltip-format-disconnected": "MPD (disconnected)",
-  //  "max-length": 35
-  //},
   "custom/recorder": {
       "format": " Rec",
       "format-disabled": " Off-air", //An empty format will hide the module.
@@ -169,22 +142,17 @@
     // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
     "format": " {status}",
     "format-disabled": "", // an empty format will hide the module
-    "format-connected": " {num_connections} connected",
+    "format-connected": " {device_alias}",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
   },
   "mpris": {
-    "format": "{player_icon} {title} - {artist}",
-    "format-paused": "{status_icon} {title} - {artist}",
-    "player-icons": {
-      "default": " "
-    },
-    "status-icons": {
-      "paused": ""
-    },
-    "title-len": 40,
-    "artist-len": 20
+    "format": "{player_icon} {title}",
+    "format-paused": "{status_icon} {title}",
+    "player-icons": { "default": "󰐊" },
+    "status-icons": { "paused": "⏸" },
+    "title-len": 20
   },
   "privacy": {
     "icon-spacing": 4,

@@ -1,0 +1,71 @@
+configuration {
+  font: "Monaspace Argon 12";
+
+  timeout {
+    delay: 10;
+    action: "kb-cancel";
+  }
+}
+
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+
+  bg: #000000;
+  bg-alt: #111111;
+  fg: #FFFFFF;
+  fg-alt: #888888;
+
+  background-color: @bg;
+  text-color: @fg;
+
+  location: northwest;
+
+  width: 500px;
+}
+
+window {
+  transparency: "real";
+}
+
+mainbox {
+  children: [inputbar, listview];
+}
+
+inputbar {
+  children: [prompt, entry];
+}
+
+entry {
+  padding: 16px 8px 16px 0;
+  background-color: @bg-alt;
+}
+
+prompt {
+  padding: 16px 8px;
+  background-color: @bg-alt;
+  color: @fg-alt;
+}
+
+listview {
+  lines: 8;
+}
+
+element {
+  children: [element-icon, element-text];
+}
+
+element-icon {
+  padding: 0 0 0 8px;
+}
+
+element-text {
+  padding: 8px;
+  text-color: @fg-alt;
+}
+
+element-text selected {
+  text-color: @fg;
+}
