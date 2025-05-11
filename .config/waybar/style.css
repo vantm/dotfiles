@@ -62,7 +62,7 @@ button {
 }
 
 #clock {
-    font-family: Monaspace Neon;
+    font-family: Monaspace Argon;
     font-size: 14px;
     font-weight: bold;
 }
@@ -83,6 +83,6 @@ button {
 
 #mpris {
     font-family: FiraCode Nerd Font;
-    font-size: 13px;
-    color: #888;
+    font-size: 12px;
+    color: #666666;
 }
