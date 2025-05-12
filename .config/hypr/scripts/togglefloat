@@ -12,62 +12,57 @@ MODE="${1:-toggle}"
 WIDTH="${2:-90%}"
 HEIGHT="${3:-90%}"
 
-setfloat() {
-    hyprctl dispatch setfloating "pid:$PID"
-}
-
-reset() {
-    hyprctl dispatch settiled "pid:$PID"
-}
-
-resize() {
-    hyprctl dispatch resizewindowpixel "exact $WIDTH $HEIGHT,pid:$PID" &&
-    hyprctl dispatch focuswindow "pid:$PID" &&
-    hyprctl dispatch centerwindow 1
-}
-
 if [ "$MODE" != "toggle" ]; then
-    mkdir -p /tmp/togglefloat
-    FILE="/tmp/togglefloat/$PID"
-    if [ ! -f $FILE ]; then
-        echo 0 > $FILE
-    fi
-    SIZE=$(cat $FILE)
-    SIZE=$((SIZE + 1))
-    if [ $SIZE -gt 3 ]; then
-        SIZE=0
-    fi
-    echo $SIZE > $FILE
-    case $SIZE in
-        3)
-            WIDTH=30%
-            HEIGHT=30%
-            ;;
-        2)
-            WIDTH=50%
-            HEIGHT=50%
-            ;;
-        1)
-            WIDTH=70%
-            HEIGHT=70%
-            ;;
-        0)
-            WIDTH=90%
-            HEIGHT=90%
-            ;;
-    esac
-
     if [ "$FLOATING" != "true" ]; then
-        setfloat && resize
+        hyprctl --batch "dispatch setfloating "pid:$PID"\
+        ;dispatch resizewindowpixel "exact $WIDTH $HEIGHT,pid:$PID"\
+        ;dispatch focuswindow "pid:$PID"\
+        ;dispatch centerwindow 1"
     else
-        resize
+        mkdir -p /tmp/togglefloat
+        FILE="/tmp/togglefloat/$PID"
+        if [ ! -f $FILE ]; then
+            echo 0 > $FILE
+        fi
+        SIZE=$(cat $FILE)
+        SIZE=$((SIZE + 1))
+        if [ $SIZE -gt 3 ]; then
+            SIZE=0
+        fi
+        echo $SIZE > $FILE
+        case $SIZE in
+            3)
+                WIDTH=30%
+                HEIGHT=30%
+                ;;
+            2)
+                WIDTH=50%
+                HEIGHT=50%
+                ;;
+            1)
+                WIDTH=70%
+                HEIGHT=70%
+                ;;
+            0)
+                WIDTH=90%
+                HEIGHT=90%
+                ;;
+        esac
+
+        hyprctl --batch "dispatch resizewindowpixel "exact $WIDTH $HEIGHT,pid:$PID"\
+        ;dispatch focuswindow "pid:$PID"\
+        ;dispatch centerwindow 1"
     fi
 else
     if [ "$FLOATING" == "true" ]; then
         FILE="/tmp/togglefloat/$PID"
-        reset && rm -f $FILE
+        hyprctl dispatch settiled "pid:$PID"
+        rm -f $FILE
     else
-        setfloat & resize
+        hyprctl --batch "dispatch setfloating "pid:$PID"\
+        ;dispatch resizewindowpixel "exact $WIDTH $HEIGHT,pid:$PID"\
+        ;dispatch focuswindow "pid:$PID"\
+        ;dispatch centerwindow 1"
     fi
 fi
 

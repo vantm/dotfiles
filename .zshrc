@@ -94,22 +94,34 @@ zle     -N             start-hyprland
 bindkey -M vicmd '\eh' start-hyprland
 bindkey -M viins '\eh' start-hyprland
 
+function py-repl {
+  FILE=$1
+  python $FILE
+  echo "Waching $FILE ..."
+  while inotifywait -qq -e modify -e move_self $FILE;
+  do
+    sleep 0.5
+    python $FILE
+  done
+}
+
 function edit-file {
   # user fzf to find files, and use vim to edit them
   # if user quits fzf, exit
   local file=$(\
-    fd -H -t f -d=4 \
+    fd -H -t f -d=10 \
       -E .vs -E .vscode -E .idea \
       -E .dotnet -E bin -E obj -E '*.dll' \
       -E __pycache__ -E .env -E .ipython \
       -E .cargo -E target \
       -E .cabal -E .ghcup \
-      -E .sdkman -E jdtls -E .java -E '*.jar' \
+      -E .sdkman -E jdtls -E .java -E .gradle -E '*.jar' \
       -E node_modules -E .nvm \
       -E .docker \
       -E .git -E .cache -E .pki -E .steam -E .cmake \
       -E '*.log' -E '*.tmp' -E '*.bak' \
       -E '*.db' \
+      -E '*.bin' \
       -E '*.iso' \
       -E '*.mp*' \
       -E '*.jpg' \
@@ -153,6 +165,10 @@ source /usr/share/nvm/init-nvm.sh
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# java
+local jdtls_dir="$HOME/.local/share/nvim/mason/packages/jdtls"
+export JDTLS_JVM_ARGS="-javaagent:${jdtls_dir}/lombok.jar"
+
 # docker
 export PATH=$HOME/bin:$PATH
 export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
@@ -162,6 +178,5 @@ export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 
 [[ "$XDG_SESSION_TYPE" == "tty" ]] && /usr/bin/Hyprland
