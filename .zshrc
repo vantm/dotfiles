@@ -81,18 +81,53 @@ function sesh-sessions() {
   sesh connect $session
 }
 
+zle     -N             sesh-sessions
+bindkey -M vicmd '\es' sesh-sessions
+bindkey -M viins '\es' sesh-sessions
+
 function start-hyprland {
   [[ "$XDG_SESSION_TYPE" != "tty" ]] && return
   Hyprland
 }
 
-zle     -N             sesh-sessions
-bindkey -M vicmd '\es' sesh-sessions
-bindkey -M viins '\es' sesh-sessions
-
 zle     -N             start-hyprland
 bindkey -M vicmd '\eh' start-hyprland
 bindkey -M viins '\eh' start-hyprland
+
+function edit-file {
+  # user fzf to find files, and use vim to edit them
+  # if user quits fzf, exit
+  local file=$(\
+    fd -H -t f -d=4 \
+      -E .vs -E .vscode -E .idea \
+      -E .dotnet -E bin -E obj -E '*.dll' \
+      -E __pycache__ -E .env -E .ipython \
+      -E .cargo -E target \
+      -E .cabal -E .ghcup \
+      -E .sdkman -E jdtls -E .java -E '*.jar' \
+      -E node_modules -E .nvm \
+      -E .docker \
+      -E .git -E .cache -E .pki -E .steam -E .cmake \
+      -E '*.log' -E '*.tmp' -E '*.bak' \
+      -E '*.db' \
+      -E '*.iso' \
+      -E '*.mp*' \
+      -E '*.jpg' \
+      -E '*.jpeg' \
+      -E '*.png' \
+      -E '*.gif' \
+      -E '*.gz' \
+      -E '*.xz' \
+      -E '*.tar' \
+      -E '*.zip' \
+      | fzf --height 40% --reverse --border-label ' edit ' --border --prompt '⚡')
+  [[ -z "$file" ]] && return
+  nvim "$file"
+}
+
+zle     -N             edit-file
+bindkey -M vicmd '\ee' edit-file
+bindkey -M viins '\ee' edit-file
 
 # GO paths
 export GOPATH="$HOME/.local/share/go"
