@@ -40,7 +40,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Make Ctrl-Left Ctrl-Right jump between words
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
-bindkey "^F" autosuggest-accept
+bindkey -M viins "^F" autosuggest-accept
 
 # plugins
 eval "$(zoxide init zsh)"
@@ -82,19 +82,10 @@ function sesh-sessions() {
 }
 
 zle     -N             sesh-sessions
-bindkey -M vicmd '\es' sesh-sessions
-bindkey -M viins '\es' sesh-sessions
+bindkey -M vicmd '\et' sesh-sessions
+bindkey -M viins '\et' sesh-sessions
 
-function start-hyprland {
-  [[ "$XDG_SESSION_TYPE" != "tty" ]] && return
-  Hyprland
-}
-
-zle     -N             start-hyprland
-bindkey -M vicmd '\eh' start-hyprland
-bindkey -M viins '\eh' start-hyprland
-
-function py-repl {
+function repl-py {
   FILE=$1
   python $FILE
   echo "Waching $FILE ..."
