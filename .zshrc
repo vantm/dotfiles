@@ -67,15 +67,8 @@ alias rebar='setopt NO_HUP && pkill waybar && waybar &'
 function sesh-sessions() {
   exec </dev/tty
   exec <&1
-  local sesh_list=$(sesh list -t -c)
-  local dir_list=$(fd -t d -d=2 -H \
-    -E .git \
-    -E node_modules \
-    -E __pycache \
-    -p ~ ~ | \
-    sed "s|^$HOME|~|" | sed 's|\/$||' | awk '!seen[$0]++')
-  local session
-  session=$(echo "~$sesh_list\n$dir_list" | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+  local sessions="$(sesh list -t)\n~\n$(sesh list -zc | sort -g)"
+  local session=$(echo $sessions | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
   zle reset-prompt > /dev/null 2>&1 || true
   [[ -z "$session" ]] && return
   sesh connect $session
