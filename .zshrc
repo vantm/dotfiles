@@ -75,7 +75,7 @@ function sesh-sessions() {
     -p ~ ~ | \
     sed "s|^$HOME|~|" | sed 's|\/$||' | awk '!seen[$0]++')
   local session
-  session=$(echo "$sesh_list\n$dir_list" | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+  session=$(echo "~$sesh_list\n$dir_list" | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
   zle reset-prompt > /dev/null 2>&1 || true
   [[ -z "$session" ]] && return
   sesh connect $session

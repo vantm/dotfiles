@@ -6,7 +6,10 @@ if [ "$JSON" == "null" ]; then
 fi
 
 FLOATING=$(echo $JSON | jq -Mcr '.floating')
-PID=$(echo $JSON | jq -Mcr '.pid')
+ADDR="$(echo $JSON | jq -Mcr '.address')"
+FILE="/tmp/togglefloat/addr_$ADDR"
+
+echo "Temp file: $FILE"
 
 MODE="${1:-toggle}"
 WIDTH="${2:-90%}"
@@ -14,13 +17,12 @@ HEIGHT="${3:-90%}"
 
 if [ "$MODE" != "toggle" ]; then
     if [ "$FLOATING" != "true" ]; then
-        hyprctl --batch "dispatch setfloating "pid:$PID"\
-        ;dispatch resizewindowpixel "exact $WIDTH $HEIGHT,pid:$PID"\
-        ;dispatch focuswindow "pid:$PID"\
+        hyprctl --batch "dispatch setfloating "address:$ADDR"\
+        ;dispatch resizewindowpixel "exact $WIDTH $HEIGHT,address:$ADDR"\
+        ;dispatch focuswindow "address:$ADDR"\
         ;dispatch centerwindow 1"
     else
         mkdir -p /tmp/togglefloat
-        FILE="/tmp/togglefloat/$PID"
         if [ ! -f $FILE ]; then
             echo 0 > $FILE
         fi
@@ -49,19 +51,18 @@ if [ "$MODE" != "toggle" ]; then
                 ;;
         esac
 
-        hyprctl --batch "dispatch resizewindowpixel "exact $WIDTH $HEIGHT,pid:$PID"\
-        ;dispatch focuswindow "pid:$PID"\
+        hyprctl --batch "dispatch resizewindowpixel "exact $WIDTH $HEIGHT,address:$ADDR"\
+        ;dispatch focuswindow "address:$ADDR"\
         ;dispatch centerwindow 1"
     fi
 else
     if [ "$FLOATING" == "true" ]; then
-        FILE="/tmp/togglefloat/$PID"
-        hyprctl dispatch settiled "pid:$PID"
+        hyprctl dispatch settiled "address:$ADDR"
         rm -f $FILE
     else
-        hyprctl --batch "dispatch setfloating "pid:$PID"\
-        ;dispatch resizewindowpixel "exact $WIDTH $HEIGHT,pid:$PID"\
-        ;dispatch focuswindow "pid:$PID"\
+        hyprctl --batch "dispatch setfloating "address:$ADDR"\
+        ;dispatch resizewindowpixel "exact $WIDTH $HEIGHT,address:$ADDR"\
+        ;dispatch focuswindow "address:$ADDR"\
         ;dispatch centerwindow 1"
     fi
 fi
