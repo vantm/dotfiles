@@ -71,7 +71,7 @@ button {
 
 .modules-right label:not(#mpris) {
     font-family: MonaspiceNe Nerd Font;
-    font-size: 13px;
+    font-size: 12px;
     background-color: #181818;
     padding: 4px 8px;
     border-bottom: 1px solid #fff;
@@ -84,5 +84,9 @@ button {
 #mpris {
     font-family: FiraCode Nerd Font;
     font-size: 11px;
-    color: #666666;
+    color: #999999;
+    margin: 1px 0 1px 8px;
+    /* background-color: #181818; */
+    padding: 4px 8px;
+    /* border-radius: 12px; */
 }

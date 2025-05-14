@@ -55,7 +55,7 @@
        "active-only": false
   },
   "hyprland/window": {
-      "max-length": 200,
+      "max-length": 60,
       "separate-outputs": true
   },
   "wireplumber": {
