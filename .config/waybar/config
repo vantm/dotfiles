@@ -34,8 +34,20 @@
           "warning": 30,
           "critical": 15
       },
-      "format": "{icon}  {capacity}%",
-      "format-icons": ["", "", "", "", ""]
+      "format": "{icon} {capacity}%",
+      "format-icons": [
+          "\udb80\udc83",
+          "\udb80\udc7a", // 10%
+          "\udb80\udc7b",
+          "\udb80\udc7c",
+          "\udb80\udc7d",
+          "\udb80\udc7e",
+          "\udb80\udc7f",
+          "\udb80\udc80",
+          "\udb80\udc81",
+          "\udb80\udc82",
+          "\udb80\udc79"  // full
+      ]
   },
   "hyprland/submap": {
   },
@@ -47,10 +59,10 @@
       "separate-outputs": true
   },
   "wireplumber": {
-      "format": "{icon} {volume}%",
+      "format": "{icon}  {volume}%",
       "format-muted": "<span color='#EE4E4E'> </span>",
       "on-click": "env GTK_THEME=Adwaita:dark pwvucontrol",
-      "format-icons": ["", "", ""],
+      "format-icons": [""],
       "scroll-step": 0.2
   },
   "tray": {
@@ -110,7 +122,19 @@
   },
   "backlight": {
       "format": "{icon} {percent}%",
-      "format-icons": ["", ""],
+      "format-icons": [
+          "\udb80\udf36",
+          "\udb86\ude4e", // 10
+          "\udb86\ude4f",
+          "\udb86\ude50",
+          "\udb86\ude51",
+          "\udb86\ude52",
+          "\udb86\ude53",
+          "\udb86\ude54",
+          "\udb86\ude55",
+          "\udb86\ude56",
+          "\udb81\udee8"
+      ],
       "on-scroll-down": "brightnessctl --class backlight set 1%+ > /dev/null",
       "on-scroll-up": "brightnessctl --class backlight set 1%- > /dev/null",
       "scroll-step": 0.1
