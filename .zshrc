@@ -64,6 +64,48 @@ alias zso='source ~/.zshrc'
 
 alias rebar='setopt NO_HUP && pkill waybar && waybar &'
 
+# GO paths
+export GOPATH="$HOME/.local/share/go"
+
+# .NET paths
+export DOTNET_ROOT="$HOME/.local/share/dotnet"
+export DOTNET_HOST_PATH="$DOTNET_ROOT/dotnet"
+export PATH="$PATH:$HOME/.dotnet/tools"
+
+# OmniSharp path
+export OMNISHARP_ROOT="$HOME/.local/share/omnisharp"
+
+# paths
+export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$OMNISHARP_ROOT"
+
+# nvm paths
+source /usr/share/nvm/init-nvm.sh
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# java
+local jdtls_dir="$HOME/.local/share/nvim/mason/packages/jdtls"
+export JDTLS_JVM_ARGS="-javaagent:${jdtls_dir}/lombok.jar"
+
+# docker
+export PATH=$HOME/bin:$PATH
+export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+
+[ -f "/home/vantm/.ghcup/env" ] && . "/home/vantm/.ghcup/env" # ghcup-env
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+[[ "$XDG_SESSION_TYPE" == "tty" ]] && /usr/bin/Hyprland
+
+### Helper functions
+
 function sesh-sessions() {
   exec </dev/tty
   exec <&1
@@ -125,42 +167,50 @@ zle     -N             edit-file
 bindkey -M vicmd '\ee' edit-file
 bindkey -M viins '\ee' edit-file
 
-# GO paths
-export GOPATH="$HOME/.local/share/go"
+function move-to-wallpaper {
+    local file_pattern="*.(jpg|jpeg|png)"
+    local file=$(fd -tf -d1 --color=never --regex "\.(jpg|jpeg|png)$" . | \
+        fzf --height 40% --reverse)
+    echo "Selected: $file"
+    [[ -z "$(pwd)/$file" ]] && return
 
-# .NET paths
-export DOTNET_ROOT="$HOME/.local/share/dotnet"
-export DOTNET_HOST_PATH="$DOTNET_ROOT/dotnet"
-export PATH="$PATH:$HOME/.dotnet/tools"
+    local wallpaper_dir="$HOME/.wallpapers"
+    [[ -z "$wallpaper_dir" ]] && return
 
-# OmniSharp path
-export OMNISHARP_ROOT="$HOME/.local/share/omnisharp"
+    local max_index=$(fd -tf -d1 --color=never --regex "\.(jpg|jpeg|png)$" $wallpaper_dir | \
+        awk -F- '{print $2}' | awk -F. '{print $1}' | sort | tail -1)
+    local new_index=$((max_index + 1))
 
-# paths
-export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$OMNISHARP_ROOT"
+    local ext="${file##*.}"
+    local new_file="$wallpaper_dir/wp-$new_index.${ext}"
 
-# nvm paths
-source /usr/share/nvm/init-nvm.sh
+    echo "Moving $file to $new_file"
+    mv "$file" "$new_file"
+}
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+function change-wallpaper {
+    local wallpaper_dir="$HOME/.wallpapers"
+    [[ -z "$wallpaper_dir" ]] && return
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+    local file=$(fd -tf -d1 --color=never --regex "\.(jpg|jpeg|png)$" $wallpaper_dir | \
+        fzf --height 40% --reverse)
 
-# java
-local jdtls_dir="$HOME/.local/share/nvim/mason/packages/jdtls"
-export JDTLS_JVM_ARGS="-javaagent:${jdtls_dir}/lombok.jar"
+    echo "Selected: $file"
 
-# docker
-export PATH=$HOME/bin:$PATH
-export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+    [[ -z "$file" ]] && return
 
-[ -f "/home/vantm/.ghcup/env" ] && . "/home/vantm/.ghcup/env" # ghcup-env
+    local file_relative_path="~/$(realpath --relative-to="$HOME" "$file")"
+    local option;
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+    nomacs "$file" && \
+        vared -p "Set as wallpaper? (Type 'yes' to confirm): " -c option
+        [[ "$option" != "yes" ]] && return
 
-[[ "$XDG_SESSION_TYPE" == "tty" ]] && /usr/bin/Hyprland
+    sed -i.old "s|^\\\$wallpaper\\s*=.*|\$wallpaper = ${file_relative_path}|g" \
+        ~/.config/hypr/hyprpaper.conf
+
+    setopt NO_HUP
+
+    pkill hyprpaper && hyprpaper &
+}
+
