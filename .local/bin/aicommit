@@ -103,9 +103,9 @@ ${diffText}
         console.log('Commit message:');
         console.log(commitMessage);
 
-        const rl = readline
-          .createInterface({ input, output })
-          .question('Do you want to use this commit message? (Y/n) ', (answer) => {
+        const rl = readline.createInterface({ input, output });
+
+        rl.question('Do you want to use this commit message? (Y/n) ', (answer) => {
             const finalAnwser = answer?.toLowerCase()?.trim() ?? 'y';
             rl.close();
             if (finalAnwser == '' || finalAnwser === 'y') {
@@ -129,9 +129,7 @@ ${diffText}
           });
 
       })
-      .catch(err => {
-        console.error('Error:', err);
-      })
+      .catch(err => console.error('Error:', err));
   } else {
     console.log('No staged changes.');
   }
