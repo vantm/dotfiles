@@ -1,0 +1,27 @@
+#/bin/bash
+
+# Users's files
+cp .zprofile ~/.zprofile
+cp .zshrc ~/.zshrc
+cp .ideavimrc ~/.ideavimrc
+cp .tmux.conf ~/.tmux.conf
+
+# Config files
+cp .config/code-flags.conf ~/.config/code-flags.conf
+cp .config/chromium-flags.conf ~/.config/chromium-flags.conf
+
+# Config directories
+cp -r .config/hypr ~/.config/hypr
+cp -r .config/alacritty ~/.config/alacritty
+cp -r .config/lazygit ~/.config/lazygit
+cp -r .config/rofi ~/.config/rofi
+cp -r .config/waybar ~/.config/waybar
+cp -r .config/zed ~/.config/zed
+
+# Bin files
+mkdir -p ~/.local/bin
+cp -f .local/bin/aicommit ~/.local/bin/aicommit
+
+# Wallpapers
+mkdir -p ~/.wallpapers
+cp -r .wallpapers ~/.wallpapers/ 
