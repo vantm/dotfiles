@@ -10,6 +10,7 @@ Set-Alias -Name vi -Value nvim
 Set-Alias -Name vim -Value nvim
 Set-Alias -Name lg -Value lazygit
 Set-Alias -Name fff -Value fastfetch
+Set-Alias -Name cm -Value chezmoi
 
 Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Cursor
@@ -20,6 +21,28 @@ Set-PSReadLineKeyHandler -Chord "ctrl+j" -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Chord "ctrl+w" -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Chord "ctrl+p" -Function PreviousHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
+
+function prompt {
+    $plugins = @()
+
+    if ((test-path -path .git -pathtype container) -eq $true) {
+        $status = $(git status -s)
+        $m = $(echo $status | ?{ $_ -like ' M*' } | measure -Line).Lines ?? 0
+        $d = $(echo $status | ?{ $_ -like ' D*' } | measure -Line).Lines ?? 0
+        $a = $(echo $status | ?{ $_ -like 'A *' } | measure -Line).Lines ?? 0
+        $u = $(echo $status | ?{ $_ -like '`?`?*' } | measure -Line).Lines ?? 0
+
+        $plugins += "[`e[93m$u`? `e[92m$a+ `e[94m$m~ `e[91m$d-`e[39m]"
+    }
+
+    $plugins_text = $plugins -join ' '
+
+    return "[$env:USERNAME@$env:COMPUTERNAME] $plugins_text $pwd`n$ "
+}
+
+function cmedit {
+    chezmoi edit "~/$(chezmoi list -p relative -i files | fzf)"
+}
 
 function forx {
     Param(
