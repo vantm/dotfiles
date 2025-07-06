@@ -23,21 +23,39 @@ Set-PSReadLineKeyHandler -Chord "ctrl+p" -Function PreviousHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
 
 function prompt {
-    $plugins = @()
+    $segments = @()
 
-    if ((test-path -path .git -pathtype container) -eq $true) {
+    $is_git = (test-path -path .git -pathtype container)
+
+    # userinfo
+    $segments += "[$env:USERNAME@$env:COMPUTERNAME]"
+
+    # git changes
+    if ($true -eq $is_git) {
         $status = $(git status -s)
         $m = $(echo $status | ?{ $_ -like ' M*' } | measure -Line).Lines ?? 0
         $d = $(echo $status | ?{ $_ -like ' D*' } | measure -Line).Lines ?? 0
         $a = $(echo $status | ?{ $_ -like 'A *' } | measure -Line).Lines ?? 0
         $u = $(echo $status | ?{ $_ -like '`?`?*' } | measure -Line).Lines ?? 0
+        $branch_name = $(git branch --show-current)
 
-        $plugins += "[`e[93m$u`? `e[92m$a+ `e[94m$m~ `e[91m$d-`e[39m]"
+        $segments += "[`e[93m$u`? `e[92m$a+ `e[94m$m~ `e[91m$d-`e[39m @ `e[95m$branch_name`e[39m]"
     }
 
-    $plugins_text = $plugins -join ' '
+    # path
+    $dir_path = "$pwd"
+    if ($dir_path -eq $env:userprofile) {
+        $dir_path = "~"
+    }
+    elseif ($dir_path.startswith($env:userprofile)) {
+        $dir_path = $dir_path.replace($env:userprofile, "~")
+    }
+    $segments += $dir_path
 
-    return "[$env:USERNAME@$env:COMPUTERNAME] $plugins_text $pwd`n$ "
+    # join segments
+    $segments_text = $segments -join ' '
+
+    return "$segments_text`n$ "
 }
 
 function cmedit {

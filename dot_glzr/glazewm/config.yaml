@@ -60,7 +60,7 @@ window_effects:
     # ** Exclusive to Windows 11 due to API limitations.
     border:
       enabled: true
-      color: '#ffffff'
+      color: '#88ff88'
 
     # Remove the title bar from the window's frame. Note that this can
     # cause rendering issues for some applications.
@@ -265,15 +265,17 @@ keybindings:
 
   # Change focus from tiling windows -> floating -> fullscreen.
   - commands: ['wm-cycle-focus']
-    bindings: ['alt+n']
+  #   bindings: ['alt+n']
   #   bindings: ['alt+space']
-
-  # Change the focused window to be floating.
-  - commands: ['toggle-floating --centered']
     bindings: ['alt+shift+space']
 
+  # Change the focused window to be floating.
+  #- commands: ['toggle-floating --centered']
+  #  bindings: ['alt+shift+space']
+
   # Change the focused window to be tiling.
-  - commands: ['toggle-tiling']
+  # - commands: ['toggle-tiling']
+  - commands: ['toggle-floating --centered']
     bindings: ['alt+t']
 
   # Change the focused window to be fullscreen.
