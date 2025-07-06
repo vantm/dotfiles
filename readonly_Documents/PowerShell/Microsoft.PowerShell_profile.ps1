@@ -112,4 +112,4 @@ Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
         }
 }
 
-& "$PSScriptRoot/PrivateFunctions.ps1"
+Import-Module "$PSScriptRoot/PrivateFunctions.ps1"
