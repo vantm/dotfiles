@@ -103,6 +103,7 @@ Invoke-Expression (&{ docker completion powershell | Out-String })
 Invoke-Expression (&{ helmfile completion powershell | Out-String })
 Invoke-Expression (&{ gh completion -s powershell | Out-String })
 Invoke-Expression (&{ yq shell-completion powershell | Out-String })
+Invoke-Expression (&{ chezmoi completion powershell | Out-String })
 
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
