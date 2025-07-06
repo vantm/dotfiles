@@ -12,7 +12,7 @@ general:
   config_reload_commands: []
 
   # Whether to automatically focus windows underneath the cursor.
-  focus_follows_cursor: false
+  focus_follows_cursor: true
 
   # Whether to switch back and forth between the previously focused
   # workspace when focusing the current workspace.
@@ -25,7 +25,7 @@ general:
     # Trigger for cursor jump:
     # - 'monitor_focus': Jump when focus changes between monitors.
     # - 'window_focus': Jump when focus changes between windows.
-    trigger: 'window_focus'
+    trigger: 'monitor_focus'
 
   # How windows should be hidden when switching workspaces.
   # - 'cloak': Recommended. Hides windows with no animation.
@@ -121,25 +121,35 @@ window_behavior:
 
 workspaces:
   - name: '1'
-    bind_to_monitor: 1
+    keep_alive: true
+    # bind_to_monitor: 1
   - name: '2'
-    bind_to_monitor: 1
+    keep_alive: true
+    # bind_to_monitor: 1
   - name: '3'
-    bind_to_monitor: 1
+    keep_alive: true
+    # bind_to_monitor: 1
   - name: '4'
-    bind_to_monitor: 1
+    keep_alive: true
+    # bind_to_monitor: 1
   - name: '5'
-    bind_to_monitor: 1
+    keep_alive: true
+    # bind_to_monitor: 1
   - name: '6'
-    bind_to_monitor: 1
+    keep_alive: true
+    # bind_to_monitor: 1
   - name: '7'
-    bind_to_monitor: 0
+    keep_alive: true
+    # bind_to_monitor: 0
   - name: '8'
-    bind_to_monitor: 0
+    keep_alive: true
+    # bind_to_monitor: 0
   - name: '9'
-    bind_to_monitor: 0
+    keep_alive: true
+    # bind_to_monitor: 0
   - name: '10'
-    bind_to_monitor: 0
+    keep_alive: true
+    # bind_to_monitor: 0
 
 window_rules:
   - commands: ['ignore']
@@ -293,7 +303,7 @@ keybindings:
   # Launch CMD terminal. Alternatively, use `shell-exec wt` or
   # `shell-exec %ProgramFiles%/Git/git-bash.exe` to start Windows
   # Terminal and Git Bash respectively.
-  - commands: ['shell-exec wt -w 0 new-tab']
+  - commands: ['shell-exec wt']
     bindings: ['alt+enter']
 
   # Focus the next/previous active workspace defined in `workspaces` config.
@@ -331,13 +341,15 @@ keybindings:
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
   - commands: ['move-workspace --direction left']
-    bindings: ['alt+shift+a']
+    # bindings: ['alt+shift+a']
+    bindings: ['alt+oem_comma']
   - commands: ['move-workspace --direction right']
-    bindings: ['alt+shift+f']
-  - commands: ['move-workspace --direction up']
-    bindings: ['alt+shift+d']
-  - commands: ['move-workspace --direction down']
-    bindings: ['alt+shift+s']
+    # bindings: ['alt+shift+f']
+    bindings: ['alt+oem_period']
+  # - commands: ['move-workspace --direction up']
+  #   bindings: ['alt+shift+d']
+  # - commands: ['move-workspace --direction down']
+  #   bindings: ['alt+shift+s']
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ['move --workspace 1', 'focus --workspace 1']
