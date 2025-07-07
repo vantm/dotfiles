@@ -12,7 +12,7 @@ general:
   config_reload_commands: []
 
   # Whether to automatically focus windows underneath the cursor.
-  focus_follows_cursor: true
+  focus_follows_cursor: false
 
   # Whether to switch back and forth between the previously focused
   # workspace when focusing the current workspace.
@@ -20,7 +20,7 @@ general:
 
   cursor_jump:
     # Whether to automatically move the cursor on the specified trigger.
-    enabled: false
+    enabled: true
 
     # Trigger for cursor jump:
     # - 'monitor_focus': Jump when focus changes between monitors.
@@ -188,6 +188,18 @@ window_rules:
       - window_process: { equals: 'EAAntiCheat' }
       - window_process: { equals: 'FC25' }
       - window_process: { equals: 'EADesktop' }
+
+      # MSI Center
+      - window_process: { equals: 'DCv2' }
+        window_class: { regex: '^HwndWrapper\[DCv2\.exe' }
+
+      # NVIDIA Control Panel
+      - window_process: { equals: 'nvcplui' }
+        window_class: { regex: '^Afx:' }
+
+      # LG Hub
+      - window_process: { equals: 'lghub' }
+        window_class: { equals: 'Chrome_WidgetWin_1' }
 
   - commands: ['set-floating --centered']
     match:
