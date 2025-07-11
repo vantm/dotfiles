@@ -180,7 +180,7 @@ window_rules:
       - window_process: { equals: 'Garena' }
 
       # Steam Games
-      - window_process: { equals: 'dontstarve_steam' }
+      - window_process: { regex: '^dontstarve_steam' }
       - window_process: { equals: 'eldenring' }
       - window_process: { equals: 'OxygenNotIncluded' }
       - window_process: { regex: '^ProjectZomboid(32|64)$' }
@@ -188,6 +188,8 @@ window_rules:
       - window_process: { equals: 'EAAntiCheat' }
       - window_process: { equals: 'FC25' }
       - window_process: { equals: 'EADesktop' }
+      - window_process: { equals: 'Frostpunk2-Win64-Shipping' }
+      - window_process: { equals: 'eurotrucks2' }
 
       # MSI Center
       - window_process: { equals: 'DCv2' }
@@ -208,6 +210,11 @@ window_rules:
         window_class: { regex: '^HwndWrapper\[DefaultDomain;;.*\]$' }
         window_title: { regex: '^[Ss]earch$' }
 
+  - commands: ['set-tiling']
+    match:
+      # Visual Studio 20xx
+      - window_process: { equals: 'devenv' }
+        window_title: { regex: 'Microsoft\sVisual\sStudio$' }
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
   - name: 'resize'
@@ -356,10 +363,10 @@ keybindings:
   # direction.
   - commands: ['move-workspace --direction left']
     # bindings: ['alt+shift+a']
-    bindings: ['alt+oem_comma']
+    bindings: ['alt+shift+oem_comma']
   - commands: ['move-workspace --direction right']
     # bindings: ['alt+shift+f']
-    bindings: ['alt+oem_period']
+    bindings: ['alt+shift+oem_period']
   # - commands: ['move-workspace --direction up']
   #   bindings: ['alt+shift+d']
   # - commands: ['move-workspace --direction down']
