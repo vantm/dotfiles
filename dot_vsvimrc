@@ -4,7 +4,7 @@ set vb
 
 let mapleader = "<space>"
 
-nmap // :noh<CR>
+nmap <esc> :noh<CR>
 
 " move lines
 nmap <A-j> :m .+1<cr>==
@@ -47,7 +47,6 @@ vmap <leader>s :vsc Edit.SurroundWith<cr>
 
 nmap s :vsc Tools.InvokePeasyMotionTwoCharJump<cr>
 nmap <leader>j :vsc Tools.InvokePeasyMotion<cr>
-nmap <C-h> :vsc View.SolutionExplorer<cr>
 nmap g] :vsc Edit.FindAllReferences<cr>
 nmap <C-]> :vsc Edit.GoToImplementation<cr>
 nmap gc :vsc Edit.ToggleLineComment<cr>
@@ -69,3 +68,6 @@ nmap <leader>di :vsc Debug.StepInto<cr>
 nmap <leader>do :vsc Debug.StepOut<cr>
 nmap <leader>dc :vsc Debug.RunToCursor<cr>
 
+" Copilot
+noremap <C-i> :vsc Ask.Copilot<cr>
+noremap <C-l> :vsc View.GitHub.Copilot.Chat<cr>

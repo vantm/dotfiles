@@ -145,6 +145,7 @@ Invoke-Expression (&{ helmfile completion powershell | Out-String })
 Invoke-Expression (&{ gh completion -s powershell | Out-String })
 Invoke-Expression (&{ yq shell-completion powershell | Out-String })
 Invoke-Expression (&{ chezmoi completion powershell | Out-String })
+fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
 
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)

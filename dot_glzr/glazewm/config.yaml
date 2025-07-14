@@ -210,11 +210,13 @@ window_rules:
         window_class: { regex: '^HwndWrapper\[DefaultDomain;;.*\]$' }
         window_title: { regex: '^[Ss]earch$' }
 
+      - window_process: { equals: 'Unity Hub' }
+
   - commands: ['set-tiling']
     match:
       # Visual Studio 20xx
       - window_process: { equals: 'devenv' }
-        window_title: { regex: 'Microsoft\sVisual\sStudio$' }
+        window_title: { regex: 'Microsoft\sVisual\sStudio(\sPreview)?$' }
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
   - name: 'resize'
