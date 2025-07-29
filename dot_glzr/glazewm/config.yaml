@@ -190,6 +190,8 @@ window_rules:
       - window_process: { equals: 'EADesktop' }
       - window_process: { equals: 'Frostpunk2-Win64-Shipping' }
       - window_process: { equals: 'eurotrucks2' }
+      - window_process: { equals: 'Universe Sandbox x64' }
+      - window_process: { equals: 'ManorLords-Win64-Shipping' }
 
       # MSI Center
       - window_process: { equals: 'DCv2' }
