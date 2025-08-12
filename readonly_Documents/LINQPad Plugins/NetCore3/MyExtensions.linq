@@ -7,7 +7,9 @@ async Task Main()
 {
     // Write code to test your extensions here. Press F5 to compile and run.
 
-    await PlantUMLSample.RunAsync();
+    //await PlantUMLSample.RunAsync();
+
+    LpServiceBusSample.Run();
 }
 
 static class PlantUMLSample
@@ -16,11 +18,11 @@ static class PlantUMLSample
     {
         LINQPad.Controls.TextArea textArea = new();
         LINQPad.Controls.Image img = new();
-        
+
         LINQPad.Controls.Div div = new();
         div.Styles["display"] = "flex";
         div.Styles["gap"] = "10px";
-        
+
         div.Children.Add(textArea);
         div.Children.Add(img);
 
@@ -72,6 +74,44 @@ static class PlantUMLSample
                     }
 
                 }, TaskScheduler.Default);
+        }
+    }
+}
+
+static class LpServiceBusSample
+{
+    public static void Run()
+    {
+        var sb = new LpServiceBus();
+
+        var sub = sb.Subscribe(() => new MyOrderPlacedConsumer());
+        sb.Subscribe(() => new MySecondOrderPlacedConsumer());
+
+        var e = new OrderPlaced(Guid.NewGuid());
+
+        sb.Publish(e);
+
+        sb.Unsubscribe(sub);
+
+        sb.Publish(e);
+    }
+
+    public record OrderPlaced(Guid OrderId);
+
+
+    public class MyOrderPlacedConsumer : ILpConsumer<OrderPlaced>
+    {
+        public void Handle(OrderPlaced evt)
+        {
+            evt.Dump(GetType().FullName + " handles an event");
+        }
+    }
+
+    public class MySecondOrderPlacedConsumer() : ILpConsumer<OrderPlaced>
+    {
+        public void Handle(OrderPlaced evt)
+        {
+            evt.Dump(GetType().FullName + " handles an event");
         }
     }
 }
@@ -202,6 +242,75 @@ public static class MyExtensions
             cancelTokenSource?.Dispose();
             cancelTokenSource = null;
         };
+    }
+}
+
+public interface ILpConsumer<T>
+{
+    void Handle(T evt);
+}
+
+public record LpFailed<T>(Exception Exception, T Event);
+
+public class LpServiceBus
+{
+    private Dictionary<Type, List<(Guid SubscriptionId, Func<object> Factory)>> _map = [];
+    public List<object> _deadLetters =[];
+
+    public Guid Subscribe<T>(Func<ILpConsumer<T>> factory)
+    {
+        var subscriptionId = Guid.NewGuid();
+        if (_map.ContainsKey(typeof(T)))
+        {
+            _map[typeof(T)].Add((subscriptionId, factory));
+        }
+        else
+        {
+            _map.Add(typeof(T), [(subscriptionId, factory)]);
+        }
+        return subscriptionId;
+    }
+
+    public void Publish(object @event)
+    {
+        Debug.Assert(@event is not null, "The event must not be null");
+        var eventType = @event.GetType();
+
+        if (!_map.ContainsKey(eventType))
+        {
+            _deadLetters.Add(@event);
+            return;
+        }
+
+        var method = typeof(ILpConsumer<>).MakeGenericType(eventType)
+            .GetMethod("Handle", BindingFlags.Instance | BindingFlags.Public, types: [eventType]);
+
+        foreach (var (_, consumerFactory) in _map[eventType])
+        {
+            var consumer = consumerFactory();
+
+            Debug.Assert(consumer != null, "Cosumer must not be null.");
+
+            try
+            {
+                method.Invoke(consumer, [@event]);
+            }
+            catch (Exception ex)
+            {
+                var failedEvent = Activator.CreateInstance(
+                    typeof(LpFailed<>).MakeGenericType(eventType), ex, @event);
+
+                Publish(failedEvent);
+            }
+        }
+    }
+
+    public void Unsubscribe(Guid subscriptionId)
+    {
+        foreach (var item in _map)
+        {
+            item.Value.RemoveAll(x => x.SubscriptionId == subscriptionId);
+        }
     }
 }
 
