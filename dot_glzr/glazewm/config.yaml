@@ -193,6 +193,8 @@ window_rules:
       - window_process: { equals: "Universe Sandbox x64" }
       - window_process: { equals: "ManorLords-Win64-Shipping" }
       - window_class: { equals: "UnityWndClass" }
+      - window_process: { equals: "underlords" }
+      - window_process: { equals: "dota2" }
 
       # MSI Center
       - window_process: { equals: "DCv2" }
@@ -205,6 +207,9 @@ window_rules:
       # LG Hub
       - window_process: { equals: "lghub" }
         window_class: { equals: "Chrome_WidgetWin_1" }
+
+      # SP Football Life 2025
+      - window_process: { equals: "FL_2025" }
 
   - commands: ["set-floating --centered"]
     match:
@@ -300,7 +305,7 @@ keybindings:
   # Change the focused window to be tiling.
   # - commands: ['toggle-tiling']
   - commands: ["toggle-floating --centered"]
-    bindings: ["alt+t"]
+    bindings: ["alt+space"]
 
   # Change the focused window to be fullscreen.
   - commands: ["toggle-fullscreen"]

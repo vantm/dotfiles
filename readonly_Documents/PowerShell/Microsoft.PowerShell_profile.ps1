@@ -153,4 +153,7 @@ Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
         }
 }
 
+function nix { wsl -d NixOS }
+function arch { wsl -d Arch }
+
 Import-Module "$PSScriptRoot/PrivateFunctions.ps1"
