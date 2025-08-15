@@ -84,8 +84,8 @@ static class LpServiceBusSample
     {
         var sb = new LpServiceBus();
 
-        var sub = sb.Subscribe(() => new MyOrderPlacedConsumer());
-        sb.Subscribe(() => new MySecondOrderPlacedConsumer());
+        var sub = sb.SubscribeFactory(() => new MyOrderPlacedConsumer());
+        sb.SubscribeConsumers<MySecondOrderPlacedConsumer>(123);
 
         var e = new OrderPlaced(Guid.NewGuid());
 
@@ -107,7 +107,7 @@ static class LpServiceBusSample
         }
     }
 
-    public class MySecondOrderPlacedConsumer() : ILpConsumer<OrderPlaced>
+    public class MySecondOrderPlacedConsumer(int a) : ILpConsumer<OrderPlaced>
     {
         public void Handle(OrderPlaced evt)
         {
@@ -254,10 +254,24 @@ public record LpFailed<T>(Exception Exception, T Event);
 
 public class LpServiceBus
 {
+
+    private sealed class DelegateConsumer<T>(Action<T> action) : ILpConsumer<T>
+    {
+        public void Handle(T evt)
+        {
+            action.Invoke(evt);
+        }
+    }
+
     private Dictionary<Type, List<(Guid SubscriptionId, Func<object> Factory)>> _map = [];
     public List<object> _deadLetters =[];
 
-    public Guid Subscribe<T>(Func<ILpConsumer<T>> factory)
+    public Guid SubscribeDelegate<T>(Action<T> action)
+    {
+        return SubscribeFactory<T>(() => new DelegateConsumer<T>(action));
+    }
+
+    public Guid SubscribeFactory<T>(Func<ILpConsumer<T>> factory)
     {
         var subscriptionId = Guid.NewGuid();
         if (_map.ContainsKey(typeof(T)))
@@ -269,6 +283,37 @@ public class LpServiceBus
             _map.Add(typeof(T), [(subscriptionId, factory)]);
         }
         return subscriptionId;
+    }
+
+    public IEnumerable<(Type, Guid)> SubscribeConsumers<T>(params object[] parameters)
+    {
+        var interfaces = typeof(T).GetInterfaces();
+        var consumerInterfaces = interfaces.Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ILpConsumer<>)).ToArray();
+        var parameterTypes = parameters?.Select(p => p.GetType()).ToArray() ?? [];
+
+        Debug.Assert(consumerInterfaces.Length > 0, $"The consumer must be inherited from {nameof(ILpConsumer<>)}");
+        Debug.Assert(
+            typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.Instance, types: parameterTypes) != null,
+            $"The consumer must have the constructor({string.Join(", ", parameterTypes.Select(t => t.FullName))}).");
+
+        var subscriptions = new List<(Type, Guid)>();
+        foreach (var consumerInterface in consumerInterfaces)
+        {
+            var eventType = consumerInterface.GetGenericArguments()[0];
+            var subscriptionId = Guid.NewGuid();
+            var factory = () => Activator.CreateInstance(typeof(T), parameters);
+
+            if (_map.ContainsKey(eventType))
+            {
+                _map[eventType].Add((subscriptionId, factory));
+            }
+            else
+            {
+                _map.Add(eventType, [(subscriptionId, factory)]);
+            }
+            subscriptions.Add((eventType, subscriptionId));
+        }
+        return subscriptions;
     }
 
     public void Publish(object @event)

@@ -211,6 +211,10 @@ window_rules:
       # SP Football Life 2025
       - window_process: { equals: "FL_2025" }
 
+      # LINQPad
+      - window_process: { regex: "^LINQPad" }
+        window_title: { regex: "^(?!LINQPad \\d+).*$" }
+
   - commands: ["set-floating --centered"]
     match:
       # Visual Studio 20xx
