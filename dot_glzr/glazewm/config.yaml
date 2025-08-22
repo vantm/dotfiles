@@ -213,7 +213,7 @@ window_rules:
 
       # LINQPad
       - window_process: { regex: "^LINQPad" }
-        window_title: { regex: "^(?!LINQPad \\d+).*$" }
+        window_title: { not_regex: "^LINQPad \\d+( Beta)?$" }
 
   - commands: ["set-floating --centered"]
     match:
