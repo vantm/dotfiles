@@ -2,11 +2,11 @@ general:
   # Commands to run when the WM has started. This is useful for running a
   # script or launching another application.
   # Example: The below command launches Zebar.
-  #startup_commands: ['shell-exec zebar']
+  startup_commands: ['shell-exec autotiling']
 
   # Commands to run just before the WM is shutdown.
   # Example: The below command kills Zebar.
-  #shutdown_commands: ['shell-exec taskkill /IM zebar.exe /F']
+  shutdown_commands: ['shell-exec taskkill /IM autotiling.exe /F']
 
   # Commands to run after the WM config is reloaded.
   config_reload_commands: []
@@ -156,10 +156,6 @@ window_rules:
     match:
       - window_process: { equals: 'yasb\.exe' }
 
-      # Ignores picture-in-picture windows for browsers.
-      - window_title: { regex: "[Pp]icture.in.[Pp]icture" }
-        window_class: { regex: "Chrome_WidgetWin_1|MozillaDialogClass" }
-
       # Ignore rules for various 3rd-party apps.
       - window_process: { equals: "PowerToys" }
         window_class: { regex: 'HwndWrapper\[PowerToys\.PowerAccent.*?\]' }
@@ -172,7 +168,6 @@ window_rules:
       - window_class: { equals: "RiotWindowClass" }
         window_process: { equals: "League of Legends" }
       - window_process: { equals: "LeagueClientUx" }
-      - window_process: { equals: "Riot Client" }
 
       # FC Online
       - window_process: { equals: "fczf" }
@@ -211,10 +206,6 @@ window_rules:
       # SP Football Life 2025
       - window_process: { equals: "FL_2025" }
 
-      # LINQPad
-      - window_process: { regex: "^LINQPad" }
-        window_title: { not_regex: "^LINQPad \\d+( Beta)?$" }
-
   - commands: ["set-floating --centered"]
     match:
       # Visual Studio 20xx
@@ -223,6 +214,17 @@ window_rules:
         window_title: { regex: "^[Ss]earch$" }
 
       - window_process: { equals: "Unity Hub" }
+
+      # LINQPad
+      - window_process: { regex: "^LINQPad" }
+        window_title: { not_regex: "^LINQPad \\d+( Beta)?$" }
+
+      # Ignores picture-in-picture windows for browsers.
+      - window_title: { regex: "[Pp]icture.in.[Pp]icture" }
+        window_class: { regex: "Chrome_WidgetWin_1|MozillaDialogClass" }
+
+      # League of Legends
+      - window_process: { equals: "Riot Client" }
 
   - commands: ["set-tiling"]
     match:
