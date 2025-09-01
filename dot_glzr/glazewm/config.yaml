@@ -206,6 +206,12 @@ window_rules:
       # SP Football Life 2025
       - window_process: { equals: "FL_2025" }
 
+      # Unikey
+      - window_process: { equals: "UnikeyNT" }
+
+      # HostsMan
+      - window_process: { equals: "hm" }
+
   - commands: ["set-floating --centered"]
     match:
       # Visual Studio 20xx
@@ -218,6 +224,10 @@ window_rules:
       # LINQPad
       - window_process: { regex: "^LINQPad" }
         window_title: { not_regex: "^LINQPad \\d+( Beta)?$" }
+
+      # ShareX
+      - window_process: { regex: "^ShareX" }
+        window_title: { not_regex: "^ShareX [\\d.]+( Portable)?$" }
 
       # Ignores picture-in-picture windows for browsers.
       - window_title: { regex: "[Pp]icture.in.[Pp]icture" }
