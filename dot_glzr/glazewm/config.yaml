@@ -44,14 +44,14 @@ gaps:
   scale_with_dpi: true
 
   # Gap between adjacent windows.
-  inner_gap: "4px"
+  inner_gap: "0px"
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: "4px"
-    right: "4px"
-    bottom: "4px"
-    left: "4px"
+    top: "0px"
+    right: "0px"
+    bottom: "0px"
+    left: "0px"
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -195,14 +195,6 @@ window_rules:
       - window_process: { equals: "DCv2" }
         window_class: { regex: '^HwndWrapper\[DCv2\.exe' }
 
-      # NVIDIA Control Panel
-      - window_process: { equals: "nvcplui" }
-        window_class: { regex: "^Afx:" }
-
-      # LG Hub
-      - window_process: { equals: "lghub" }
-        window_class: { equals: "Chrome_WidgetWin_1" }
-
       # SP Football Life 2025
       - window_process: { equals: "FL_2025" }
 
@@ -236,11 +228,23 @@ window_rules:
       # League of Legends
       - window_process: { equals: "Riot Client" }
 
+      # Docker Installer
+      - window_process: { regex: "^Docker Desktop Installer" }
+
+      # LG Hub
+      - window_process: { equals: "lghub" }
+        window_class: { equals: "Chrome_WidgetWin_1" }
+
+      # NVIDIA Control Panel
+      - window_process: { equals: "nvcplui" }
+        window_class: { regex: "^Afx:" }
+
   - commands: ["set-tiling"]
     match:
       # Visual Studio 20xx
       - window_process: { equals: "devenv" }
         window_title: { regex: 'Microsoft\sVisual\sStudio(\sPreview)?$' }
+
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
   - name: "resize"
