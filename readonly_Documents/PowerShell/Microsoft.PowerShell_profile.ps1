@@ -22,6 +22,8 @@ Set-PSReadLineKeyHandler -Chord "ctrl+w" -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Chord "ctrl+p" -Function PreviousHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
 
+$env:EDITOR="nvim"
+
 function prompt {
     $segments = @()
 
@@ -134,26 +136,36 @@ function Get-WmWorkspaces {
 }
 
 function Get-WmInfo {
-    glazewm query monitors | jq '.data.monitors.[] | {hardwareId,hasFocus,children:([.children.[] | {name,hasFocus,tilingDirection,children:([.children.[]|{title,className,processName,hasFocus}])}])}'
+    $jq = '.data.monitors.[]|' + `
+	  '{hardwareId,hasFocus,children:([.children.[]|' + `
+	  '{name,hasFocus,tilingDirection,children:([.children.[]|{id,title,className,processName,hasFocus}])}])}'
+    glazewm query monitors | jq $jq
 }
 
-Invoke-Expression (&{ zoxide init powershell | Out-String })
-Invoke-Expression (&{ kubectl completion powershell | Out-String })
-Invoke-Expression (&{ docker completion powershell | Out-String })
-# Invoke-Expression (&{ helm completion powershell | Out-String })
-Invoke-Expression (&{ helmfile completion powershell | Out-String })
-Invoke-Expression (&{ gh completion -s powershell | Out-String })
-Invoke-Expression (&{ yq shell-completion powershell | Out-String })
-Invoke-Expression (&{ chezmoi completion powershell | Out-String })
-
-Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
-    param($wordToComplete, $commandAst, $cursorPosition)
-        dotnet complete --position $cursorPosition "$commandAst" | ForEach-Object {
-            [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-        }
+function Reset-WmWindows {
+    glazewm query windows `
+    | jq -c '.data.windows.[] | select(.state.type=="tiling" or .state.type=="fullscreen") | {title,processName,id}' `
+    | ConvertFrom-Json `
+    | %{ glazewm command --id $_.id set-tiling; write "Reset '$($_.title)'!" }
 }
 
 function nix { wsl -d NixOS }
 function arch { wsl -d Arch }
 
-Import-Module "$PSScriptRoot/PrivateFunctions.ps1"
+Invoke-Expression (&{ zoxide init powershell | Out-String })
+#Invoke-Expression (&{ kubectl completion powershell | Out-String })
+#Invoke-Expression (&{ docker completion powershell | Out-String })
+#Invoke-Expression (&{ helm completion powershell | Out-String })
+#Invoke-Expression (&{ helmfile completion powershell | Out-String })
+#Invoke-Expression (&{ gh completion -s powershell | Out-String })
+#Invoke-Expression (&{ yq shell-completion powershell | Out-String })
+#Invoke-Expression (&{ chezmoi completion powershell | Out-String })
+
+#Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
+#    param($wordToComplete, $commandAst, $cursorPosition)
+#        dotnet complete --position $cursorPosition "$commandAst" | ForEach-Object {
+#            [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+#        }
+#}
+
+Import-Module -ErrorAction Ignore "$PSScriptRoot/PrivateFunctions.ps1"
