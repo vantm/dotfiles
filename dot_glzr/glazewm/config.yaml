@@ -204,6 +204,9 @@ window_rules:
       # HostsMan
       - window_process: { equals: "hm" }
 
+      # Yoosee
+      - window_process: { equals: "Yoosee" }
+
   - commands: ["set-floating --centered"]
     match:
       # Visual Studio 20xx
@@ -305,7 +308,7 @@ keybindings:
   # Disables window management and all other keybindings until alt+shift+p
   # is pressed again.
   - commands: ["wm-toggle-pause"]
-    bindings: ["alt+shift+p"]
+    bindings: ["alt+shift+esc"]
 
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
