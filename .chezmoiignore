@@ -9,7 +9,6 @@ setup-zsh*
 
 {{ if eq .chezmoi.os "linux" }}
 dot_*
-readonly_*/
 {{ end }}
 
 assets
