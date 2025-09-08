@@ -1,6 +1,6 @@
 .vscode/
 
-{{- if (and (eq .chezmoi.os "windows")  (eq .mingw 0)) -}}
+{{- if (and (eq .chezmoi.os "windows")  (eq .chezmoi.mingw 0)) -}}
 .config/
 .wallpapers/
 
