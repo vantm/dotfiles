@@ -4,12 +4,16 @@ setup-zsh*
 .z*
 .vim*
 .tmux*
+.wallpapers
 {{ end }}
 
 {{ if eq .chezmoi.os "linux" }}
 dot_*
-readonly_*
+readonly_*/
 {{ end }}
 
-README.md
 assets
+.vscode
+.gitignore
+
+README.md
