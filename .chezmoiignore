@@ -27,5 +27,7 @@ Documents/
 .config/waybar
 .config/zed
 .config/*.conf
+
+.ideavimrc
 {{- end }}
 {{- end }}
