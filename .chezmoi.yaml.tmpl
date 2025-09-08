@@ -1,0 +1,5 @@
+{{- if eq env "MINGW_CHOST" "x86_64-w64-mingw32" }}
+    mingw: 1
+{{- else }}
+    mingw: 0
+{{- end }}

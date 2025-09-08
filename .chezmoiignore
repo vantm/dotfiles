@@ -1,6 +1,6 @@
 .vscode/
 
-{{ if eq .chezmoi.os "windows" }}
+{{- if (and (eq .chezmoi.os "windows")  (eq .mingw 0)) -}}
 .config/
 .wallpapers/
 
@@ -9,12 +9,12 @@
 
 .zprofile
 .zshrc
-{{ end }}
+{{- end -}}
 
-{{ if eq .chezmoi.os "linux" }}
+{{- if eq .chezmoi.os "linux" -}}
 Documents/
 .glzr/
 
 .vsvimrc
 .wslconfig
-{{ end }}
+{{- end -}}
