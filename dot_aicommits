@@ -1,0 +1,5 @@
+OPENAI_KEY=sk-no-needed
+base-url=http://localhost:11434
+type=conventional
+max-length=50
+model=qwen2.5-coder:7b

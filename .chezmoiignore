@@ -1,0 +1,15 @@
+setup-zsh*
+
+{{ if eq .chezmoi.os "windows" }}
+.z*
+.vim*
+.tmux*
+{{ end }}
+
+{{ if eq .chezmoi.os "linux" }}
+dot_*
+readonly_*
+{{ end }}
+
+README.md
+assets
