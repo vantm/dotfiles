@@ -1,0 +1,17 @@
+{{- if eq .chezmoi.os "linux" }}
+#!/bin/sh
+
+apk update
+
+apk add --no-cache \
+    zsh \
+    git \
+    curl \
+    tmux \
+    neovim \
+    vim \
+    lazygit
+
+chsh -s /bin/zsh $USER
+
+{{- end }}
