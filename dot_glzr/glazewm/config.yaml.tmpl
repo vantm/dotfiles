@@ -44,14 +44,14 @@ gaps:
   scale_with_dpi: false
 
   # Gap between adjacent windows.
-  inner_gap: "1px"
+  inner_gap: "2px"
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: "1px"
-    right: "1px"
-    bottom: "1px"
-    left: "1px"
+    top: "2px"
+    right: "2px"
+    bottom: "2px"
+    left: "2px"
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -119,6 +119,8 @@ window_behavior:
       # Whether to show fullscreen windows as always on top.
       shown_on_top: false
 
+{{- if eq .chezmoi.hostname "VANTM-PC" }}
+
 workspaces:
   - name: "1"
     keep_alive: true
@@ -150,6 +152,8 @@ workspaces:
   - name: "10"
     keep_alive: true
     bind_to_monitor: 1
+
+{{- end }}
 
 window_rules:
   - commands: ["ignore"]
