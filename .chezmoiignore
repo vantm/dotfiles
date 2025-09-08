@@ -1,18 +1,7 @@
-setup-zsh*
-
-{{ if eq .chezmoi.os "windows" }}
-.z*
-.vim*
-.tmux*
-.wallpapers
+.vscode/
+{{ if ne .chezmoi.os "windows" }}
+windows/
 {{ end }}
-
-{{ if eq .chezmoi.os "linux" }}
-dot_*
+{{ if ne .chezmoi.os "linux" }}
+linux/
 {{ end }}
-
-assets
-.vscode
-.gitignore
-
-README.md
