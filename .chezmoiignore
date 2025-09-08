@@ -1,13 +1,20 @@
 .vscode/
 
 {{ if eq .chezmoi.os "windows" }}
-dot_config
-dot_wallpapers
+.config/
+.wallpapers/
+
+.tmux.conf
+.vimrc
+
+.zprofile
+.zshrc
 {{ end }}
 
 {{ if eq .chezmoi.os "linux" }}
-dot_glzr
-readonly_Documents
-dot_vsvimrc
-dot_wslconfig
+Documents/
+.glzr/
+
+.vsvimrc
+.wslconfig
 {{ end }}
