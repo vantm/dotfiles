@@ -14,11 +14,8 @@ apk add --no-cache \
     lazygit
 
 chsh -s /bin/zsh $USER
-{{- else if and (eq .chezmoi.os "windows") (eq .chezmoi.mingw 1) }}
+{{- else if and (eq .chezmoi.os "windows") (eq .chezmoi.mingw 1) -}}
 #!/bin/bash
-
 pacman -Syu --noconfirm
-pacman -S --noconfirm \
-    zsh
-
-{{- end }}
+pacman -S --noconfirm zsh
+{{- end -}}
