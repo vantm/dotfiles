@@ -11,7 +11,7 @@
 .zshrc
 {{- end -}}
 
-{{- if eq .chezmoi.os "linux" -}}
+{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.mingw 1) -}}
 Documents/
 .glzr/
 
