@@ -12,9 +12,18 @@
 {{- end }}
 
 {{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.mingw 1)) }}
+
 Documents/
 .glzr/
 
 .vsvimrc
 .wslconfig
+
+{{- if eq .chezmoi.mingw 1 }}
+.wallpapers
+
+.config/
+!.config/lazygit
+{{- end }}
+
 {{- end }}
