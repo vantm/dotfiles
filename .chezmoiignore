@@ -1,7 +1,13 @@
 .vscode/
-{{ if ne .chezmoi.os "windows" }}
-windows/
+
+{{ if eq .chezmoi.os "windows" }}
+dot_config
+dot_wallpapers
 {{ end }}
-{{ if ne .chezmoi.os "linux" }}
-linux/
+
+{{ if eq .chezmoi.os "linux" }}
+dot_glzr
+readonly_Documents
+dot_vsvimrc
+dot_wslconfig
 {{ end }}
