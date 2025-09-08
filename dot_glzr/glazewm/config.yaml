@@ -44,14 +44,14 @@ gaps:
   scale_with_dpi: false
 
   # Gap between adjacent windows.
-  inner_gap: "0px"
+  inner_gap: "1px"
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: "0px"
-    right: "0px"
-    bottom: "0px"
-    left: "0px"
+    top: "1px"
+    right: "1px"
+    bottom: "1px"
+    left: "1px"
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -242,11 +242,16 @@ window_rules:
       - window_process: { equals: "nvcplui" }
         window_class: { regex: "^Afx:" }
 
+      # Visual Studio 20xx Initial Screen
+      - window_process: { equals: "devenv" }
+        window_title: { equals: ""}
+
+
   - commands: ["set-tiling"]
     match:
       # Visual Studio 20xx
       - window_process: { equals: "devenv" }
-        window_title: { regex: 'Microsoft\sVisual\sStudio(\sPreview)?$' }
+        window_title: { regex: "Microsoft Visual Studio( Preview)?$" }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.

@@ -1,4 +1,4 @@
-Import-Module -Name Terminal-Icons
+# Import-Module -Name Terminal-Icons
 
 Set-Alias -Name l -Value ls
 Set-Alias -Name ll -Value ls
