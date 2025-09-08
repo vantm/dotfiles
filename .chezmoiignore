@@ -21,7 +21,11 @@ Documents/
 {{- if eq .chezmoi.mingw 1 }}
 .wallpapers
 
-.config/
-!.config/lazygit
+.config/alacritty
+.config/hypr
+.config/rofi
+.config/waybar
+.config/zed
+.config/*.conf
 {{- end }}
 {{- end }}
