@@ -8,3 +8,38 @@ args = ["--depth", "1", "--branch", "main"]
 
 ["nvim".pull]
 args = ["--ff-only"]
+
+["fzf-tab"]
+type = "git-repo"
+url = "https://github.com/Aloxaf/fzf-tab.git"
+refreshPeriod = "168h"
+["fzf-tab".pull]
+args = ["--ff-only"]
+
+["zsh-autosuggestions"]
+type = "git-repo"
+url = "https://github.com/zsh-users/zsh-autosuggestions.git"
+refreshPeriod = "168h"
+["zsh-autosuggestions".pull]
+args = ["--ff-only"]
+
+["fast-syntax-highlighting"]
+type = "git-repo"
+url = "https://github.com/zdharma-continuum/fast-syntax-highlighting.git"
+refreshPeriod = "168h"
+["fast-syntax-highlighting".pull]
+args = ["--ff-only"]
+
+["zsh-vi-mode"]
+type = "git-repo"
+url = "https://github.com/jeffreytse/zsh-vi-mode.git"
+refreshPeriod = "168h"
+["zsh-vi-mode".pull]
+args = ["--ff-only"]
+
+["pure"]
+type = "git-repo"
+url = "https://github.com/sindresorhus/pure.git"
+refreshPeriod = "168h"
+["pure".pull]
+args = ["--ff-only"]
