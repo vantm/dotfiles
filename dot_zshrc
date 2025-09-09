@@ -75,11 +75,8 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 # OmniSharp path
 export OMNISHARP_ROOT="$HOME/.local/share/omnisharp"
 
-# paths
+# Paths
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$OMNISHARP_ROOT"
-
-# nvm paths
-source /usr/share/nvm/init-nvm.sh
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
@@ -92,9 +89,17 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 local jdtls_dir="$HOME/.local/share/nvim/mason/packages/jdtls"
 export JDTLS_JVM_ARGS="-javaagent:${jdtls_dir}/lombok.jar"
 
-# docker
+# custom bin dir
 export PATH=$HOME/bin:$PATH
-export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+
+# Docker
+if [ -e "/mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock" ] ; then
+    # Podman integration
+    # Rootful pod, use -user.sock for rootless
+    export DOCKER_HOST="unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
+else
+    export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+fi
 
 [ -f "/home/vantm/.ghcup/env" ] && . "/home/vantm/.ghcup/env" # ghcup-env
 
@@ -214,3 +219,6 @@ function change-wallpaper {
     pkill hyprpaper && hyprpaper &
 }
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

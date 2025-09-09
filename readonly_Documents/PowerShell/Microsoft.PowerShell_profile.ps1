@@ -11,7 +11,6 @@ Set-Alias -Name vim -Value nvim
 Set-Alias -Name lg -Value lazygit
 Set-Alias -Name fff -Value fastfetch
 Set-Alias -Name cm -Value chezmoi
-Set-Alias -Name docker -Value podman
 
 Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Cursor
