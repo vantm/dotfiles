@@ -10,7 +10,6 @@ Set-Alias -Name vi -Value nvim
 Set-Alias -Name vim -Value nvim
 Set-Alias -Name lg -Value lazygit
 Set-Alias -Name fff -Value fastfetch
-Set-Alias -Name cm -Value chezmoi
 
 Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Cursor
@@ -27,7 +26,7 @@ $env:EDITOR="nvim"
 function prompt {
     $segments = @()
 
-    $is_git = (test-path -path .git -pathtype container)
+    $is_git = "$(git rev-parse --is-inside-work-tree)" -eq "true"
 
     # userinfo
     $segments += "[$env:USERNAME@$env:COMPUTERNAME]"

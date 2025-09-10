@@ -211,13 +211,14 @@ window_rules:
       # Yoosee
       - window_process: { equals: "Yoosee" }
 
-  - commands: ["set-floating --centered"]
-    match:
-      # Visual Studio 20xx
+# Visual Studio 20xx
       - window_process: { equals: "devenv" }
         window_class: { regex: '^HwndWrapper\[DefaultDomain;;.*\]$' }
         window_title: { regex: "^[Ss]earch$" }
 
+
+  - commands: ["set-floating --centered"]
+    match:
       - window_process: { equals: "Unity Hub" }
 
       # LINQPad
