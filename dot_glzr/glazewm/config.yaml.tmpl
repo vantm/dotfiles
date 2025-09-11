@@ -44,14 +44,14 @@ gaps:
   scale_with_dpi: false
 
   # Gap between adjacent windows.
-  inner_gap: "2px"
+  inner_gap: "0px"
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: "2px"
-    right: "2px"
-    bottom: "2px"
-    left: "2px"
+    top: "0px"
+    right: "0px"
+    bottom: "0px"
+    left: "0px"
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -211,11 +211,13 @@ window_rules:
       # Yoosee
       - window_process: { equals: "Yoosee" }
 
-# Visual Studio 20xx
+      # Visual Studio 20xx
       - window_process: { equals: "devenv" }
         window_class: { regex: '^HwndWrapper\[DefaultDomain;;.*\]$' }
         window_title: { regex: "^[Ss]earch$" }
 
+      # OneDrive
+      - window_process: { equals: "OneDrive" }
 
   - commands: ["set-floating --centered"]
     match:
