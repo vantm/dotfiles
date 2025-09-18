@@ -1,5 +1,3 @@
-# Import-Module -Name Terminal-Icons
-
 Set-Alias -Name l -Value ls
 Set-Alias -Name ll -Value ls
 Set-Alias -Name k -Value kubectl
@@ -148,23 +146,6 @@ function Reset-WmWindows {
     | %{ glazewm command --id $_.id set-tiling; write "Reset '$($_.title)'!" }
 }
 
-function nix { wsl -d NixOS }
-function arch { wsl -d Arch }
-
 Invoke-Expression (&{ zoxide init powershell | Out-String })
-#Invoke-Expression (&{ kubectl completion powershell | Out-String })
-#Invoke-Expression (&{ docker completion powershell | Out-String })
-#Invoke-Expression (&{ helm completion powershell | Out-String })
-#Invoke-Expression (&{ helmfile completion powershell | Out-String })
-#Invoke-Expression (&{ gh completion -s powershell | Out-String })
-#Invoke-Expression (&{ yq shell-completion powershell | Out-String })
-#Invoke-Expression (&{ chezmoi completion powershell | Out-String })
-
-#Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
-#    param($wordToComplete, $commandAst, $cursorPosition)
-#        dotnet complete --position $cursorPosition "$commandAst" | ForEach-Object {
-#            [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-#        }
-#}
 
 Import-Module -ErrorAction Ignore "$PSScriptRoot/PrivateFunctions.ps1"
