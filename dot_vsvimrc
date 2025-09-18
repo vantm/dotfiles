@@ -46,7 +46,7 @@ nnoremap J mzJ`z
 vmap <leader>s :vsc Edit.SurroundWith<cr>
 
 nmap s :vsc Tools.InvokePeasyMotionTwoCharJump<cr>
-nmap <leader>j :vsc Tools.InvokePeasyMotion<cr>
+vmap s :vsc Tools.InvokePeasyMotionTwoCharJump<cr>
 nmap g] :vsc Edit.FindAllReferences<cr>
 nmap <C-]> :vsc Edit.GoToImplementation<cr>
 nmap gc :vsc Edit.ToggleLineComment<cr>
