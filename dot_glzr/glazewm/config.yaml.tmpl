@@ -124,16 +124,16 @@ window_behavior:
 workspaces:
   - name: "1"
     keep_alive: true
-    bind_to_monitor: 1
+    bind_to_monitor: 0
   - name: "2"
     keep_alive: true
-    bind_to_monitor: 1
+    bind_to_monitor: 0
   - name: "3"
     keep_alive: true
-    bind_to_monitor: 0
+    bind_to_monitor: 1
   - name: "4"
     keep_alive: true
-    bind_to_monitor: 0
+    bind_to_monitor: 1
   - name: "5"
     keep_alive: true
     bind_to_monitor: 1
@@ -255,7 +255,7 @@ window_rules:
     match:
       # Visual Studio 20xx
       - window_process: { equals: "devenv" }
-        window_title: { regex: "Microsoft Visual Studio( Preview)?$" }
+        window_title: { regex: "Microsoft Visual Studio (Preview|Insiders)?$" }
 
       # VS Debug Console
       - window_process: { equals: "VsDebugConsole" }
@@ -353,15 +353,15 @@ keybindings:
 #  - commands: ["focus --workspace 9"]
 #    bindings: ["alt+9"]
   - commands: ["focus --workspace 1"]
-    bindings: ["alt+s"]
-  - commands: ["focus --workspace 2"]
-    bindings: ["alt+d"]
-  - commands: ["focus --workspace 3"]
-    bindings: ["alt+f"]
-  - commands: ["focus --workspace 4"]
-    bindings: ["alt+g"]
-  - commands: ["focus --workspace 5"]
     bindings: ["alt+a"]
+  - commands: ["focus --workspace 2"]
+    bindings: ["alt+s"]
+  - commands: ["focus --workspace 3"]
+    bindings: ["alt+d"]
+  - commands: ["focus --workspace 4"]
+    bindings: ["alt+f"]
+  - commands: ["focus --workspace 5"]
+    bindings: ["alt+g"]
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
@@ -391,12 +391,12 @@ keybindings:
 #    bindings: ["alt+shift+9"]
 
   - commands: ["move --workspace 1", "focus --workspace 1"]
-    bindings: ["alt+shift+s"]
-  - commands: ["move --workspace 2", "focus --workspace 2"]
-    bindings: ["alt+shift+d"]
-  - commands: ["move --workspace 3", "focus --workspace 3"]
-    bindings: ["alt+shift+f"]
-  - commands: ["move --workspace 4", "focus --workspace 4"]
-    bindings: ["alt+shift+g"]
-  - commands: ["move --workspace 5", "focus --workspace 5"]
     bindings: ["alt+shift+a"]
+  - commands: ["move --workspace 2", "focus --workspace 2"]
+    bindings: ["alt+shift+s"]
+  - commands: ["move --workspace 3", "focus --workspace 3"]
+    bindings: ["alt+shift+d"]
+  - commands: ["move --workspace 4", "focus --workspace 4"]
+    bindings: ["alt+shift+f"]
+  - commands: ["move --workspace 5", "focus --workspace 5"]
+    bindings: ["alt+shift+g"]
