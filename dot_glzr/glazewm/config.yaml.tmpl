@@ -155,7 +155,10 @@ workspaces:
 window_rules:
   - commands: ["ignore"]
     match:
-      - window_process: { equals: 'yasb\.exe' }
+      - window_process: { equals: "Taskmgr" }
+      - window_process: { equals: "explorer" }
+        window_title: { equals: "Run" }
+      - window_process: { equals: "TextInputHost" }
 
       # Ignore rules for various 3rd-party apps.
       - window_process: { equals: "PowerToys" }
@@ -255,7 +258,7 @@ window_rules:
     match:
       # Visual Studio 20xx
       - window_process: { equals: "devenv" }
-        window_title: { regex: "Microsoft Visual Studio (Preview|Insiders)?$" }
+        window_title: { regex: "Microsoft Visual Studio( (Preview|Insiders))?$" }
 
       # VS Debug Console
       - window_process: { equals: "VsDebugConsole" }
@@ -316,6 +319,10 @@ keybindings:
   # Change the focused window to be fullscreen.
   - commands: ["toggle-fullscreen"]
     bindings: ["alt+u"]
+
+  # Change the focused window to be tiling.
+  - commands: ["toggle-tiling"]
+    bindings: ["alt+t"]
 
   # Close focused window.
   - commands: ["close"]

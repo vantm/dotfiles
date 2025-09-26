@@ -134,8 +134,8 @@ function Get-WmWorkspaces {
 
 function Get-WmInfo {
     $jq = '.data.monitors.[]|' + `
-	  '{hardwareId,hasFocus,children:([.children.[]|' + `
-	  '{name,hasFocus,tilingDirection,children:([.children.[]|{id,title,className,processName,hasFocus}])}])}'
+          '{hardwareId,hasFocus,children:([.children.[]|' + `
+          '{name,hasFocus,tilingDirection,children:([.children.[]|{id,title,className,processName,hasFocus}])}])}'
     glazewm query monitors | jq $jq
 }
 
