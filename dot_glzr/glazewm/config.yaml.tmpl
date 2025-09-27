@@ -289,31 +289,19 @@ keybindings:
   - commands: ["position --centered"]
     bindings: ["alt+c"]
 
-{{- if eq .chezmoi.hostname "VANTM-PC" }}
-
   # Resize focused window by a percentage or pixel amount.
-  - commands: ["resize --width -5%"] #, "position --centered"]
-    bindings: ["alt+9"]
-  - commands: ["resize --width +5%"] #, "position --centered"]
-    bindings: ["alt+0"]
-  - commands: ["resize --height -5%"] #, "position --centered"]
-    bindings: ["alt+shift+9"]
-  - commands: ["resize --height +5%"] #, "position --centered"]
-    bindings: ["alt+shift+0"]
-
-{{- else }}
-
-  # Resize focused window by a percentage or pixel amount.
-  - commands: ["resize --width -5%"] #, "position --centered"]
-    bindings: ["alt+oem_minus"]
-  - commands: ["resize --width +5%"] #, "position --centered"]
-    bindings: ["alt+oem_plus"]
-  - commands: ["resize --height -5%"] #, "position --centered"]
-    bindings: ["alt+shift+oem_minus"]
-  - commands: ["resize --height +5%"] #, "position --centered"]
-    bindings: ["alt+shift+oem_plus"]
-
-{{- end }}
+  - commands: ["resize --width -5%", "position --centered"]
+    bindings: ["alt+u"]
+  - commands: ["resize --width +5%", "position --centered"]
+    bindings: ["alt+i"]
+  - commands: ["resize --height -5%", "position --centered"]
+    bindings: ["alt+o"]
+  - commands: ["resize --height +5%", "position --centered"]
+    bindings: ["alt+p"]
+  - commands: ["resize --width -5% --height -5%", "position --centered"]
+    bindings: ["alt+shift+u"]
+  - commands: ["resize --width +5% --height +5%", "position --centered"]
+    bindings: ["alt+shift+i"]
 
   # Disables window management and all other keybindings until alt+shift+p
   # is pressed again.
@@ -331,15 +319,15 @@ keybindings:
 
   # Change the focused window to be tiling.
   - commands: ["toggle-floating --centered"]
-    bindings: ["alt+o"]
+    bindings: ["alt+shift+space"]
 
   # Change the focused window to be fullscreen.
   - commands: ["toggle-fullscreen"]
-    bindings: ["alt+u"]
+    bindings: ["alt+n"]
 
   # Change the focused window to be tiling.
   - commands: ["toggle-tiling"]
-    bindings: ["alt+i"]
+    bindings: ["alt+m"]
 
   # Close focused window.
   - commands: ["close"]
