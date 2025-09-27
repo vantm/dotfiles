@@ -1,0 +1,4 @@
+[".hostvn-hosts.txt"]
+type = "file"
+url = "https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts"
+refreshPeriod = "168h"
