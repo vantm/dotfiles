@@ -2,11 +2,11 @@ general:
   # Commands to run when the WM has started. This is useful for running a
   # script or launching another application.
   # Example: The below command launches Zebar.
-  startup_commands: ['shell-exec autotiling']
+  #startup_commands: ['shell-exec autotiling']
 
   # Commands to run just before the WM is shutdown.
   # Example: The below command kills Zebar.
-  shutdown_commands: ['shell-exec taskkill /IM autotiling.exe /F']
+  #shutdown_commands: ['shell-exec taskkill /IM autotiling.exe /F']
 
   # Commands to run after the WM config is reloaded.
   config_reload_commands: []
@@ -340,6 +340,10 @@ keybindings:
   # Re-evaluate configuration file.
   - commands: ["wm-reload-config"]
     bindings: ["alt+shift+r"]
+
+  # Redraw
+  - commands: ["wm-redraw"]
+    bindings: ["alt+shift+w"]
 
   # Launch CMD terminal.
   - commands: ["shell-exec wt"]
