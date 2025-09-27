@@ -289,6 +289,20 @@ keybindings:
   - commands: ["position --centered"]
     bindings: ["alt+c"]
 
+{{- if eq .chezmoi.hostname "VANTM-PC" }}
+
+  # Resize focused window by a percentage or pixel amount.
+  - commands: ["resize --width -5%"] #, "position --centered"]
+    bindings: ["alt+9"]
+  - commands: ["resize --width +5%"] #, "position --centered"]
+    bindings: ["alt+0"]
+  - commands: ["resize --height -5%"] #, "position --centered"]
+    bindings: ["alt+shift+9"]
+  - commands: ["resize --height +5%"] #, "position --centered"]
+    bindings: ["alt+shift+0"]
+
+{{- else }}
+
   # Resize focused window by a percentage or pixel amount.
   - commands: ["resize --width -5%"] #, "position --centered"]
     bindings: ["alt+oem_minus"]
@@ -298,6 +312,8 @@ keybindings:
     bindings: ["alt+shift+oem_minus"]
   - commands: ["resize --height +5%"] #, "position --centered"]
     bindings: ["alt+shift+oem_plus"]
+
+{{- end }}
 
   # Disables window management and all other keybindings until alt+shift+p
   # is pressed again.
