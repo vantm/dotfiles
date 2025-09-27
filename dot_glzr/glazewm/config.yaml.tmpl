@@ -156,6 +156,7 @@ window_rules:
   - commands: ["ignore"]
     match:
       - window_process: { equals: "Taskmgr" }
+      - window_process: { equals: "perfmon" }
       - window_process: { equals: "explorer" }
         window_title: { equals: "Run" }
       - window_process: { equals: "TextInputHost" }
@@ -314,7 +315,7 @@ keybindings:
 
   # Change the focused window to be tiling.
   - commands: ["toggle-floating --centered"]
-    bindings: ["alt+shift+space"]
+    bindings: ["alt+o"]
 
   # Change the focused window to be fullscreen.
   - commands: ["toggle-fullscreen"]
@@ -322,7 +323,7 @@ keybindings:
 
   # Change the focused window to be tiling.
   - commands: ["toggle-tiling"]
-    bindings: ["alt+t"]
+    bindings: ["alt+i"]
 
   # Close focused window.
   - commands: ["close"]
