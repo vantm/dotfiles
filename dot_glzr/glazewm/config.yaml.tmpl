@@ -44,14 +44,14 @@ gaps:
   scale_with_dpi: true
 
   # Gap between adjacent windows.
-  inner_gap: "0px"
+  inner_gap: "4px"
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: "0px"
-    right: "0px"
-    bottom: "0px"
-    left: "0px"
+    top: "4px"
+    right: "4px"
+    bottom: "4px"
+    left: "4px"
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -119,38 +119,39 @@ window_behavior:
       # Whether to show fullscreen windows as always on top.
       shown_on_top: false
 
-{{- if eq .chezmoi.hostname "VANTM-PC" }}
 
 workspaces:
   - name: "1"
     keep_alive: true
+{{- if eq .chezmoi.hostname "VANTM-PC" }}
     bind_to_monitor: 0
+{{- end }}
   - name: "2"
     keep_alive: true
+{{- if eq .chezmoi.hostname "VANTM-PC" }}
     bind_to_monitor: 0
+{{- end }}
   - name: "3"
     keep_alive: true
+{{- if eq .chezmoi.hostname "VANTM-PC" }}
     bind_to_monitor: 1
+{{- end }}
   - name: "4"
     keep_alive: true
+{{- if eq .chezmoi.hostname "VANTM-PC" }}
     bind_to_monitor: 1
+{{- end }}
   - name: "5"
     keep_alive: true
+{{- if eq .chezmoi.hostname "VANTM-PC" }}
     bind_to_monitor: 1
-#   - name: "6"
-#     keep_alive: true
-#     bind_to_monitor: 1
-#   - name: "7"
-#     keep_alive: true
-#     bind_to_monitor: 1
-#   - name: "8"
-#     keep_alive: true
-#     bind_to_monitor: 1
-#   - name: "9"
-#     keep_alive: true
-#     bind_to_monitor: 1
-
 {{- end }}
+  - name: "6"
+    keep_alive: true
+{{- if eq .chezmoi.hostname "VANTM-PC" }}
+    bind_to_monitor: 1
+{{- end }}
+
 
 window_rules:
   - commands: ["ignore"]
@@ -378,6 +379,8 @@ keybindings:
     bindings: ["alt+f"]
   - commands: ["focus --workspace 5"]
     bindings: ["alt+g"]
+  - commands: ["focus --workspace 6"]
+    bindings: ["alt+t"]
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
@@ -416,3 +419,5 @@ keybindings:
     bindings: ["alt+shift+f"]
   - commands: ["move --workspace 5", "focus --workspace 5"]
     bindings: ["alt+shift+g"]
+  - commands: ["move --workspace 6", "focus --workspace 6"]
+    bindings: ["alt+shift+t"]
