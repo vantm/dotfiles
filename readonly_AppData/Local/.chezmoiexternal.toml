@@ -8,3 +8,8 @@ args = ["--depth", "1", "--branch", "main"]
 
 ["nvim".pull]
 args = ["--ff-only"]
+
+["lazygit/config.yml"]
+type = "file"
+url = "https://raw.githubusercontent.com/vantm/dotfiles/refs/heads/master/dot_config/lazygit/config.yml"
+refreshPeriod = "168h"
