@@ -1,3 +1,9 @@
+{{- if eq .hostname "vm" }}
+
+monitor = , preferred, auto, 1
+
+{{- else }}
+
 # monitor=eDP-1,2880x1800@90,3840x-240,1.5
 monitor=eDP-1,2880x1800@90,0x0,1.5
 workspace = r[1-9], monitor:eDP-1
@@ -5,3 +11,5 @@ workspace = r[1-9], monitor:eDP-1
 # monitor=DP-1,1920x1080@60,2880x480,1
 monitor=DP-1,3840x2160@60,2880x-240,1.5
 workspace = 10, monitor:DP-1
+
+{{ -end }}
