@@ -1,6 +1,6 @@
 .vscode/
 
-{{- if (and (eq .chezmoi.os "windows")  (eq .chezmoi.mingw 0)) }}
+{{- if eq .chezmoi.os "windows" }}
 .config/
 .wallpapers/
 
@@ -11,7 +11,7 @@
 .zshrc
 {{- end }}
 
-{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.mingw 1)) }}
+{{- if eq .chezmoi.os "linux" }}
 Documents/
 AppData/
 hosts/
@@ -19,17 +19,4 @@ hosts/
 
 .vsvimrc
 .wslconfig
-
-{{- if eq .chezmoi.mingw 1 }}
-.wallpapers
-
-.config/alacritty
-.config/hypr
-.config/rofi
-.config/waybar
-.config/zed
-.config/*.conf
-
-.ideavimrc
-{{- end }}
 {{- end }}
