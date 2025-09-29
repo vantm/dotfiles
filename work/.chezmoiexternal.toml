@@ -4,7 +4,7 @@ url = "https://aur.archlinux.org/yay.git"
 refreshPeriod = "168h"
 
 ["yay-bin".clone]
-args = ["--depth", "1", "--branch", "main"]
+args = ["--depth", "1"]
 
 ["yay-bin".pull]
 args = ["--ff-only"]
