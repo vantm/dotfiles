@@ -1,0 +1,11 @@
+#!/bin/bash
+
+{{- if .packages.linux.pacman }}
+sudo pacman -S --needed 
+{{- range .packages.linux.pacman }} {{ . }}{{- end}}
+{{- end }}
+
+{{- if .packages.linux.yay }}
+yay -S --needed
+{{- range .packages.linux.yay }} {{ . }}{{- end}}
+{{- end }}

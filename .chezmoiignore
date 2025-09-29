@@ -3,6 +3,7 @@
 {{- if eq .chezmoi.os "windows" }}
 .config/
 .wallpapers/
+work/yay-bin/
 
 .tmux.conf
 .vimrc
