@@ -1,3 +1,5 @@
+{{- if eq .chezmoi.os "linux" -}}
+
 #!/bin/bash
 
 {{- if .packages.linux.pacman }}
@@ -9,3 +11,6 @@ sudo pacman -S --needed
 yay -S --needed
 {{- range .packages.linux.yay }} {{ . }}{{- end}}
 {{- end }}
+
+{{- end -}}
+
