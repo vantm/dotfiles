@@ -10,9 +10,9 @@ config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.tab_max_width = 40
 
-config.launch_menu = config.launch_menu or {}
-
 {{- if eq .chezmoi.os "windows" }}
+
+config.launch_menu = config.launch_menu or {}
 
 local pwsh = { os.getenv("USERPROFILE") .. "\\scoop\\apps\\pwsh\\current\\pwsh.exe", "-NoLogo" }
 local wsl = { "wsl" }
@@ -26,7 +26,6 @@ table.insert(config.launch_menu, {
         label = "WSL",
         args = wsl,
 })
-
 
 config.default_prog = wsl
 
