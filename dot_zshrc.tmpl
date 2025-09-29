@@ -219,10 +219,15 @@ function change-wallpaper {
     pkill hyprpaper && hyprpaper &
 }
 
-{{- if eq .chezmoi.os "linux" }}
-[ -s /usr/share/nvm/init-nvm.sh ] && /usr/share/nvm/init-nvm.sh
-{{- end }}
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+{{- if eq .chezmoi.os "linux" }}
+
+type nvm >/dev/null 2>&1
+if [ "$?" = "1" ] ; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+fi
+
+{{- end }}
