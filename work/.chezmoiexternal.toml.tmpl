@@ -1,3 +1,5 @@
+{{- if eq .chezmoi.osRelease.id "arch" -}}
+
 ["yay-bin"]
 type = "git-repo"
 url = "https://aur.archlinux.org/yay.git"
@@ -8,3 +10,5 @@ args = ["--depth", "1"]
 
 ["yay-bin".pull]
 args = ["--ff-only"]
+
+{{- end -}}

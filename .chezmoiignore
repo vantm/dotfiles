@@ -1,23 +1,28 @@
 .vscode/
 
-{{- if eq .chezmoi.os "windows" }}
-.config/
+{{- $arch    := eq       .chezmoi.osRelease.id     "arch"                   }}
+{{- $linux   := eq       .chezmoi.os               "linux"                  }}
+{{- $windows := eq       .chezmoi.os               "windows"                }}
+{{- $wsl     := contains .chezmoi.kernel.osrelease "microsoft-standard-WSL" }}
+
+{{- if or (not $arch) $wsl }}
 .wallpapers/
 work/yay-bin/
+{{- end }}
 
+{{- if not $linux }}
+.config/
 .tmux.conf
 .vimrc
-
 .zprofile
 .zshrc
 {{- end }}
 
-{{- if eq .chezmoi.os "linux" }}
+{{- if not $windows }}
 Documents/
 AppData/
 hosts/
 .glzr/
-
 .vsvimrc
 .wslconfig
-{{- end }}
+{{- end -}}
