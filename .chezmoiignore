@@ -1,9 +1,9 @@
 .vscode/
 
-{{- $arch    := eq       .chezmoi.osRelease.id     "arch"                   }}
-{{- $linux   := eq       .chezmoi.os               "linux"                  }}
-{{- $windows := eq       .chezmoi.os               "windows"                }}
-{{- $wsl     := contains .chezmoi.kernel.osrelease "microsoft-standard-WSL" }}
+{{- $linux := eq .chezmoi.os "linux" }}
+{{- $arch := and $linux (eq .chezmoi.osRelease.id "arch")}}
+{{- $windows := eq .chezmoi.os "windows" }}
+{{- $wsl := and $linux (contains .chezmoi.kernel.osrelease "microsoft-standard-WSL") }}
 
 {{- if or (not $arch) $wsl }}
 .wallpapers/
