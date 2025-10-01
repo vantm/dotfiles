@@ -119,36 +119,37 @@ window_behavior:
       # Whether to show fullscreen windows as always on top.
       shown_on_top: false
 
+{{- $dual_monitors := eq .chezmoi.hostname "VANTM-PC" }}
 
 workspaces:
   - name: "1"
     keep_alive: true
-{{- if eq .chezmoi.hostname "VANTM-PC" }}
+{{- if $dual_monitors }}
     bind_to_monitor: 0
 {{- end }}
   - name: "2"
     keep_alive: true
-{{- if eq .chezmoi.hostname "VANTM-PC" }}
+{{- if $dual_monitors }}
     bind_to_monitor: 0
 {{- end }}
   - name: "3"
     keep_alive: true
-{{- if eq .chezmoi.hostname "VANTM-PC" }}
+{{- if $dual_monitors }}
     bind_to_monitor: 1
 {{- end }}
   - name: "4"
     keep_alive: true
-{{- if eq .chezmoi.hostname "VANTM-PC" }}
+{{- if $dual_monitors }}
     bind_to_monitor: 1
 {{- end }}
   - name: "5"
     keep_alive: true
-{{- if eq .chezmoi.hostname "VANTM-PC" }}
+{{- if $dual_monitors }}
     bind_to_monitor: 1
 {{- end }}
   - name: "6"
     keep_alive: true
-{{- if eq .chezmoi.hostname "VANTM-PC" }}
+{{- if $dual_monitors }}
     bind_to_monitor: 1
 {{- end }}
 

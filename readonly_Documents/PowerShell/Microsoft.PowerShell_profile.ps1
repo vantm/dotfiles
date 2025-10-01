@@ -7,7 +7,9 @@ Set-Alias -Name v -Value nvim
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name vim -Value nvim
 Set-Alias -Name lg -Value lazygit
+Set-Alias -Name ldo -Value lazydocker
 Set-Alias -Name fff -Value fastfetch
+Set-Alias -Name which -Value where.exe 
 
 Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Cursor
@@ -22,6 +24,8 @@ Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
 $env:EDITOR="nvim"
 
 function prompt {
+    $exit_code = $lastexitcode
+
     $segments = @()
 
     $is_git = "$(git rev-parse --is-inside-work-tree)" -eq "true"
@@ -54,7 +58,12 @@ function prompt {
     # join segments
     $segments_text = $segments -join ' '
 
-    return "$segments_text`n$ "
+    $status = "`e[92m$`e[39m"
+    if ($exit_code -ne 0) {
+        $status = "`e[91m$`e[39m" 
+    }
+
+    return "$segments_text`n$status "
 }
 
 function cmedit {
