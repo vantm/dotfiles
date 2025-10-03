@@ -43,4 +43,27 @@ data:
             - go
             - rustup
             - ttf-fantasque-nerd
-
+    git:
+        aliases:
+            - - tree
+              - log --graph --oneline --all
+            - ["co", "checkout"]
+            - ["br", "branch"]
+            - ["ff", "merge --ff-only"]
+            - ["f", "fetch"]
+            - ["fo", "fetch origin"]
+            - ["fop", "fetch origin --prune"]
+            - ["p", "pull"]
+            - ["po", "pull origin"]
+            - ["pom", "pull origin master"]
+            - ["cp", "cherry-pick"]
+            - ["bn", "branch --show-current"]
+            - ["mc", "merge --continue"]
+            - ["ma", "merge --abort"]
+            - ["s", "status"]
+            - ["c", "commit -m"]
+            - ["d", "diff"]
+            - ["dc", "diff --catched"]
+        user:
+            name: Van Tran
+            email: tmvan.1903@gmail.com

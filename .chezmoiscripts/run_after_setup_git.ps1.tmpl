@@ -1,0 +1,10 @@
+{{- if eq .chezmoi.os "windows" -}}
+{{- range .git.aliases }}
+git config set --global alias.{{ index . 0 }} "{{ index . 1 }}"
+{{- end }}
+git config set --global user.name "{{ .git.user.name }}"
+git config set --global user.email "{{ .git.user.email }}"
+git config set --global core.editor nvim
+git config set --global init.defaultbranch master
+git config set --global pull.ff only
+{{- end -}}
