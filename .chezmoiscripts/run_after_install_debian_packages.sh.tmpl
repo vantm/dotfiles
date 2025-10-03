@@ -3,7 +3,7 @@
 #!/bin/bash
 
 {{- if .packages.linux.apt }}
-sudo apt-get install --no-install-recomments --assume-yes --no-upgrade
+sudo apt-get install --no-install-recommends --assume-yes --no-upgrade
 {{- range .packages.linux.apt }} {{ . }}{{- end}}
 {{- end }}
 
