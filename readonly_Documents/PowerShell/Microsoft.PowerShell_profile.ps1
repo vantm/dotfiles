@@ -155,6 +155,18 @@ function Reset-WmWindows {
     | %{ glazewm command --id $_.id set-tiling; write "Reset '$($_.title)'!" }
 }
 
+function View-Diff {
+    if ("$(git rev-parse --is-inside-work-tree)" -ne "true") {
+        Write-Error "Not in a git repo"
+    }
+    else {
+        $fst = "$(git log --oneline --reverse -n 50 --no-color | fzf | %{ ($_ -split ' ')[0] })"
+        $snd = "$(git log --oneline --reverse -n 50 --no-color | fzf | %{ ($_ -split ' ')[0] })"
+
+        git difftool $fst $snd --name-only | fzf | %{ git difftool -y $fst $snd -- $_ }
+    }
+}
+
 Invoke-Expression (&{ zoxide init powershell | Out-String })
 
 Import-Module -ErrorAction Ignore "$PSScriptRoot/PrivateFunctions.ps1"
