@@ -1,0 +1,10 @@
+{{- $linux := eq .chezmoi.os "linux" -}}
+{{- if and $linux (eq .chezmoi.osRelease.id "debian" ) -}}
+#!/bin/bash
+
+{{- if .packages.linux.apt }}
+sudo apt-get --no-install-recomments --assume-yes --no-upgrade
+{{- range .packages.linux.apt }} {{ . }}{{- end}}
+{{- end }}
+
+{{- end -}}
