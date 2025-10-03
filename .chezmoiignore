@@ -30,4 +30,5 @@ hosts/
 *.ps1
 *.cmd
 *.exe
+preferences/
 {{- end -}}
