@@ -7,4 +7,12 @@ git config set --global user.email "{{ .git.user.email }}"
 git config set --global core.editor nvim
 git config set --global init.defaultbranch master
 git config set --global pull.ff only
+
+git config set --global diff.tool vscode
+git config set --global diff.guitool vscode
+git config set --global difftool.vscode.cmd 'powershell.exe -nop -nol -w hidden -f {{ .chezmoi.homeDir }}/bin/gitcode.ps1 --wait --diff $LOCAL $REMOTE'
+
+git config set --global merge.tool vscode
+git config set --global merge.guitool vscode
+git config set --global mergetool.vscode.cmd 'powershell.exe -nop -nol -w hidden -f {{ .chezmoi.homeDir }}/bin/gitcode.cmd --wait --merge $REMOTE $LOCAL $BASE $MERGED'
 {{- end -}}

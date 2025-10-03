@@ -16,6 +16,7 @@ work/yay-bin/
 .vimrc
 .zprofile
 .zshrc
+*.sh
 {{- end }}
 
 {{- if not $windows }}
@@ -25,4 +26,8 @@ hosts/
 .glzr/
 .vsvimrc
 .wslconfig
+
+*.ps1
+*.cmd
+*.exe
 {{- end -}}
