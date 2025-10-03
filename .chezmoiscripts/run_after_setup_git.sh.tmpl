@@ -1,6 +1,6 @@
 {{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
-{{- range .git.aliases -}}
+{{- range .git.aliases }}
 git config set --global alias.{{ index . 0 }} "{{ index . 1 }}"
 {{- end }}
 git config set --global user.name "{{ .git.user.name }}"
