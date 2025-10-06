@@ -225,6 +225,9 @@ window_rules:
       # OneDrive
       - window_process: { equals: "OneDrive" }
 
+      # 1.1.1.1
+      - window_process: { equals: "Cloudflare WARP" }
+
   - commands: ["set-floating --centered"]
     match:
       - window_process: { equals: "Unity Hub" }
