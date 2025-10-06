@@ -5,4 +5,7 @@ templates:
     copyright: MIT
     github-username: vantm
 
+install-ghc: false
+install-msys: false
+skip-msys: true
 system-ghc: true
