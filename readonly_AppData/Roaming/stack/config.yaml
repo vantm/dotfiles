@@ -1,0 +1,8 @@
+templates:
+  params:
+    author-name: Van Tran
+    author-email: tmvan.1903@gmail.com
+    copyright: MIT
+    github-username: vantm
+
+system-ghc: true
