@@ -169,4 +169,8 @@ function View-Diff {
 
 Invoke-Expression (&{ zoxide init powershell | Out-String })
 
+If ("$(where.exe kaf)" -ne "") {
+    Invoke-Expression (@(kaf completion powershell) -replace " ''\)$"," ' ')" -join "`n")
+}
+
 Import-Module -ErrorAction Ignore "$PSScriptRoot/PrivateFunctions.ps1"
