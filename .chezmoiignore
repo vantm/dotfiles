@@ -1,4 +1,4 @@
-.vscode/
+.vscode/*
 
 {{- $linux := eq .chezmoi.os "linux" }}
 {{- $arch := and $linux (eq .chezmoi.osRelease.id "arch")}}
@@ -6,12 +6,13 @@
 {{- $wsl := and $linux (contains .chezmoi.kernel.osrelease "microsoft-standard-WSL") }}
 
 {{- if or (not $arch) $wsl }}
-.wallpapers/
-work/yay-bin/
+.wallpapers/*
+work/yay-bin/*
 {{- end }}
 
 {{- if not $linux }}
-.config/
+.config/*
+!.config/*tacky-borders/
 .tmux.conf
 .vimrc
 .zprofile
@@ -20,15 +21,16 @@ work/yay-bin/
 {{- end }}
 
 {{- if not $windows }}
-Documents/
-AppData/
-hosts/
-.glzr/
+AppData/*
+Documents/*
+.config/*tacky-borders/*
+hosts/*
+.glzr/*
 .vsvimrc
 .wslconfig
 
 *.ps1
 *.cmd
 *.exe
-preferences/
+preferences/*
 {{- end -}}
