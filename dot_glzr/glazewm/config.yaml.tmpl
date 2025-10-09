@@ -44,14 +44,14 @@ gaps:
   scale_with_dpi: true
 
   # Gap between adjacent windows.
-  inner_gap: "2px"
+  inner_gap: "6px"
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: "2px"
-    right: "2px"
-    bottom: "2px"
-    left: "2px"
+    top: "4px"
+    right: "4px"
+    bottom: "4px"
+    left: "4px"
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -298,17 +298,17 @@ keybindings:
     bindings: ["alt+c"]
 
   # Resize focused window by a percentage or pixel amount.
-  - commands: ["resize --width -5%", "position --centered"]
+  - commands: ["resize --width -2%", "position --centered"]
     bindings: ["alt+u"]
-  - commands: ["resize --width +5%", "position --centered"]
+  - commands: ["resize --width +2%", "position --centered"]
     bindings: ["alt+i"]
-  - commands: ["resize --height -5%", "position --centered"]
+  - commands: ["resize --height -2%", "position --centered"]
     bindings: ["alt+o"]
-  - commands: ["resize --height +5%", "position --centered"]
+  - commands: ["resize --height +2%", "position --centered"]
     bindings: ["alt+p"]
-  - commands: ["resize --width -5% --height -5%", "position --centered"]
+  - commands: ["resize --width -2% --height -2%", "position --centered"]
     bindings: ["alt+shift+u"]
-  - commands: ["resize --width +5% --height +5%", "position --centered"]
+  - commands: ["resize --width +2% --height +2%", "position --centered"]
     bindings: ["alt+shift+i"]
 
   # Disables window management and all other keybindings until alt+shift+p
