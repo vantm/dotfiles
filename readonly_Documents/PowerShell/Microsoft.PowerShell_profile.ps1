@@ -66,8 +66,21 @@ function prompt {
     return "$segments_text`n$status "
 }
 
-function cmedit {
-    chezmoi edit "~/$(chezmoi list -p relative -i files | fzf)"
+function Edit-Chezmoi {
+    param(
+        [Switch] $Watch
+    )
+
+    chezmoi list --include files
+    | fzf
+    | %{
+        if ($Watch -eq $True) {
+            chezmoi edit --watch $_
+        }
+        else {
+            chezmoi edit --apply $_
+        }
+    }
 }
 
 function forx {
@@ -166,6 +179,7 @@ function View-Diff {
         git difftool $fst $snd --name-only | fzf | %{ git difftool -y $fst $snd -- $_ }
     }
 }
+
 
 Invoke-Expression (&{ zoxide init powershell | Out-String })
 
