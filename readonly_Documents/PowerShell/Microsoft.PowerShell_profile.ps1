@@ -28,7 +28,7 @@ function prompt {
 
     $segments = @()
 
-    $is_git = "$(git rev-parse --is-inside-work-tree)" -eq "true"
+    $is_git = $false #"$(git rev-parse --is-inside-work-tree)" -eq "true"
 
     # userinfo
     $segments += "[$env:USERNAME@$env:COMPUTERNAME]"
