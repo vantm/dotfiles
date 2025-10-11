@@ -355,3 +355,8 @@ window_rules:
   - match: Process
     name: "Cloudflare WARP"
     enabled: False
+
+  - match: Class
+    name: ^HwndWrapper\[setup\.exe;;.*\]$
+    strategy: Regex
+    enabled: False
