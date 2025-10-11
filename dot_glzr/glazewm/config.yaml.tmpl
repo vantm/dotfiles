@@ -228,6 +228,17 @@ window_rules:
       # 1.1.1.1
       - window_process: { equals: "Cloudflare WARP.exe" }
 
+      # Docker Installer
+      - window_process: { regex: "^Docker Desktop Installer" }
+
+      # Visual Studio Installer
+      - window_process: { equals: "setup" }
+        window_class: { regex: '^HwndWrapper\[setup\.exe;;.*\]$' }
+
+      # Visual Studio 20xx Initial Screen
+      - window_process: { equals: "devenv" }
+        window_title: { equals: ""}
+
   - commands: ["set-floating --centered"]
     match:
       - window_process: { equals: "Unity Hub" }
@@ -247,9 +258,6 @@ window_rules:
       # League of Legends
       - window_process: { equals: "Riot Client" }
 
-      # Docker Installer
-      - window_process: { regex: "^Docker Desktop Installer" }
-
       # LG Hub
       - window_process: { equals: "lghub" }
         window_class: { equals: "Chrome_WidgetWin_1" }
@@ -257,11 +265,6 @@ window_rules:
       # NVIDIA Control Panel
       - window_process: { equals: "nvcplui" }
         window_class: { regex: "^Afx:" }
-
-      # Visual Studio 20xx Initial Screen
-      - window_process: { equals: "devenv" }
-        window_title: { equals: ""}
-
 
   - commands: ["set-tiling"]
     match:
@@ -306,9 +309,9 @@ keybindings:
     bindings: ["alt+o"]
   - commands: ["resize --height +5%", "position --centered"]
     bindings: ["alt+p"]
-  - commands: ["resize --width -5% --height -2%", "position --centered"]
+  - commands: ["resize --width -5% --height -3%", "position --centered"]
     bindings: ["alt+shift+u"]
-  - commands: ["resize --width +5% --height +2%", "position --centered"]
+  - commands: ["resize --width +5% --height +3%", "position --centered"]
     bindings: ["alt+shift+i"]
 
   # Disables window management and all other keybindings until alt+shift+p
