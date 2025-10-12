@@ -22,6 +22,7 @@ Set-PSReadLineKeyHandler -Chord "ctrl+p" -Function PreviousHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
 
 $env:EDITOR="nvim"
+$env:SHELL="pwsh"
 
 function prompt {
     $exit_code = $lastexitcode
