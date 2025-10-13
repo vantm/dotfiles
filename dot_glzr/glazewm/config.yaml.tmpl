@@ -161,6 +161,8 @@ window_rules:
       - window_process: { equals: "perfmon" }
       - window_process: { equals: "explorer" }
         window_title: { equals: "Run" }
+      - window_process: { equals: "explorer" }
+        window_class: { equals: "OperationStatusWindow" }
       - window_process: { equals: "TextInputHost" }
       - window_process: { equals: "OptionalFeatures" }
       - window_process: { equals: "mmc" }
