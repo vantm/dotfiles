@@ -29,7 +29,7 @@ function prompt {
 
     $segments = @()
 
-    $is_git = $false #"$(git rev-parse --is-inside-work-tree)" -eq "true"
+    $is_git = "$(git rev-parse --is-inside-work-tree)" -eq "true"
 
     # userinfo
     $segments += "[$env:USERNAME@$env:COMPUTERNAME]"
@@ -68,9 +68,7 @@ function prompt {
 }
 
 function Edit-Chezmoi {
-    param(
-        [Switch] $Watch
-    )
+    param([Switch] $Watch)
 
     chezmoi list --include files
     | fzf
@@ -84,52 +82,15 @@ function Edit-Chezmoi {
     }
 }
 
-function forx {
-    Param(
-        [Parameter(Mandatory,ValueFromPipeline)]
-        [object[]]
-        $paths,
+function .. { cd .. }
 
-        [Parameter(Mandatory,Position=2,ValueFromRemainingArguments)]
-        [string]
-        $cmd
-    )
+function ... { cd ../.. }
 
-    Process {
-        $paths | foreach-object -throttle 6 -parallel {
-            pushd $_
-            iex $using:cmd
-        }
-    }
-}
+function fdd { fd -td -d5 | fzf }
+function fdz { fd -td -d5 | fzf | %{ z $_ } }
+function fdf { fd -tf -d5 | fzf }
 
-function Test-Coverage {
-    $output = $(dotnet test --collect:"XPlat Code Coverage")
-
-    $id = $(select-string `
-        -InputObject $output `
-        -Pattern "TestResults\\([^\\]+)\\coverage.cobertura.xml" `
-        -AllMatches).Matches.Groups[1].Value
-
-    Write-Host $output
-
-    reportgenerator.exe `
-        -reporttypes:Html `
-        -targetdir:".\TestResults\$id\report" `
-        -reports:".\TestResults\$id\coverage.cobertura.xml";
-
-    & ".\TestResults\$id\report\index.html";
-}
-
-function .. {
-    cd ..
-}
-
-function ... {
-    cd ../..
-}
-
-function Dotnet-Counters() {
+function Get-DotnetCounters() {
     $process = $("$(dotnet counters ps | fzf --layout reverse)" -split " ")[1]
     if ("$process" -eq "") {
         return;
