@@ -82,13 +82,32 @@ function Edit-Chezmoi {
     }
 }
 
-function .. { cd .. }
+function forx {
+    Param(
+        [Parameter(Mandatory,ValueFromPipeline)]
+        [object[]]
+        $paths,
 
+        [Parameter(Mandatory,Position=2,ValueFromRemainingArguments)]
+        [string]
+        $cmd
+    )
+
+    Process {
+        $paths | foreach-object -throttle 6 -parallel {
+            pushd $_
+            iex $using:cmd
+        }
+    }
+}
+
+function .. { cd .. }
 function ... { cd ../.. }
 
-function fdd { fd -td -d5 | fzf }
-function fdz { fd -td -d5 | fzf | %{ z $_ } }
-function fdf { fd -tf -d5 | fzf }
+function fdd { fd -td -d5 --path-separator '/' | fzf }
+function fdz { fd -td -d5 --path-separator '/' | fzf | %{ z $_ } }
+function fdf { fd -tf -d5 --path-separator '/' | fzf }
+function fdv { fd -tf -d5 --path-separator '/' | fzf | %{ v $_ } }
 
 function Get-DotnetCounters() {
     $process = $("$(dotnet counters ps | fzf --layout reverse)" -split " ")[1]
