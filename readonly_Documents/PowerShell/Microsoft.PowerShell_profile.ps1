@@ -162,7 +162,7 @@ function View-Diff {
 }
 
 
-Invoke-Expression (&{ zoxide init powershell | Out-String })
+Invoke-Expression (&{ zoxide init powershell --cmd cd | Out-String })
 
 If ("$(where.exe /Q kaf && echo 1)" -ne "") {
     Invoke-Expression (@(kaf completion powershell) -replace " ''\)$"," ' ')" -join "`n")
