@@ -168,4 +168,6 @@ If ("$(where.exe /Q kaf && echo 1)" -ne "") {
     Invoke-Expression (@(kaf completion powershell) -replace " ''\)$"," ' ')" -join "`n")
 }
 
+Invoke-Expression (&{ direnv hook pwsh | Out-String })
+
 Import-Module -ErrorAction Ignore "$PSScriptRoot/PrivateFunctions.ps1"
