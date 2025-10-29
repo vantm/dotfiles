@@ -161,6 +161,14 @@ function View-Diff {
     }
 }
 
+function getenv {
+    cat .env `
+    | %{ $_.trim() } `
+    | ?{ $_ -match '^(?!#)' } `
+    | %{ $_ -replace '^(.*?=)(?!")(.*)$', '$1"$2"' } `
+    | %{ iex $(write "`$env:$_") }
+}
+
 
 Invoke-Expression (&{ zoxide init powershell --cmd cd | Out-String })
 
