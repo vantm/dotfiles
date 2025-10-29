@@ -165,6 +165,7 @@ function getenv {
     cat .env `
     | %{ $_.trim() } `
     | ?{ $_ -match '^(?!#)' } `
+    | ?{ $_.length > 0 }
     | %{ $_ -replace '^(.*?=)(?!")(.*)$', '$1"$2"' } `
     | %{ iex $(write "`$env:$_") }
 }
