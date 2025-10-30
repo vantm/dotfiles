@@ -14,5 +14,5 @@ git config set --global difftool.vscode.cmd 'powershell.exe -nop -nol -w hidden 
 
 git config set --global merge.tool vscode
 git config set --global merge.guitool vscode
-git config set --global mergetool.vscode.cmd 'powershell.exe -nop -nol -w hidden -f {{ .chezmoi.homeDir }}/bin/gitcode.cmd --wait --merge $REMOTE $LOCAL $BASE $MERGED'
+git config set --global mergetool.vscode.cmd 'powershell.exe -nop -nol -w hidden -f {{ .chezmoi.homeDir }}/bin/gitcode.ps1 --wait --merge $REMOTE $LOCAL $BASE $MERGED'
 {{- end -}}
