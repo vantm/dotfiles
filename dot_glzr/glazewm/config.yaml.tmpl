@@ -152,6 +152,11 @@ workspaces:
 {{- if $dual_monitors }}
     bind_to_monitor: 1
 {{- end }}
+  - name: "7"
+    keep_alive: true
+{{- if $dual_monitors }}
+    bind_to_monitor: 1
+{{- end }}
 
 
 window_rules:
@@ -394,6 +399,8 @@ keybindings:
     bindings: ["alt+g"]
   - commands: ["focus --workspace 6"]
     bindings: ["alt+t"]
+  - commands: ["focus --workspace 7"]
+    bindings: ["alt+y"]
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
@@ -434,3 +441,5 @@ keybindings:
     bindings: ["alt+shift+g"]
   - commands: ["move --workspace 6", "focus --workspace 6"]
     bindings: ["alt+shift+t"]
+  - commands: ["move --workspace 7", "focus --workspace 7"]
+    bindings: ["alt+shift+y"]
