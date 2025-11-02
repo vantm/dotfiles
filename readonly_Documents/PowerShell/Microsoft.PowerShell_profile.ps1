@@ -21,11 +21,15 @@ Set-PSReadLineKeyHandler -Chord "ctrl+w" -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Chord "ctrl+p" -Function PreviousHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+r" -ScriptBlock {
-    $Command = "$(Get-Content -Tail 150 (Get-PSReadlineOption).HistorySavePath | fzf)"
+    $Command = Get-Content -Tail 150 (Get-PSReadlineOption).HistorySavePath `
+        | %{ $_.ToString().Trim() } `
+        | Sort-Object `
+        | Get-Unique `
+        | fzf --layout=reverse
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert($Command)
 }
 Set-PSReadLineKeyHandler -Chord "ctrl+t" -ScriptBlock {
-    $File = "$(fd -d6 -H -E node_modules -E dist -E target -E bin -E obj -E .git -H | fzf)"
+    $File = "$(fd -d6 -H -E node_modules -E dist -E target -E bin -E obj -E .git -H | fzf --layout=reverse)"
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert($File)
 }
 
@@ -81,7 +85,7 @@ function Edit-Chezmoi {
     param([Switch] $Watch)
 
     chezmoi list --include files
-    | fzf
+    | fzf --layout=reverse
     | %{
         if ($Watch -eq $True) {
             chezmoi edit --watch $_
@@ -160,6 +164,10 @@ function Reset-WmWindows {
 }
 
 function View-Diff {
+    param (
+        $Context = 3
+    )
+
     if ("$(git rev-parse --is-inside-work-tree)" -ne "true") {
         Write-Error "Not in a git repo"
     }
@@ -170,7 +178,7 @@ function View-Diff {
         if (0 -ne $LastExitCode) { return; }
 
         # git difftool $fst $snd --name-only | fzf | %{ git difftool -y $fst $snd -- $_ }
-        git difftool $fst $snd --name-only | fzf | %{ git diff $fst $snd -- $_ }
+        git difftool $fst $snd --name-only | fzf | %{ git diff --unified=$context $fst $snd -- $_ }
     }
 }
 
