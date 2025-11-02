@@ -20,6 +20,12 @@ Set-PSReadLineKeyHandler -Chord "ctrl+j" -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Chord "ctrl+w" -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Chord "ctrl+p" -Function PreviousHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
+Set-PSReadLineKeyHandler -Chord "ctrl+r" -ScriptBlock {
+    Get-Content -Tail 50 (Get-PSReadlineOption).HistorySavePath `
+    | fzf `
+    | Invoke-Expression
+}
+
 
 $env:EDITOR="nvim"
 $env:SHELL="pwsh"
@@ -154,8 +160,10 @@ function View-Diff {
         Write-Error "Not in a git repo"
     }
     else {
-        $fst = "$(git log --oneline --reverse -n 50 --no-color | fzf | %{ ($_ -split ' ')[0] })"
-        $snd = "$(git log --oneline --reverse -n 50 --no-color | fzf | %{ ($_ -split ' ')[0] })"
+        $fst = "$(git log --oneline -n 50 --no-color | fzf | %{ ($_ -split ' ')[0] })"
+        if (0 -ne $LastExitCode) { return; }
+        $snd = "$(git log --oneline -n 50 --no-color | fzf | %{ ($_ -split ' ')[0] })"
+        if (0 -ne $LastExitCode) { return; }
 
         git difftool $fst $snd --name-only | fzf | %{ git difftool -y $fst $snd -- $_ }
     }
