@@ -21,10 +21,14 @@ Set-PSReadLineKeyHandler -Chord "ctrl+w" -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Chord "ctrl+p" -Function PreviousHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+r" -ScriptBlock {
-    Get-Content -Tail 50 (Get-PSReadlineOption).HistorySavePath `
-    | fzf `
-    | Invoke-Expression
+    $Command = "$(Get-Content -Tail 150 (Get-PSReadlineOption).HistorySavePath | fzf)"
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert($Command)
 }
+Set-PSReadLineKeyHandler -Chord "ctrl+t" -ScriptBlock {
+    $File = "$(fd -d6 -H -E node_modules -E dist -E target -E bin -E obj -E .git -H | fzf)"
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert($File)
+}
+
 
 
 $env:EDITOR="nvim"
@@ -165,7 +169,8 @@ function View-Diff {
         $snd = "$(git log --oneline -n 50 --no-color | fzf | %{ ($_ -split ' ')[0] })"
         if (0 -ne $LastExitCode) { return; }
 
-        git difftool $fst $snd --name-only | fzf | %{ git difftool -y $fst $snd -- $_ }
+        # git difftool $fst $snd --name-only | fzf | %{ git difftool -y $fst $snd -- $_ }
+        git difftool $fst $snd --name-only | fzf | %{ git diff $fst $snd -- $_ }
     }
 }
 
