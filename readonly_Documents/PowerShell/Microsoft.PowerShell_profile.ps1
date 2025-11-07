@@ -182,6 +182,47 @@ function View-Diff {
     }
 }
 
+function Copy-WorkTreeEnv {
+    $IsInsideGitDir = "$(git rev-parse --is-inside-work-tree 2>$null)" -eq "true"
+
+    If (!$IsInsideGitDir) {
+        Write-Error "This script must be run inside a Git directory."
+        Return
+    }
+
+    $SelectedWorktreePath = git worktree list `
+    | fzf --layout=reverse --prompt="Select a worktree: " --height=40% --border --ansi
+    | ForEach-Object { $_.Split(" ")[0] }
+    | ForEach-Object { $_.Trim() }
+    | Where-Object { $_ -ne "" }
+
+    $WorkTreeRootPath = "$(git rev-parse --show-toplevel)"
+
+    If ($WorkTreeRootPath -eq $SelectedWorktreePath) {
+        Write-Error "The selected worktree is the current worktree. Aborting."
+        Return
+    }
+
+    Push-Location $SelectedWorktreePath
+
+    git ls-files --others | rg '.env' | ForEach-Object {
+        $SourcePath = Join-Path $SelectedWorktreePath $_
+        $DestinationPath = Join-Path $WorkTreeRootPath $_
+
+        $Response = Read-Host "Copy '$SourcePath' to '$DestinationPath'? (Y/n) "
+        $Accepted = $Response -eq '' -Or $Response -eq 'y' -Or $Response -eq 'Y'
+
+        If (-Not $Accepted) {
+            Write-Host "Skipping '$SourcePath'"
+            Return
+        }
+
+        Copy-Item -Path $SourcePath -Destination $DestinationPath -Force
+    }
+
+    Pop-Location
+}
+
 function getenv {
     cat .env `
     | %{ $_.trim() } `
