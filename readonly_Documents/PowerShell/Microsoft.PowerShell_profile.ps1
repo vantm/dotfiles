@@ -23,7 +23,7 @@ Set-PSReadLineKeyHandler -Chord "ctrl+w" -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Chord "ctrl+p" -Function PreviousHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+n" -Function NextHistory
 Set-PSReadLineKeyHandler -Chord "ctrl+r" -ScriptBlock {
-    $Command = Get-Content -Tail 150 (Get-PSReadlineOption).HistorySavePath `
+    $Command = Get-Content -Tail 500 (Get-PSReadlineOption).HistorySavePath `
         | %{ $_.ToString().Trim() } `
         | Sort-Object `
         | Get-Unique `
@@ -207,7 +207,7 @@ function Copy-WorkTreeEnv {
 
     Push-Location $SelectedWorktreePath
 
-    git ls-files --others | rg '.env' | ForEach-Object {
+    git ls-files --others | rg '\.env$' | ForEach-Object {
         $SourcePath = Join-Path $SelectedWorktreePath $_
         $DestinationPath = Join-Path $WorkTreeRootPath $_
 
