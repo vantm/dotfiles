@@ -10,6 +10,8 @@ Set-Alias -Name lg -Value lazygit
 Set-Alias -Name ldo -Value lazydocker
 Set-Alias -Name fff -Value fastfetch
 Set-Alias -Name which -Value where.exe 
+Set-Alias -Name cw -Value Change-WorkTree
+Set-Alias -Name cpwe -Value Copy-WorkTreeEnv
 
 Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Cursor
@@ -183,10 +185,10 @@ function View-Diff {
 }
 
 function Copy-WorkTreeEnv {
-    $IsInsideGitDir = "$(git rev-parse --is-inside-work-tree 2>$null)" -eq "true"
+    $IsInsideWorkTreeDir = "$(git rev-parse --is-inside-work-tree 2>$null)" -eq "true"
 
-    If (!$IsInsideGitDir) {
-        Write-Error "This script must be run inside a Git directory."
+    If (!$IsInsideWorkTreeDir) {
+        Write-Error "This script must be run inside a worktree directory."
         Return
     }
 
@@ -221,6 +223,38 @@ function Copy-WorkTreeEnv {
     }
 
     Pop-Location
+}
+
+function Change-WorkTree {
+    $IsInsideGitDir = "$(git rev-parse --is-inside-git-dir 2>$null)" -eq "true"
+    $IsInsideWorkTreeDir = $false
+
+    If (!$IsInsideGitDir) {
+        $IsInsideWorkTreeDir = "$(git rev-parse --is-inside-work-tree 2>$null)" -eq "true"
+        If (!$IsInsideWorkTreeDir) {
+            Write-Error "This script must be run inside a Git directory."
+            Return
+        }
+    }
+
+    $SelectedWorktreePath = git worktree list `
+    | fzf --layout=reverse --prompt="Select a worktree: " --height=40% --border --ansi
+    | ForEach-Object { $_.Split(" ")[0] }
+    | ForEach-Object { $_.Trim() }
+    | Where-Object { $_ -ne "" }
+
+    $WorkTreeRootPath = $null;
+
+    If ($IsInsideWorkTreeDir) {
+        $WorkTreeRootPath = "$(git rev-parse --show-toplevel)"
+    }
+
+    If ($WorkTreeRootPath -eq $SelectedWorktreePath) {
+        Write-Host "The selected worktree is the current worktree. Aborting."
+        Return
+    }
+
+    Set-Location $SelectedWorktreePath
 }
 
 function getenv {
