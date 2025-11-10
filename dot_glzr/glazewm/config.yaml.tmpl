@@ -276,6 +276,12 @@ window_rules:
       # everything
       - window_process: { equals: "Everything" }
 
+
+  - commands: ["set-floating", "resize --width +25% --height +15%", "position --centered"]
+    match:
+      # WezTerm
+      - window_process: { equals: "wezterm-gui" }
+
   - commands: ["set-tiling"]
     match:
       # Visual Studio 20xx
